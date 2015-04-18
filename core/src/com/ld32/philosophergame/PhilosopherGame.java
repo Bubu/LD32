@@ -2,10 +2,12 @@ package com.ld32.philosophergame;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 public class PhilosopherGame extends Game {
 	MenuScreen menuScreen;
 	FightScreen fightscreen;
 	boolean isRunning;
+	Philosopher player;
 
 	public void create () {
 		isRunning = false;
@@ -16,6 +18,7 @@ public class PhilosopherGame extends Game {
 
 	public void start() {
 		isRunning = true;	
+		player = new Philosopher(100,20,new Texture(Gdx.files.internal("sprite.png")));
 		resumeGame();
 		
 	}
