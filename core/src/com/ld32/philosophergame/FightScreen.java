@@ -15,7 +15,7 @@ public class FightScreen extends ScreenAdapter {
 	Stage stage;
 	Opponent opponent;
 	Menu menu;
-	Player player;
+	Philosopher player;
 	public FightScreen(final PhilosopherGame game) {
 		this.game = game;
 		stage = new Stage(new ScreenViewport());
