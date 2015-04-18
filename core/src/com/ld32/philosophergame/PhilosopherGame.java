@@ -18,7 +18,7 @@ public class PhilosopherGame extends Game {
 
 	public void start() {
 		isRunning = true;	
-		player = new Philosopher(100,20,new Texture(Gdx.files.internal("sprite.png")));
+		player = new Philosopher(100,20,new Texture(Gdx.files.internal("nietzsche.png")));
 		resumeGame();
 		
 	}
