@@ -8,6 +8,9 @@ public class Attack {
 	float bonus;
 	float malus;
 
+	public static Attack Confuse(){
+		return new Attack("Confuse", 0, 0, 10, 0.5f, 0);
+	}
 	public Attack(String name, int coolDown, float hpDamage, float sanityDamage, float bonus, float malus) {
 		// TODO Auto-generated constructor stub
 		this.name = name;
