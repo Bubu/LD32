@@ -76,24 +76,22 @@ public class FightScreen extends ScreenAdapter {
 		stage.addActor(game.player.sprite);
 		
 		menutable.add(menu);
-
-
 	}
 	
 	public void handleAttack(Attack attack){
 		String feedback = game.player.doAttack(attack, game.opponent);
-		showAttackInfo(attack, feedback);
+		showAttackInfo(game.player, attack, feedback);
 	}
 
-	private void showAttackInfo(Attack attack, String feedback) {
+	public void showAttackInfo(Philosopher phil, Attack attack, String feedback) {
 		game.fightscreen.menu.setVisible(false);
-		game.fightscreen.infoText.setText(game.player.name + " uses \"" + attack.name + "\"" + n + feedback);
+		game.fightscreen.infoText.setText(phil.name + " uses \"" + attack.name + "\"" + n + feedback);
 		game.fightscreen.infoText.setVisible(true);
 		game.fightscreen.stage.addListener(new InputListener(){
 			@Override
 			public boolean keyDown(InputEvent event, int keycode) {
 				if(keycode == Input.Keys.ENTER){
-					advanceText(this,game.opponent);
+					advanceText(this);
 					return true;
 				}
 				else{
@@ -105,13 +103,13 @@ public class FightScreen extends ScreenAdapter {
 				return true;
 			}
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				advanceText(this,game.opponent);
+				advanceText(this);
 			}
 		});
 	}
 
 	protected boolean checkStatus() {
-		game.player.status
+		//game.player.status
 		return false;
 	}
 
@@ -137,12 +135,16 @@ public class FightScreen extends ScreenAdapter {
 		stage.getViewport().update(width, height, true);
 	}
 
-	private void advanceText(InputListener listener, Philosopher next) {
+	private void advanceText(InputListener listener) {
 		game.fightscreen.menu.setVisible(true);
 		game.fightscreen.infoText.setVisible(false);
 		game.fightscreen.stage.removeListener(listener);
-		if(!(next == game.player)){
-			next.chooseMove(game.player);
+		if(!(game.currentplayer != game.player)){
+			game.currentplayer = game.opponent;
+			game.opponent.chooseMove(game);
+		}
+		else{
+			game.currentplayer = game.player;
 		}
 	}
 

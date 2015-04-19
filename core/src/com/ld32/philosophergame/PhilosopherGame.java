@@ -8,6 +8,7 @@ public class PhilosopherGame extends Game {
 	boolean isRunning;
 	Philosopher player;
 	Philosopher opponent;
+	Philosopher currentplayer;
 
 	public void create () {
 		isRunning = false;
@@ -20,6 +21,7 @@ public class PhilosopherGame extends Game {
 		
 		player =  Philosopher.Nietzsche(false);
 		opponent = Philosopher.Descartes(true);
+		currentplayer = player; 
 		fightscreen = new FightScreen(this);
 		resumeGame();
 		

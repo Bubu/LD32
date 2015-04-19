@@ -29,7 +29,7 @@ public class Philosopher {
 		Philosopher p = new Philosopher("Nietzsche", 100,20,Ressources.Nietzsche(),isOpponent);
 		p.attacks[3] = Attack.EternalReturn();
 		p.attacks[4] = Attack.WilltoPower();
-		p.attacks[5] = Attack.Summon‹bermensch();
+		p.attacks[5] = Attack.SummonUbermensch();
 		return p;
 	}
 	public static Philosopher Descartes(boolean isOpponent){
@@ -37,7 +37,7 @@ public class Philosopher {
 		Philosopher p = new Philosopher("Descartes", 100,20,Ressources.Descartes(),isOpponent);
 		p.attacks[3] = Attack.EternalReturn();
 		p.attacks[4] = Attack.WilltoPower();
-		p.attacks[5] = Attack.Summon‹bermensch();
+		p.attacks[5] = Attack.SummonUbermensch();
 		return p;
 	}
 	
@@ -65,10 +65,11 @@ public class Philosopher {
 		return "It does something!";
 	}
 
-	public Attack chooseMove(Philosopher opp) {
+	public void chooseMove(PhilosopherGame game) {
 		Gdx.app.log("TODO!", "Choose Attack");
-		doAttack(new Attack(), opp);
-		return new Attack();
+		Attack attack = new Attack();
+		String feedback = doAttack(attack, game.player);
+		game.fightscreen.showAttackInfo(this,attack, feedback);
 	}
 	
 	public static Philosopher getRandom() {
