@@ -21,6 +21,8 @@ public class FightScreen extends ScreenAdapter {
 	Stage stage;
 	Menu menu;
 	Label infoText;
+	ProgressBar oppHealth;
+	ProgressBar playerHealth;
 	
 	public FightScreen(final PhilosopherGame game) {
 		this.game = game;
@@ -41,8 +43,10 @@ public class FightScreen extends ScreenAdapter {
 		
 		infoText = new Label("", skin);
 		infoText.setVisible(false);
-		ProgressBar oppHealth = new ProgressBar(0, game.opponent.maxhp, 1, false, skin);
+		oppHealth = new ProgressBar(0, game.opponent.maxhp, 1, false, skin);
 		oppHealth.setValue(game.opponent.currenthp);
+		playerHealth = new ProgressBar(0, game.player.maxhp, 1, false, skin);
+		playerHealth.setValue(game.player.currenthp);
 
 		menu = new Menu(skin);
 		menu.updateMenu(game);
@@ -65,6 +69,7 @@ public class FightScreen extends ScreenAdapter {
 		opponentTable.debugAll();
 		opponentTable.setFillParent(true);
 		opponentTable.right().top();
+		opponentTable.add(playerHealth);
 		opponentTable.add(oppHealth);
 		opponentTable.add(game.opponent.sprite).height(150)
 			.width(game.opponent.sprite.getWidth()* 100/game.opponent.sprite.getWidth())
@@ -80,6 +85,7 @@ public class FightScreen extends ScreenAdapter {
 	
 	public void handleAttack(Attack attack){
 		String feedback = game.player.doAttack(attack, game.opponent);
+		oppHealth.setValue(game.opponent.currenthp);
 		showAttackInfo(game.player, attack, feedback);
 	}
 
@@ -112,13 +118,9 @@ public class FightScreen extends ScreenAdapter {
 		//game.player.status
 		return false;
 	}
-
-	protected void describeAttack(Attack attack) {
-		Gdx.app.log("TODO!", "Describe Attack");
-	}
 	
 	protected void describeStatus(Status status) {
-		Gdx.app.log("TODO!", "Describe Attack");
+		Gdx.app.log("TODO!", "Describe Status");
 	}
 
 	public void render(float delta) {

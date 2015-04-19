@@ -26,7 +26,7 @@ public class Attack {
 		messages[0] = "You stink!";
 		messages[1] = "I would listen to you, but then again,"+n+"you are an idiot.";
 		messages[2] = "You don't really have a degree, do you?";
-		return new Attack("Ad Hominem", 40, 0, 10, 0.5f, 0, messages);
+		return new Attack("Ad Hominem", 0, 40, 0, 0, 0, messages);
 	}
 	
 	public static Attack SelPerption(){
@@ -49,14 +49,14 @@ public class Attack {
 	public static Attack WilltoPower(){
 		String[] messages = new String[3];
 		messages[0] = "I have the power!";
-		messages[1] = "The world is the will to power"+n+"â€” and nothing besides!";
+		messages[1] = "The world is the will to power"+n+"-- and nothing besides!";
 		messages[2] = "There is only power and those too weak to seek it!";
 		return new Attack("Will to Power", 1, 0, 0, 0.5f, 1, messages);
 	}
 	public static Attack SummonUbermensch(){
 		String[] messages = new String[3];
-		messages[0] = "A wild Ãœbermensch appears!";
-		messages[1] = "We are but a bridge from ape to Ãœbermensch.";
+		messages[0] = "A wild Übermensch appears!";
+		messages[1] = "We are but a bridge from ape to Übermensch.";
 		messages[2] = "I make my own morales.";
 		return new Attack("Summon Ubermensch", 1, 0, 0, 0.5f, 1, messages);
 	}

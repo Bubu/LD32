@@ -1,8 +1,8 @@
 package com.ld32.philosophergame;
 
 import java.util.ArrayList;
+import java.util.Random;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -16,6 +16,7 @@ public class Philosopher {
 	Image sprite;
 	Attack[] attacks;
 	String name;
+	int currentSanity;
 	private static ArrayList<Philosopher> philosphers;
 	
 	public static ArrayList<Philosopher> getList(){
@@ -61,14 +62,17 @@ public class Philosopher {
 	}
 
 	public String doAttack(Attack attack, Philosopher opp) {
-		Gdx.app.log("TODO!", "Handle Attack: "+attack.name);
-		return "It does something!";
+		int damage = (int) Math.ceil(attack.hpDamage + attack.bonus * sanity - attack.malus * opp.sanity);  
+		opp.currenthp -= damage;
+		opp.currentSanity -= attack.sanityDamage;
+		return "It does "+ damage + " damage to " + opp.name + "'s conviction!";
 	}
 
 	public void chooseMove(PhilosopherGame game) {
-		Gdx.app.log("TODO!", "Choose Attack");
-		Attack attack = new Attack();
+		Random rand = new Random();
+		Attack attack = attacks[rand.nextInt(6)];
 		String feedback = doAttack(attack, game.player);
+		game.fightscreen.playerHealth.setValue(game.player.currenthp);
 		game.fightscreen.showAttackInfo(this,attack, feedback);
 	}
 	
