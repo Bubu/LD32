@@ -13,6 +13,7 @@ public class Menu extends Table {
 		length = 0;
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public Cell add() {
 		if(length>=2){

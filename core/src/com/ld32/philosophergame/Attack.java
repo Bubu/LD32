@@ -27,7 +27,7 @@ public class Attack {
 		return new Attack("Will to Power", 1, 0, 0, 0.5f, 1);
 	}
 	public static Attack Summon‹bermensch(){
-		return new Attack("Summon ‹bermensch", 1, 0, 0, 0.5f, 1);
+		return new Attack("Summon Ubermensch", 1, 0, 0, 0.5f, 1);
 	}
 	
 	public Attack(String name, int coolDown, float hpDamage, float sanityDamage, float bonus, float malus) {
