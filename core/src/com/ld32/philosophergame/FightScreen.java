@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -37,7 +38,8 @@ public class FightScreen extends ScreenAdapter {
 		 	}
 		});
 		opponent = new Philosopher("EvilNietzsche", 100,20,new Texture(Gdx.files.internal("nietzsche.png")),true);
-		
+		ProgressBar oppHealth = new ProgressBar(0, opponent.maxhp, 1, false, skin);
+		oppHealth.setValue(opponent.currenthp);
 		menu = new Menu();
 		for(int i = 0; i < game.player.attacks.length; i++){
 			final int finali = i;
@@ -47,24 +49,24 @@ public class FightScreen extends ScreenAdapter {
 					@Override
 					public void changed(ChangeEvent event, Actor actor) {
 						game.player.doAttack(game.player.attacks[finali]);
+						describeAttack(game.player.attacks[finali]);
+						describeAttack(opponent.chooseMove());
 					}
 				});
 			}
 			else{menu.add();}
 		}
-		game.player.sprite.setDebug(true);
 		game.player.sprite.setPosition(20, 25);
 		
 		Table menutable = new Table();
 
 		menutable.setFillParent(true);
-		menutable.debug();
 		menutable.right().bottom();
 		
 		Table opponentTable = new Table();
 		opponentTable.setFillParent(true);
-		opponentTable.debug();
 		opponentTable.right().top();
+		opponentTable.add(oppHealth);
 		opponentTable.add(opponent.sprite).height(100)
 			.width(opponent.sprite.getWidth()* 100/opponent.sprite.getWidth())
 			.pad(50);
@@ -79,6 +81,10 @@ public class FightScreen extends ScreenAdapter {
 		menutable.add(menu);
 
 
+	}
+
+	protected void describeAttack(Attack attack) {
+		Gdx.app.log("TODO!", "Describe Attack");
 	}
 
 	public void render(float delta) {
