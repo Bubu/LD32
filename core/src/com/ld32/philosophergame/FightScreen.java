@@ -4,14 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class FightScreen extends ScreenAdapter {
@@ -19,6 +18,8 @@ public class FightScreen extends ScreenAdapter {
 	PhilosopherGame game;
 	Stage stage;
 	Menu menu;
+	Label infoText;
+	
 	public FightScreen(final PhilosopherGame game) {
 		this.game = game;
 		Skin skin = new Skin(Gdx.files.internal("uiskin.json"));
@@ -36,10 +37,12 @@ public class FightScreen extends ScreenAdapter {
 		 	}
 		});
 		
+		infoText = new Label("", skin);
+		infoText.setVisible(false);
 		ProgressBar oppHealth = new ProgressBar(0, game.opponent.maxhp, 1, false, skin);
 		oppHealth.setValue(game.opponent.currenthp);
 		menu = new Menu(skin);
-		menu.updateMenu(game.player, game.opponent);
+		menu.updateMenu(game.player, game.opponent, infoText);
 		
 		game.player.sprite.setPosition(20, 25);
 		
@@ -47,6 +50,12 @@ public class FightScreen extends ScreenAdapter {
 
 		menutable.setFillParent(true);
 		menutable.right().bottom();
+		
+		Table infoTextTable = new Table();
+		infoTextTable.setFillParent(true);
+		infoTextTable.right().bottom();
+		
+		infoTextTable.add(infoText).padRight(380).padBottom(105);
 		
 		Table opponentTable = new Table();
 		opponentTable.debugAll();
@@ -58,8 +67,8 @@ public class FightScreen extends ScreenAdapter {
 			.pad(15);
 		
 		stage.addActor(opponentTable);
-		
 		stage.addActor(menutable);
+		stage.addActor(infoTextTable);
 		stage.addActor(game.player.sprite);
 		
 
