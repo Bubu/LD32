@@ -4,21 +4,24 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class FightScreen extends ScreenAdapter {
 
+	public static String n = System.getProperty("line.separator");
+
 	PhilosopherGame game;
 	Stage stage;
 	Menu menu;
+	Label infoText;
+	
 	public FightScreen(final PhilosopherGame game) {
 		this.game = game;
 		Skin skin = new Skin(Gdx.files.internal("uiskin.json"));
@@ -36,33 +39,27 @@ public class FightScreen extends ScreenAdapter {
 		 	}
 		});
 		
+		infoText = new Label("", skin);
+		infoText.setVisible(false);
 		ProgressBar oppHealth = new ProgressBar(0, game.opponent.maxhp, 1, false, skin);
 		oppHealth.setValue(game.opponent.currenthp);
-		menu = new Menu();
-		for(int i = 0; i < game.player.attacks.length; i++){
-			final int finali = i;
-			if(game.player.attacks[i] != null){
-				menu.add(new KeyTextButton(game.player.attacks[i].name,skin));
-				menu.entries[i].addListener(new ChangeListener() {
-					@Override
-					public void changed(ChangeEvent event, Actor actor) {
-						game.player.doAttack(game.player.attacks[finali], game.opponent);
-						describeAttack(game.player.attacks[finali]);
-						describeAttack(game.opponent.chooseMove(game.player));
-						if (!checkStatus()){
-							displayStatusMessage();
-						}
-					}
-				});
-			}
-			else{menu.add();}
-		}
+
+		menu = new Menu(skin);
+		menu.updateMenu(game);
+		
+
 		game.player.sprite.setPosition(20, 25);
 		
 		Table menutable = new Table();
 
 		menutable.setFillParent(true);
 		menutable.right().bottom();
+		
+		Table infoTextTable = new Table();
+		infoTextTable.setFillParent(true);
+		infoTextTable.left().top();
+		
+		infoTextTable.add(infoText).padLeft(210).padTop(350);
 		
 		Table opponentTable = new Table();
 		opponentTable.debugAll();
@@ -74,15 +71,43 @@ public class FightScreen extends ScreenAdapter {
 			.pad(15);
 		
 		stage.addActor(opponentTable);
-		
 		stage.addActor(menutable);
+		stage.addActor(infoTextTable);
 		stage.addActor(game.player.sprite);
 		
-
-		menu.setDebug(true, true);
 		menutable.add(menu);
 
 
+	}
+	
+	public void handleAttack(Attack attack){
+		String feedback = game.player.doAttack(attack, game.opponent);
+		game.fightscreen.menu.setVisible(false);
+		game.fightscreen.infoText.setText(game.player.name + " uses \"" + attack.name + "\"" + n + feedback);
+		game.fightscreen.infoText.setVisible(true);
+		game.fightscreen.stage.addListener(new InputListener(){
+			@Override
+			public boolean keyDown(InputEvent event, int keycode) {
+				if(keycode == Input.Keys.ENTER){
+					game.fightscreen.menu.setVisible(true);
+					game.fightscreen.infoText.setVisible(false);
+					game.fightscreen.stage.removeListener(this);
+					return true;
+				}
+				else{
+					return false;
+				}
+			}
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+				return true;
+			}
+			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+				game.fightscreen.menu.setVisible(true);
+				game.fightscreen.infoText.setVisible(false);
+				game.fightscreen.stage.removeListener(this);
+			}
+		});
 	}
 
 	protected boolean checkStatus() {

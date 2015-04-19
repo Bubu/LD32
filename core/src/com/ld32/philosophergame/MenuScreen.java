@@ -64,7 +64,6 @@ public class MenuScreen extends ScreenAdapter {
 		
 		group.center();
 
-		group.debug();
 		
 		Label titel = new Label("Philosophers Fight", skin);
 		

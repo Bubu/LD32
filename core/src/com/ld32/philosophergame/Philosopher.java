@@ -60,9 +60,9 @@ public class Philosopher {
 		this.attacks[2] = Attack.SelPerption();
 	}
 
-	public void doAttack(Attack attack, Philosopher opp) {
+	public String doAttack(Attack attack, Philosopher opp) {
 		Gdx.app.log("TODO!", "Handle Attack: "+attack.name);
-		
+		return "It does something!";
 	}
 
 	public Attack chooseMove(Philosopher opp) {

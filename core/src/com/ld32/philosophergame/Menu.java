@@ -1,14 +1,20 @@
 package com.ld32.philosophergame;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
 public class Menu extends Table {
+	public static String n = System.getProperty("line.separator");
 	KeyTextButton[] entries;
-	int length; 
+	int length;
+	private Skin skin; 
 	
 
-	public Menu() {
+	public Menu(Skin skin) {
+		this.skin = skin;
 		entries = new KeyTextButton[6];
 		length = 0;
 	}
@@ -36,4 +42,23 @@ public class Menu extends Table {
 		return super.add(entry).width(200).pad(10);
 			
 	}
+	
+	public void updateMenu(final PhilosopherGame game){
+		entries = new KeyTextButton[6];
+		reset();
+		for(int i = 0; i < game.player.attacks.length; i++){
+			final int finali = i;
+			if(game.player.attacks[i] != null){
+				add(new KeyTextButton(game.player.attacks[i].name,skin));
+				entries[i].addListener(new ChangeListener() {
+					@Override
+					public void changed(ChangeEvent event, final Actor actor) {
+						game.fightscreen.handleAttack( game.player.attacks[finali]);
+					}
+				});
+			}
+			else{add();}
+		}
+	}
+	
 }
