@@ -55,19 +55,20 @@ public class FightScreen extends ScreenAdapter {
 		menu.updateMenu(game);
 		
 		// Creation of speech bubble
-		NinePatch bubblePatchLeft = new NinePatch(new Texture(Gdx.files.internal("BubbleLeft.png")), 48, 96, 24, 48);
+		NinePatch bubblePatchLeft = new NinePatch(new Texture(Gdx.files.internal("BubbleLeft.png")), 49, 49, 24, 56);
 		skin.add("bubbleBackgroundLeft",bubblePatchLeft);
-		LabelStyle bubbleStyleLeft = new LabelStyle();
-		Label bubbleLeft = new Label("", bubbleStyleLeft);
+		LabelStyle bubbleStyleLeft = new LabelStyle(skin.getFont("default-font"), skin.getColor("white"));
+		Label bubbleLeft = new Label("\n\rSassssssss\n\rdassssssssssssssssssssssssss                              \n\r\n\r", bubbleStyleLeft);
+		bubbleLeft.debug();
 		bubbleStyleLeft.background = skin.getDrawable("bubbleBackgroundLeft");
 		
-		NinePatch bubblePatchRight = new NinePatch(new Texture(Gdx.files.internal("BubbleLeft.png")), 14, 42, 14, 28);
+		NinePatch bubblePatchRight = new NinePatch(new Texture(Gdx.files.internal("BubbleLeft.png")), 14, 37, 14, 50);
 		skin.add("bubbleBackgroundRight",bubblePatchRight);
-		LabelStyle bubbleStyleRight = new LabelStyle();
+		LabelStyle bubbleStyleRight = new LabelStyle(skin.getFont("default-font"), skin.getColor("white"));
 		Label bubbleRight = new Label("", bubbleStyleRight);
 		bubbleStyleRight.background = skin.getDrawable("bubbleBackgroundRight");
 		
-		bubbleLeft.setPosition(20, 30);
+		bubbleLeft.setPosition(30, 150);
 		bubbleRight.setPosition(20, 30);
 		
 		game.player.sprite.setPosition(20, 25);
@@ -98,7 +99,7 @@ public class FightScreen extends ScreenAdapter {
 		stage.addActor(infoTextTable);
 		stage.addActor(game.player.sprite);
 		stage.addActor(bubbleLeft);
-		stage.addActor(bubbleRight);
+		//stage.addActor(bubbleRight);
 		
 		menutable.add(menu);
 	}
