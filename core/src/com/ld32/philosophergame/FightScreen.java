@@ -15,6 +15,8 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class FightScreen extends ScreenAdapter {
 
+	public static String n = System.getProperty("line.separator");
+
 	PhilosopherGame game;
 	Stage stage;
 	Menu menu;
@@ -42,7 +44,7 @@ public class FightScreen extends ScreenAdapter {
 		ProgressBar oppHealth = new ProgressBar(0, game.opponent.maxhp, 1, false, skin);
 		oppHealth.setValue(game.opponent.currenthp);
 		menu = new Menu(skin);
-		menu.updateMenu(game.player, game.opponent, infoText);
+		menu.updateMenu(game);
 		
 		game.player.sprite.setPosition(20, 25);
 		
@@ -53,9 +55,9 @@ public class FightScreen extends ScreenAdapter {
 		
 		Table infoTextTable = new Table();
 		infoTextTable.setFillParent(true);
-		infoTextTable.right().bottom();
+		infoTextTable.left().top();
 		
-		infoTextTable.add(infoText).padRight(380).padBottom(105);
+		infoTextTable.add(infoText).padLeft(210).padTop(350);
 		
 		Table opponentTable = new Table();
 		opponentTable.debugAll();
@@ -71,11 +73,39 @@ public class FightScreen extends ScreenAdapter {
 		stage.addActor(infoTextTable);
 		stage.addActor(game.player.sprite);
 		
-
-		menu.setDebug(true, true);
 		menutable.add(menu);
 
 
+	}
+	
+	public void handleAttack(Attack attack){
+		String feedback = game.player.doAttack(attack, game.opponent);
+		game.fightscreen.menu.setVisible(false);
+		game.fightscreen.infoText.setText(game.player.name + " uses \"" + attack.name + "\"" + n + feedback);
+		game.fightscreen.infoText.setVisible(true);
+		game.fightscreen.stage.addListener(new InputListener(){
+			@Override
+			public boolean keyDown(InputEvent event, int keycode) {
+				if(keycode == Input.Keys.ENTER){
+					game.fightscreen.menu.setVisible(true);
+					game.fightscreen.infoText.setVisible(false);
+					game.fightscreen.stage.removeListener(this);
+					return true;
+				}
+				else{
+					return false;
+				}
+			}
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+				return true;
+			}
+			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+				game.fightscreen.menu.setVisible(true);
+				game.fightscreen.infoText.setVisible(false);
+				game.fightscreen.stage.removeListener(this);
+			}
+		});
 	}
 
 	protected void describeAttack(Attack attack) {
