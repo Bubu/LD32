@@ -67,7 +67,7 @@ public class Philosopher {
 
 	public Attack chooseMove(Philosopher opp) {
 		Gdx.app.log("TODO!", "Choose Attack");
-		doAttack(new Attack(), opp);	
+		doAttack(new Attack(), opp);
 		return new Attack();
 	}
 	
