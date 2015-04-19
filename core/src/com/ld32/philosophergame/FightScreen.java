@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -19,7 +18,6 @@ public class FightScreen extends ScreenAdapter {
 
 	PhilosopherGame game;
 	Stage stage;
-	Philosopher opponent;
 	Menu menu;
 	public FightScreen(final PhilosopherGame game) {
 		this.game = game;
@@ -37,9 +35,9 @@ public class FightScreen extends ScreenAdapter {
 				}
 		 	}
 		});
-		opponent = new Philosopher("EvilNietzsche", 100,20,new Texture(Gdx.files.internal("nietzsche.png")),true);
-		ProgressBar oppHealth = new ProgressBar(0, opponent.maxhp, 1, false, skin);
-		oppHealth.setValue(opponent.currenthp);
+		
+		ProgressBar oppHealth = new ProgressBar(0, game.opponent.maxhp, 1, false, skin);
+		oppHealth.setValue(game.opponent.currenthp);
 		menu = new Menu();
 		for(int i = 0; i < game.player.attacks.length; i++){
 			final int finali = i;
@@ -48,9 +46,9 @@ public class FightScreen extends ScreenAdapter {
 				menu.entries[i].addListener(new ChangeListener() {
 					@Override
 					public void changed(ChangeEvent event, Actor actor) {
-						game.player.doAttack(game.player.attacks[finali]);
+						game.player.doAttack(game.player.attacks[finali], game.opponent);
 						describeAttack(game.player.attacks[finali]);
-						describeAttack(opponent.chooseMove());
+						describeAttack(game.opponent.chooseMove(game.player));
 					}
 				});
 			}
@@ -64,12 +62,13 @@ public class FightScreen extends ScreenAdapter {
 		menutable.right().bottom();
 		
 		Table opponentTable = new Table();
+		opponentTable.debugAll();
 		opponentTable.setFillParent(true);
 		opponentTable.right().top();
 		opponentTable.add(oppHealth);
-		opponentTable.add(opponent.sprite).height(100)
-			.width(opponent.sprite.getWidth()* 100/opponent.sprite.getWidth())
-			.pad(50);
+		opponentTable.add(game.opponent.sprite).height(150)
+			.width(game.opponent.sprite.getWidth()* 100/game.opponent.sprite.getWidth())
+			.pad(15);
 		
 		stage.addActor(opponentTable);
 		

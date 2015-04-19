@@ -7,6 +7,7 @@ public class PhilosopherGame extends Game {
 	FightScreen fightscreen;
 	boolean isRunning;
 	Philosopher player;
+	Philosopher opponent;
 
 	public void create () {
 		isRunning = false;
@@ -15,8 +16,10 @@ public class PhilosopherGame extends Game {
 	}
 
 	public void start() {
-		isRunning = true;	
-		player =  Philosopher.Nietzsche();
+		isRunning = true;
+		
+		player =  Philosopher.getRandom();
+		opponent = Philosopher.Descartes(true);
 		fightscreen = new FightScreen(this);
 		resumeGame();
 		
