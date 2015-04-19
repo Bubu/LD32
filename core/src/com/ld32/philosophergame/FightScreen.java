@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class FightScreen extends ScreenAdapter {
@@ -15,9 +17,9 @@ public class FightScreen extends ScreenAdapter {
 	Stage stage;
 	Opponent opponent;
 	Menu menu;
-	Philosopher player;
 	public FightScreen(final PhilosopherGame game) {
 		this.game = game;
+		Skin skin = new Skin(Gdx.files.internal("uiskin.json"));
 		stage = new Stage(new ScreenViewport());
 		stage.addListener(new InputListener() {
 			@Override
@@ -31,6 +33,27 @@ public class FightScreen extends ScreenAdapter {
 				}
 		 	}
 		});
+		 menu = new Menu();
+		 for(int i = 0; i < game.player.attacks.length; i++){
+			 if(game.player.attacks[i] != null){
+				 menu.add(new KeyTextButton(game.player.attacks[i].name,skin));
+			 }
+			 else{menu.add();}
+		 }
+		 game.player.sprite.setDebug(true);
+		 game.player.sprite.setPosition(20, 25);
+		 Table table = new Table();
+		 
+		 
+		 table.setFillParent(true);
+		 table.debug();
+		 table.right().bottom();
+		 stage.addActor(table);
+		 stage.addActor(game.player.sprite);
+
+		 menu.setDebug(true, true);
+		 table.add(menu);
+		
 
 	}
 	
@@ -41,8 +64,11 @@ public class FightScreen extends ScreenAdapter {
 	}
 	
 	public void show() {
+		Gdx.gl.glClearColor(0.2f, 0.3f, 0.9f, 1);
 		Gdx.input.setInputProcessor(stage);
 	}
-
+	public void resize (int width, int height) {
+		stage.getViewport().update(width, height, true);
+	}
 
 }

@@ -12,13 +12,13 @@ public class PhilosopherGame extends Game {
 	public void create () {
 		isRunning = false;
 		menuScreen = new MenuScreen(this);
-		fightscreen = new FightScreen(this);
 		setScreen(menuScreen);
 	}
 
 	public void start() {
 		isRunning = true;	
 		player = new Philosopher(100,20,new Texture(Gdx.files.internal("nietzsche.png")));
+		fightscreen = new FightScreen(this);
 		resumeGame();
 		
 	}

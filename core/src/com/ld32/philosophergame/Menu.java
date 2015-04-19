@@ -1,20 +1,35 @@
 package com.ld32.philosophergame;
 
+import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 public class Menu extends Table {
 	KeyTextButton[] entries;
+	int length; 
 	
 
 	public Menu() {
 		entries = new KeyTextButton[4];
+		length = 0;
 	}
 
-	public void add(KeyTextButton entry){
-		if(entries.length>2){
+	@Override
+	public Cell add() {
+		if(length>=2){
+			this.row();
+			entries[entries.length-1] = null;
+		}
+		length ++;
+		return super.add().width(200).pad(10);
+	}
+
+	public Cell<KeyTextButton> add(KeyTextButton entry){
+		if(length>=2){
 			this.row();
 			entries[entries.length-1] = entry;
 		}
-			this.add(entry);
+		length ++;
+		return super.add(entry).width(200).pad(10);
+			
 	}
 }

@@ -11,8 +11,12 @@ public class Attack {
 	public static Attack Confuse(){
 		return new Attack("Confuse", 0, 0, 10, 0.5f, 0);
 	}
+	
+	public static Attack SelPerption(){
+		return new Attack("Selective Perception", 1, 0, 0, 0.5f, 1);
+	}
+	
 	public Attack(String name, int coolDown, float hpDamage, float sanityDamage, float bonus, float malus) {
-		// TODO Auto-generated constructor stub
 		this.name = name;
 		this.coolDown = coolDown;
 		this.hpDamage = hpDamage;

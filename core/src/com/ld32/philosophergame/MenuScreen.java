@@ -95,6 +95,7 @@ public class MenuScreen extends ScreenAdapter {
 	
 	@Override
 	public void show() {
+		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.input.setInputProcessor(stage);
 		if(game.isRunning){
 			
