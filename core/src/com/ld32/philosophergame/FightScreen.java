@@ -65,7 +65,9 @@ public class FightScreen extends ScreenAdapter {
 		opponentTable.setFillParent(true);
 		opponentTable.debug();
 		opponentTable.right().top();
-		opponentTable.add(opponent.sprite).height(100).width(opponent.sprite.getWidth()* 100/opponent.sprite.getWidth()).pad(20);
+		opponentTable.add(opponent.sprite).height(100)
+			.width(opponent.sprite.getWidth()* 100/opponent.sprite.getWidth())
+			.pad(50);
 		
 		stage.addActor(opponentTable);
 		
