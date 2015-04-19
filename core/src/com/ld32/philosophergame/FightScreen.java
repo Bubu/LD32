@@ -43,9 +43,11 @@ public class FightScreen extends ScreenAdapter {
 		infoText.setVisible(false);
 		ProgressBar oppHealth = new ProgressBar(0, game.opponent.maxhp, 1, false, skin);
 		oppHealth.setValue(game.opponent.currenthp);
+
 		menu = new Menu(skin);
 		menu.updateMenu(game);
 		
+
 		game.player.sprite.setPosition(20, 25);
 		
 		Table menutable = new Table();
@@ -108,7 +110,16 @@ public class FightScreen extends ScreenAdapter {
 		});
 	}
 
+	protected boolean checkStatus() {
+		game.player.status
+		return false;
+	}
+
 	protected void describeAttack(Attack attack) {
+		Gdx.app.log("TODO!", "Describe Attack");
+	}
+	
+	protected void describeStatus(Status status) {
 		Gdx.app.log("TODO!", "Describe Attack");
 	}
 
