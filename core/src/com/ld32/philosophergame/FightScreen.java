@@ -4,10 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -47,7 +50,22 @@ public class FightScreen extends ScreenAdapter {
 		menu = new Menu(skin);
 		menu.updateMenu(game);
 		
-
+		// Creation of speech bubble
+		NinePatch bubblePatchLeft = new NinePatch(new Texture(Gdx.files.internal("BubbleLeft.png")), 48, 96, 24, 48);
+		skin.add("bubbleBackgroundLeft",bubblePatchLeft);
+		LabelStyle bubbleStyleLeft = new LabelStyle();
+		Label bubbleLeft = new Label("", bubbleStyleLeft);
+		bubbleStyleLeft.background = skin.getDrawable("bubbleBackgroundLeft");
+		
+		NinePatch bubblePatchRight = new NinePatch(new Texture(Gdx.files.internal("BubbleLeft.png")), 14, 42, 14, 28);
+		skin.add("bubbleBackgroundRight",bubblePatchRight);
+		LabelStyle bubbleStyleRight = new LabelStyle();
+		Label bubbleRight = new Label("", bubbleStyleRight);
+		bubbleStyleRight.background = skin.getDrawable("bubbleBackgroundRight");
+		
+		bubbleLeft.setPosition(20, 30);
+		bubbleRight.setPosition(20, 30);
+		
 		game.player.sprite.setPosition(20, 25);
 		
 		Table menutable = new Table();
@@ -74,6 +92,8 @@ public class FightScreen extends ScreenAdapter {
 		stage.addActor(menutable);
 		stage.addActor(infoTextTable);
 		stage.addActor(game.player.sprite);
+		stage.addActor(bubbleLeft);
+		stage.addActor(bubbleRight);
 		
 		menutable.add(menu);
 
@@ -111,7 +131,7 @@ public class FightScreen extends ScreenAdapter {
 	}
 
 	protected boolean checkStatus() {
-		game.player.status
+		//game.player.status
 		return false;
 	}
 
