@@ -49,6 +49,9 @@ public class FightScreen extends ScreenAdapter {
 						game.player.doAttack(game.player.attacks[finali], game.opponent);
 						describeAttack(game.player.attacks[finali]);
 						describeAttack(game.opponent.chooseMove(game.player));
+						if (!checkStatus()){
+							displayStatusMessage();
+						}
 					}
 				});
 			}
@@ -82,7 +85,16 @@ public class FightScreen extends ScreenAdapter {
 
 	}
 
+	protected boolean checkStatus() {
+		game.player.status
+		return false;
+	}
+
 	protected void describeAttack(Attack attack) {
+		Gdx.app.log("TODO!", "Describe Attack");
+	}
+	
+	protected void describeStatus(Status status) {
 		Gdx.app.log("TODO!", "Describe Attack");
 	}
 
