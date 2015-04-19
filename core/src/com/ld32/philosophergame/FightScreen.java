@@ -38,22 +38,9 @@ public class FightScreen extends ScreenAdapter {
 		
 		ProgressBar oppHealth = new ProgressBar(0, game.opponent.maxhp, 1, false, skin);
 		oppHealth.setValue(game.opponent.currenthp);
-		menu = new Menu();
-		for(int i = 0; i < game.player.attacks.length; i++){
-			final int finali = i;
-			if(game.player.attacks[i] != null){
-				menu.add(new KeyTextButton(game.player.attacks[i].name,skin));
-				menu.entries[i].addListener(new ChangeListener() {
-					@Override
-					public void changed(ChangeEvent event, Actor actor) {
-						game.player.doAttack(game.player.attacks[finali], game.opponent);
-						describeAttack(game.player.attacks[finali]);
-						describeAttack(game.opponent.chooseMove(game.player));
-					}
-				});
-			}
-			else{menu.add();}
-		}
+		menu = new Menu(skin);
+		menu.updateMenu(game.player, game.opponent);
+		
 		game.player.sprite.setPosition(20, 25);
 		
 		Table menutable = new Table();
