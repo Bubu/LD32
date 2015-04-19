@@ -9,7 +9,7 @@ public class Menu extends Table {
 	
 
 	public Menu() {
-		entries = new KeyTextButton[4];
+		entries = new KeyTextButton[6];
 		length = 0;
 	}
 
@@ -24,7 +24,10 @@ public class Menu extends Table {
 	}
 
 	public Cell<KeyTextButton> add(KeyTextButton entry){
-		if(length>=2){
+		if(length == 2){
+			this.row();
+		}
+		if(length == 4){
 			this.row();
 		}
 		entries[length] = entry;
