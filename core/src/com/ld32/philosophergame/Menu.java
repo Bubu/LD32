@@ -26,8 +26,8 @@ public class Menu extends Table {
 	public Cell<KeyTextButton> add(KeyTextButton entry){
 		if(length>=2){
 			this.row();
-			entries[entries.length-1] = entry;
 		}
+		entries[length] = entry;
 		length ++;
 		return super.add(entry).width(200).pad(10);
 			

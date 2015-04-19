@@ -1,5 +1,6 @@
 package com.ld32.philosophergame;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -13,21 +14,30 @@ public class Philosopher {
 	int sanity;
 	Image sprite;
 	Attack[] attacks;
+	String name;
 
-	public Philosopher(int maxhp, int sanity, Texture texture) {
+	public Philosopher(String name, int maxhp, int sanity, Texture texture, boolean isOpponent) {
+		this.name = name;
 		this.maxhp = maxhp;
 		this.currenthp = maxhp;
 		this.sanity = sanity;
 		Sprite s =new Sprite(texture);
-		s.flip(true, false);
+		if (!isOpponent) s.flip(true, false);
 		sprite = new Image(new TextureRegionDrawable(s));
-		//sprite.setColor(Color.RED);
+		if(isOpponent) sprite.setColor(Color.RED);
 		sprite.setScaling(Scaling.fill);
-		sprite.setHeight(150);
-		sprite.setWidth(sprite.getWidth() * 150/texture.getHeight());
+		if(!isOpponent || true) {
+			sprite.setHeight(150);
+			sprite.setWidth(sprite.getWidth() * 150/texture.getHeight());
+		}
 		this.attacks = new Attack[4];
 		this.attacks[0] = Attack.Confuse();
 		this.attacks[1] = Attack.SelPerption();
+	}
+
+	public void doAttack(Attack attack) {
+		Gdx.app.log("Attack", attack.name);
+		
 	}
 
 }
