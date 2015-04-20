@@ -28,12 +28,8 @@ public class FightScreen extends ScreenAdapter {
 		
 		stage = new Stage(new ScreenViewport());
 		stage.addListener(Ressources.EscListener(game));
-		
 
-		menu = new Menu(Ressources.Skin());
-		menu.updateMenu(game);
-		
-		// Creation of speech bubble
+		// Creation of speech bubble:
 		LeftBubble bubbleLeft = new LeftBubble("Hallo");
 		bubbleLeft.debug();
 		RightBubble bubbleRight = new RightBubble("Sassssssss\n\rdassssssssssssssssssssssssss");
@@ -41,24 +37,26 @@ public class FightScreen extends ScreenAdapter {
 		
 		game.player.sprite.setPosition(20, 25);
 		
-		Table menutable = new Table();
-
-		menutable.setFillParent(true);
-		menutable.right().bottom();
-		
 		stage.addActor(generateOpponentTable());
-		stage.addActor(menutable);
-		stage.addActor(generateInfoTexttable());
+		stage.addActor(generateMenuTable());
+		stage.addActor(generateInfoTextTable());
 		stage.addActor(game.player.sprite);
 		stage.addActor(bubbleLeft);
 		stage.addActor(bubbleRight);
 		
+	}
+		
+	public Table generateMenuTable(){
+		menu = new Menu(Ressources.Skin());
+		menu.updateMenu(game);
+		Table menutable = new Table();
+		menutable.setFillParent(true);
+		menutable.right().bottom();
 		menutable.add(menu);
+		return menutable;
 	}
 	
-	
-	
-	public Table generateInfoTexttable(){
+	public Table generateInfoTextTable(){
 		infoText = new Label("", Ressources.Skin());
 		infoText.setVisible(false);
 		Table infoTextTable = new Table();
