@@ -61,6 +61,31 @@ public class Attack {
 		return new Attack("Summon Ubermensch", 1, 0, 0, 0.5f, 1, messages);
 	}
 	
+	// Attack Schopenhauer
+	
+	public static Attack Pessimism(){
+		String[] messages = new String[3];
+		messages[0] = "Why ";
+		messages[1] = "We are but a bridge from ape to Übermensch.";
+		messages[2] = "I make my own morales.";
+		return new Attack("Summon Ubermensch", 1, 0, 0, 0.5f, 1, messages);
+	}
+	
+	public static Attack LifeIsSuffering(){
+		String[] messages = new String[3];
+		messages[0] = "Why ";
+		messages[1] = "We are but a bridge from ape to Übermensch.";
+		messages[2] = "I make my own morales.";
+		return new Attack("Summon Ubermensch", 1, 0, 0, 0.5f, 1, messages);
+	}
+	
+	public static Attack HedgehogDilemma(){
+		String[] messages = new String[3];
+		messages[0] = "Real Closeness is impossible.";
+		messages[1] = "The more you try, the more you hurt the people closest to you.";
+		messages[2] = "I make my own morales.";
+		return new Attack("Summon Ubermensch", 1, 0, 0, 0.5f, 1, messages);
+	}
 	
 	
 	public Attack(String name, int coolDown, float hpDamage, float sanityDamage, float bonus, float malus, String[] messages) {

@@ -29,18 +29,51 @@ public class Philosopher {
 		Philosopher p = new Philosopher("Nietzsche", 100,20,Ressources.Nietzsche(),isOpponent);
 		p.attacks[3] = Attack.EternalReturn();
 		p.attacks[4] = Attack.WilltoPower();
-		p.attacks[5] = Attack.Summon‹bermensch();
-		return p;
-	}
-	public static Philosopher Descartes(boolean isOpponent){
-		
-		Philosopher p = new Philosopher("Descartes", 100,20,Ressources.Descartes(),isOpponent);
-		p.attacks[3] = Attack.EternalReturn();
-		p.attacks[4] = Attack.WilltoPower();
-		p.attacks[5] = Attack.Summon‹bermensch();
+		p.attacks[5] = Attack.Summon√úbermensch();
 		return p;
 	}
 	
+	Philosopher p = new Philosopher("Schopenhauer", 100,20,Ressources.Schopenhauer(),isOpponent);
+	p.attacks[3] = Attack.Pessimism();
+	p.attacks[4] = Attack.HedgehogDilemma();
+	p.attacks[5] = Attack.LifeIsSuffering();
+	return p;
+}
+
+Philosopher p = new Philosopher("Wittgenstein", 100,20,Ressources.Wittgenstein(),isOpponent);
+p.attacks[3] = Attack.LogicalProposition();
+p.attacks[4] = Attack.LanguageGames();
+p.attacks[5] = Attack.BeatleInABox();
+return p;
+}
+
+Philosopher p = new Philosopher("Hobbes", 100,20,Ressources.Hobbes(),isOpponent);
+p.attacks[3] = Attack.AllAgainstAll();
+p.attacks[4] = Attack.SocialContract();
+p.attacks[5] = Attack.SummonLeviathan();
+return p;
+}
+
+Philosopher p = new Philosopher("Freud", 100,20,Ressources.Freud(),isOpponent);
+p.attacks[3] = Attack.Tabu();
+p.attacks[4] = Attack.SexualRepression();
+p.attacks[5] = Attack.SummonSuperEgo();
+return p;
+}
+
+Philosopher p = new Philosopher("Kant", 100,20,Ressources.Kant(),isOpponent);
+p.attacks[3] = Attack.PureReason();
+p.attacks[4] = Attack.CathegorialImperativ();
+p.attacks[5] = Attack.Enlightenment();
+return p;
+}
+
+Philosopher p = new Philosopher("Kierkegaard", 100,20,Ressources.Kierkegaard(),isOpponent);
+p.attacks[3] = Attack.Angst();
+p.attacks[4] = Attack.ExistentialDespair();
+p.attacks[5] = Attack.summonKnightOfFaith();
+return p;
+}
 
 	public Philosopher(String name, int maxhp, int sanity, TextureRegion texture, boolean isOpponent) {
 		this.name = name;
