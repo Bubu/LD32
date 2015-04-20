@@ -84,6 +84,7 @@ public static Philosopher Socrates(boolean isOpponent){
 		this.maxhp = maxhp;
 		this.currenthp = maxhp;
 		this.sanity = sanity;
+		this.currentSanity = sanity;
 		Sprite s =new Sprite(texture);
 		if (!isOpponent) s.flip(true, false);
 		sprite = new Image(new TextureRegionDrawable(s));
@@ -99,7 +100,7 @@ public static Philosopher Socrates(boolean isOpponent){
 	}
 
 	public String doAttack(Attack attack, Philosopher opp) {
-		int damage = (int) Math.ceil(attack.hpDamage + attack.bonus * sanity - attack.malus * opp.sanity);  
+		int damage = (int) Math.ceil(attack.hpDamage*(1 + attack.malus*(currentSanity-sanity)/sanity + attack.bonus*(opp.sanity - opp.currentSanity)/opp.sanity));  
 		opp.currenthp -= damage;
 		opp.currentSanity -= attack.sanityDamage;
 		return "It does "+ damage + " damage to " + opp.name + "'s conviction!";

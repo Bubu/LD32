@@ -46,7 +46,9 @@ public class FightScreen extends ScreenAdapter {
 		stage.addActor(leftBubble);
 		stage.addActor(rightBubble);
 	}
-		
+	
+	// %%%%% Table Generators %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
 	public Table generateMenuTable(){
 		menu = new Menu(Ressources.Skin());
 		menu.updateMenu(game);
@@ -85,10 +87,12 @@ public class FightScreen extends ScreenAdapter {
 		return opponentTable;
 	}
 	
+	// %%%%% Attack Handlers %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
 	public void handleAttack(Attack attack){
 		String feedback = game.player.doAttack(attack, game.opponent);
 		oppHealth.setValue(game.opponent.currenthp);
-		showAttackInfo(game.player, attack, feedback);
+		showAttackInfo(attack, feedback);
 		showAttackMessage(attack);
 	}
 	
@@ -107,9 +111,8 @@ public class FightScreen extends ScreenAdapter {
 		}
 	}
 
-	public void showAttackInfo(Philosopher phil, Attack attack, String feedback) {
-		game.fightscreen.menu.setVisible(false);
-		game.fightscreen.infoText.setText(phil.name + " uses \"" + attack.name + "\"" + n + feedback);
+	public void showAttackInfo(Attack attack, String feedback) {
+		game.fightscreen.infoText.setText(game.currentplayer.name + " uses \"" + attack.name + "\"" + n + feedback);
 		game.fightscreen.infoText.setVisible(true);
 		waitForClick(Ressources.AdvanceText);
 	}
@@ -117,25 +120,9 @@ public class FightScreen extends ScreenAdapter {
 	protected boolean checkStatus() {
 		//game.player.status
 		return false;
-	}
+	}	
 	
-	protected void describeStatus(Status status) {
-		Gdx.app.log("TODO!", "Describe Status");
-	}
-
-	public void render(float delta) {
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		stage.act(Gdx.graphics.getDeltaTime());
-		stage.draw();
-	}
-	
-	public void show() {
-		Gdx.gl.glClearColor(0.2f, 0.3f, 0.9f, 1);
-		Gdx.input.setInputProcessor(stage);
-	}
-	public void resize (int width, int height) {
-		stage.getViewport().update(width, height, true);
-	}
+	// %%%%% Turn Handlers %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	
 	public void waitForClick (final int action) {
 		InputListener listener = new InputListener(){
@@ -168,15 +155,33 @@ public class FightScreen extends ScreenAdapter {
 	}
 	
 	private void advancePlayer() {
-		menu.setVisible(true);
-		infoText.setVisible(false);
 		if(game.currentplayer == game.player){
 			game.currentplayer = game.opponent;
 			handleAttack(game.opponent.choseRandomMove(game));
 		}
 		else{
 			game.currentplayer = game.player;
+			menu.setVisible(true);
+			infoText.setVisible(false);
 		}
 	}
 
+	protected void describeStatus(Status status) {
+		Gdx.app.log("TODO!", "Describe Status");
+	}
+
+	public void render(float delta) {
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		stage.act(Gdx.graphics.getDeltaTime());
+		stage.draw();
+	}
+	
+	public void show() {
+		Gdx.gl.glClearColor(0.2f, 0.3f, 0.9f, 1);
+		Gdx.input.setInputProcessor(stage);
+	}
+	public void resize (int width, int height) {
+		stage.getViewport().update(width, height, true);
+	}
+	
 }
