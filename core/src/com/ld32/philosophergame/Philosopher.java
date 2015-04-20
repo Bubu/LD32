@@ -1,7 +1,6 @@
 package com.ld32.philosophergame;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -16,8 +15,10 @@ public class Philosopher {
 	Image sprite;
 	Attack[] attacks;
 	String name;
+	String[] phrases;
 	int currentSanity;
 	private static ArrayList<Philosopher> philosphers;
+	static String n = System.getProperty("line.separator");
 	
 	public static ArrayList<Philosopher> getList(){
 		if (philosphers == null){
@@ -31,6 +32,10 @@ public class Philosopher {
 		p.attacks[3] = Attack.EternalReturn();
 		p.attacks[4] = Attack.WilltoPower();
 		p.attacks[5] = Attack.SummonUbermensch();
+		
+		p.phrases[0] = "You shall be overcome.";
+		p.phrases[1] = "I perish ... and in perishing ... I triumph!";
+		p.phrases[2] = "You found me before you found yourself.";
 		return p;
 	}
 	public static Philosopher Descartes(boolean isOpponent){
@@ -39,6 +44,11 @@ public class Philosopher {
 		p.attacks[3] = Attack.EternalReturn();
 		p.attacks[4] = Attack.WilltoPower();
 		p.attacks[5] = Attack.SummonUbermensch();
+		
+		p.phrases[0] = "I think -- therefore I kick ass!";
+		p.phrases[1] = "I am indeed amazed when I consider how weak"+n+"my mind is and how prone to error.";
+		p.phrases[2] = "Perfect men like perfect numbers are very rare."+n+"You are not one of them.";
+		
 		return p;
 	}
 	
@@ -59,6 +69,7 @@ public class Philosopher {
 		this.attacks[0] = Attack.AdHominem();
 		this.attacks[1] = Attack.Paradox();
 		this.attacks[2] = Attack.SelPerption();
+		this.phrases = new String[3];
 	}
 
 	public String doAttack(Attack attack, Philosopher opp) {
@@ -68,12 +79,9 @@ public class Philosopher {
 		return "It does "+ damage + " damage to " + opp.name + "'s conviction!";
 	}
 
-	public void chooseMove(PhilosopherGame game) {
-		Random rand = new Random();
-		Attack attack = attacks[rand.nextInt(6)];
-		String feedback = doAttack(attack, game.player);
-		game.fightscreen.playerHealth.setValue(game.player.currenthp);
-		game.fightscreen.showAttackInfo(this,attack, feedback);
+	public Attack choseRandomMove(PhilosopherGame game) {
+		Attack attack = attacks[Ressources.Rand().nextInt(attacks.length)];
+		return attack;
 	}
 	
 	public static Philosopher getRandom() {

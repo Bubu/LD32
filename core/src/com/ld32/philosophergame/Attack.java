@@ -55,13 +55,21 @@ public class Attack {
 	}
 	public static Attack SummonUbermensch(){
 		String[] messages = new String[3];
-		messages[0] = "A wild Übermensch appears!";
-		messages[1] = "We are but a bridge from ape to Übermensch.";
+		messages[0] = "A wild ï¿½bermensch appears!";
+		messages[1] = "We are but a bridge from ape to ï¿½bermensch.";
 		messages[2] = "I make my own morales.";
 		return new Attack("Summon Ubermensch", 1, 0, 0, 0.5f, 1, messages);
 	}
+
+	// Descartes Attacks
 	
-	
+	public static Attack CartesianDualism(){
+		String[] messages = new String[3];
+		messages[0] = "I'll be back!";
+		messages[1] = "Don't simply bear the necessary. Love it!";
+		messages[2] = "This is the greatest burden of all.";
+		return new Attack("Cartesian Dualism", 1, 0, 0, 0.5f, 1, messages);
+	}	
 	
 	public Attack(String name, int coolDown, float hpDamage, float sanityDamage, float bonus, float malus, String[] messages) {
 		this.name = name;
@@ -70,6 +78,7 @@ public class Attack {
 		this.sanityDamage = sanityDamage;
 		this.bonus = bonus;
 		this.malus = malus;
+		this.messages = messages;
 	}
 
 	public Attack() {
