@@ -40,12 +40,6 @@ public class FightScreen extends ScreenAdapter {
 		 	}
 		});
 		
-		infoText = new Label("", Ressources.Skin());
-		infoText.setVisible(false);
-		oppHealth = new ProgressBar(0, game.opponent.maxhp, 1, false, Ressources.Skin());
-		oppHealth.setValue(game.opponent.currenthp);
-		playerHealth = new ProgressBar(0, game.player.maxhp, 1, false, Ressources.Skin());
-		playerHealth.setValue(game.player.currenthp);
 
 		menu = new Menu(Ressources.Skin());
 		menu.updateMenu(game);
@@ -63,12 +57,34 @@ public class FightScreen extends ScreenAdapter {
 		menutable.setFillParent(true);
 		menutable.right().bottom();
 		
+		stage.addActor(generateOpponentTable());
+		stage.addActor(menutable);
+		stage.addActor(generateInfoTexttable());
+		stage.addActor(game.player.sprite);
+		stage.addActor(bubbleLeft);
+		stage.addActor(bubbleRight);
+		
+		menutable.add(menu);
+	}
+	
+	
+	
+	public Table generateInfoTexttable(){
+		infoText = new Label("", Ressources.Skin());
+		infoText.setVisible(false);
 		Table infoTextTable = new Table();
 		infoTextTable.setFillParent(true);
 		infoTextTable.left().top();
-		
 		infoTextTable.add(infoText).padLeft(210).padTop(350);
-		
+		return infoTextTable;
+	}
+	
+	public Table generateOpponentTable(){
+		oppHealth = new ProgressBar(0, game.opponent.maxhp, 1, false, Ressources.Skin());
+		oppHealth.setValue(game.opponent.currenthp);
+		playerHealth = new ProgressBar(0, game.player.maxhp, 1, false, Ressources.Skin());
+		playerHealth.setValue(game.player.currenthp);
+
 		Table opponentTable = new Table();
 		opponentTable.debugAll();
 		opponentTable.setFillParent(true);
@@ -78,15 +94,7 @@ public class FightScreen extends ScreenAdapter {
 		opponentTable.add(game.opponent.sprite).height(150)
 			.width(game.opponent.sprite.getWidth()* 100/game.opponent.sprite.getWidth())
 			.pad(15);
-		
-		stage.addActor(opponentTable);
-		stage.addActor(menutable);
-		stage.addActor(infoTextTable);
-		stage.addActor(game.player.sprite);
-		stage.addActor(bubbleLeft);
-		stage.addActor(bubbleRight);
-		
-		menutable.add(menu);
+		return opponentTable;
 	}
 	
 	public void handleAttack(Attack attack){
