@@ -1,5 +1,7 @@
 package com.ld32.philosophergame;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -12,6 +14,7 @@ public class PhilosopherGame extends Game {
 	Philosopher opponent;
 	Philosopher currentplayer;
 	private Screen currentScreen;
+	private ArrayList<Philosopher.Philosophers> fought;
 
 	public void create () {
 		isRunning = false;
@@ -20,12 +23,16 @@ public class PhilosopherGame extends Game {
 	}
 
 	public void startFight() {
-		opponent = Philosopher.Descartes(true);
+		opponent = getNextOpponent();
 		currentplayer = player; 
 		fightscreen = new FightScreen(this);
 		currentScreen = fightscreen;
 		setScreen(currentScreen);
-		
+	}
+
+	private Philosopher getNextOpponent() {
+		int pick = Ressources.Rand().nextInt(Philosopher.Philosophers.values().length);
+		return Philosopher.createPhilosopher(Philosopher.Philosophers.values()[pick], true);
 	}
 
 	public void resumeGame() {

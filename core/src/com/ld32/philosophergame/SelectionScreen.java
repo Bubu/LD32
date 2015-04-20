@@ -27,7 +27,6 @@ public class SelectionScreen extends ScreenAdapter {
 		stage.addActor(table);		
 		table.center();		
 		table.setFillParent(true);
-		table.debugAll();
 		Label titel = new Label("Select your character!", Ressources.Skin());
 		Table charTable = new Table();
 		

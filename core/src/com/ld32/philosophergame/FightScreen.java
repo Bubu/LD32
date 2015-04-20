@@ -1,7 +1,5 @@
 package com.ld32.philosophergame;
 
-import java.util.Random;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
@@ -37,7 +35,6 @@ public class FightScreen extends ScreenAdapter {
 		leftBubble = new LeftBubble(game.player.phrases[0]);
 		leftBubble.setVisible(false);
 		rightBubble = new RightBubble(game.opponent.phrases[0]);
-		rightBubble.debug();
 		rightBubble.setVisible(true);
 		
 		game.player.sprite.setPosition(20, 25);
