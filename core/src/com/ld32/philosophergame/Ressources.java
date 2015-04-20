@@ -1,5 +1,7 @@
 package com.ld32.philosophergame;
 
+import java.util.Random;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
@@ -12,12 +14,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 
 public final class Ressources {
+	public static int AdvanceText = 0;
 	private static Ressources instance = null;
 	private Skin skin;
 	public TextureRegion[][] philosophers;
 	private LabelStyle bubbleStyleLeft;
 	private LabelStyle bubbleStyleRight;
+	private Random rand;
 	private Ressources() {
+		 rand = new Random();
 		 philosophers = TextureRegion.split(new Texture(Gdx.files.internal("PhilospherSprites.png")), 15, 26);
 		 skin = new Skin(Gdx.files.internal("uiskin.json"));
 		 //load bubble skin
@@ -115,5 +120,7 @@ public final class Ressources {
 		return esclistner;
 		
 	}
-	
+	public static Random Rand(){
+		return getInstance().rand;
+	}
 }

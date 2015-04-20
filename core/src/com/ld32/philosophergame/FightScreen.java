@@ -1,5 +1,7 @@
 package com.ld32.philosophergame;
 
+import java.util.Random;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
@@ -20,6 +22,8 @@ public class FightScreen extends ScreenAdapter {
 	Stage stage;
 	Menu menu;
 	Label infoText;
+	LeftBubble leftBubble;
+	RightBubble rightBubble;
 	ProgressBar oppHealth;
 	ProgressBar playerHealth;
 	
@@ -30,10 +34,11 @@ public class FightScreen extends ScreenAdapter {
 		stage.addListener(Ressources.EscListener(game));
 
 		// Creation of speech bubble:
-		LeftBubble bubbleLeft = new LeftBubble("Hallo");
-		bubbleLeft.debug();
-		RightBubble bubbleRight = new RightBubble("Sassssssss\n\rdassssssssssssssssssssssssss");
-		bubbleRight.setVisible(true);
+		leftBubble = new LeftBubble(game.player.phrases[0]);
+		leftBubble.setVisible(false);
+		rightBubble = new RightBubble(game.opponent.phrases[0]);
+		rightBubble.debug();
+		rightBubble.setVisible(true);
 		
 		game.player.sprite.setPosition(20, 25);
 		
@@ -41,9 +46,8 @@ public class FightScreen extends ScreenAdapter {
 		stage.addActor(generateMenuTable());
 		stage.addActor(generateInfoTextTable());
 		stage.addActor(game.player.sprite);
-		stage.addActor(bubbleLeft);
-		stage.addActor(bubbleRight);
-		
+		stage.addActor(leftBubble);
+		stage.addActor(rightBubble);
 	}
 		
 	public Table generateMenuTable(){
@@ -88,31 +92,29 @@ public class FightScreen extends ScreenAdapter {
 		String feedback = game.player.doAttack(attack, game.opponent);
 		oppHealth.setValue(game.opponent.currenthp);
 		showAttackInfo(game.player, attack, feedback);
+		showAttackMessage(attack);
+	}
+	
+	public void showAttackMessage(Attack attack){
+		String message = attack.messages[Ressources.Rand().nextInt(attack.messages.length)];
+		if(game.currentplayer == game.player){
+			leftBubble.setVisible(true);
+			leftBubble.setText(message);
+			leftBubble.pack();
+			rightBubble.setVisible(false);
+		}else{
+			rightBubble.setVisible(true);
+			rightBubble.setText(message);
+			rightBubble.pack();
+			leftBubble.setVisible(false);
+		}
 	}
 
 	public void showAttackInfo(Philosopher phil, Attack attack, String feedback) {
 		game.fightscreen.menu.setVisible(false);
 		game.fightscreen.infoText.setText(phil.name + " uses \"" + attack.name + "\"" + n + feedback);
 		game.fightscreen.infoText.setVisible(true);
-		game.fightscreen.stage.addListener(new InputListener(){
-			@Override
-			public boolean keyDown(InputEvent event, int keycode) {
-				if(keycode == Input.Keys.ENTER){
-					advanceText(this);
-					return true;
-				}
-				else{
-					return false;
-				}
-			}
-			@Override
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				advanceText(this);
-			}
-		});
+		waitForClick(Ressources.AdvanceText);
 	}
 
 	protected boolean checkStatus() {
@@ -137,14 +139,43 @@ public class FightScreen extends ScreenAdapter {
 	public void resize (int width, int height) {
 		stage.getViewport().update(width, height, true);
 	}
+	
+	public void waitForClick (final int action) {
+		InputListener listener = new InputListener(){
+			@Override
+			public boolean keyDown(InputEvent event, int keycode) {
+				if(keycode == Input.Keys.ENTER){
+					continueAction(action,this);
+					return true;
+				}
+				else{
+					return false;
+				}
+			}
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+				return true;
+			}
+			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+					continueAction(action,this);
+			}
+		};
+		game.fightscreen.stage.addListener(listener);
+	}
 
-	private void advanceText(InputListener listener) {
-		game.fightscreen.menu.setVisible(true);
-		game.fightscreen.infoText.setVisible(false);
-		game.fightscreen.stage.removeListener(listener);
+	private void continueAction(final int action, InputListener listener){
+		if (action == Ressources.AdvanceText) {
+			advancePlayer();
+		}
+		stage.removeListener(listener);
+	}
+	
+	private void advancePlayer() {
+		menu.setVisible(true);
+		infoText.setVisible(false);
 		if(game.currentplayer == game.player){
 			game.currentplayer = game.opponent;
-			game.opponent.chooseMove(game);
+			handleAttack(game.opponent.choseRandomMove(game));
 		}
 		else{
 			game.currentplayer = game.player;
