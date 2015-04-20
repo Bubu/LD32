@@ -65,9 +65,25 @@ public class Attack {
 	
 	public static Attack CartesianDualism(){
 		String[] messages = new String[3];
-		messages[0] = "I'll be back!";
-		messages[1] = "Don't simply bear the necessary. Love it!";
-		messages[2] = "This is the greatest burden of all.";
+		messages[0] = "I separate my mind from my body.";
+		messages[1] = "The thinking thing is the essence of himself.";
+		messages[2] = "Two are better than one.";
+		return new Attack("Cartesian Dualism", 1, 0, 0, 0.5f, 1, messages);
+	}
+	
+	public static Attack DeusDeceptor(){
+		String[] messages = new String[3];
+		messages[0] = "Everything was arranged to deceive you!";
+		messages[1] = "A malicious deamon controls your senses.";
+		messages[2] = "I show you how deep the rabbit hole goes.";
+		return new Attack("Cartesian Dualism", 1, 0, 0, 0.5f, 1, messages);
+	}	
+	
+	public static Attack CogitoErgoSum(){
+		String[] messages = new String[3];
+		messages[0] = "Je pense ainsi je suis.";
+		messages[1] = "I may be wrong, but at least I am.";
+		messages[2] = "For all I know, you might be just a P-Zombie.";
 		return new Attack("Cartesian Dualism", 1, 0, 0, 0.5f, 1, messages);
 	}	
 	
