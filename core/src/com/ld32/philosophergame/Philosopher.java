@@ -58,9 +58,9 @@ public class Philosopher {
 	public static Philosopher Descartes(boolean isOpponent){
 		
 		Philosopher p = new Philosopher("Descartes", 100,20,Ressources.Descartes(),isOpponent);
-		p.attacks[3] = Attack.EternalReturn();
-		p.attacks[4] = Attack.WilltoPower();
-		p.attacks[5] = Attack.SummonUbermensch();
+		p.attacks[3] = Attack.CartesianDualism();
+		p.attacks[4] = Attack.DeusDeceptor();
+		p.attacks[5] = Attack.CogitoErgoSum();
 		
 		p.phrases[0] = "I think -- therefore I kick ass!";
 		p.phrases[1] = "I am indeed amazed when I consider how weak"+n+"my mind is and how prone to error.";
@@ -72,9 +72,9 @@ public class Philosopher {
 public static Philosopher Socrates(boolean isOpponent){
 		
 		Philosopher p = new Philosopher("Socrates", 100,20,Ressources.Socrates(),isOpponent);
-		p.attacks[3] = Attack.EternalReturn();
-		p.attacks[4] = Attack.WilltoPower();
-		p.attacks[5] = Attack.SummonUbermensch();
+		p.attacks[3] = Attack.SocraticMethod();
+		p.attacks[4] = Attack.PlatonicLove();
+		p.attacks[5] = Attack.AristotelianLogic();
 		return p;
 	}
 	

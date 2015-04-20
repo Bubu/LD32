@@ -22,11 +22,14 @@ public class Attack {
 	}
 	
 	public static Attack AdHominem() {
-		String[] messages = new String[3];
+		String[] messages = new String[6];
 		messages[0] = "You stink!";
 		messages[1] = "I would listen to you, but then again,"+n+"you are an idiot.";
 		messages[2] = "You don't really have a degree, do you?";
-		return new Attack("Ad Hominem", 0, 40, 0, 0, 0, messages);
+		messages[3] = "That's what she said!";
+		messages[4] = "If I agree with you we are both wrong!";
+		messages[5] = "Get a haircut, you hippy!";
+		return new Attack("Ad Hominem", 0, 10, 0, 0, 0, messages);
 	}
 	
 	public static Attack SelPerption(){
@@ -43,7 +46,7 @@ public class Attack {
 		String[] messages = new String[3];
 		messages[0] = "I'll be back!";
 		messages[1] = "Don't simply bear the necessary. Love it!";
-		messages[2] = "This is the greatest burden of all.";
+		messages[2] = "Eternal return. This is the greatest burden of all.";
 		return new Attack("Eternal Return", 1, 0, 0, 0.5f, 1, messages);
 	}
 	public static Attack WilltoPower(){
@@ -55,7 +58,7 @@ public class Attack {
 	}
 	public static Attack SummonUbermensch(){
 		String[] messages = new String[3];
-		messages[0] = "A wild �bermensch appears!";
+		messages[0] = "A wild Ubermensch appears!";
 		messages[1] = "We are but a bridge from ape to �bermensch.";
 		messages[2] = "I make my own morales.";
 		return new Attack("Summon Ubermensch", 1, 0, 0, 0.5f, 1, messages);
@@ -76,7 +79,7 @@ public class Attack {
 		messages[0] = "Everything was arranged to deceive you!";
 		messages[1] = "A malicious deamon controls your senses.";
 		messages[2] = "I show you how deep the rabbit hole goes.";
-		return new Attack("Cartesian Dualism", 1, 0, 0, 0.5f, 1, messages);
+		return new Attack("Deus Deceptor", 1, 0, 0, 0.5f, 1, messages);
 	}	
 	
 	public static Attack CogitoErgoSum(){
@@ -84,8 +87,34 @@ public class Attack {
 		messages[0] = "Je pense ainsi je suis.";
 		messages[1] = "I may be wrong, but at least I am.";
 		messages[2] = "For all I know, you might be just a P-Zombie.";
-		return new Attack("Cartesian Dualism", 1, 0, 0, 0.5f, 1, messages);
+		return new Attack("Cogito Ergo Sum", 1, 0, 0, 0.5f, 1, messages);
 	}	
+	
+	// Socrates Attacks
+	
+	public static Attack SocraticMethod(){
+		String[] messages = new String[3];
+		messages[0] = "I see, from the few words which you have uttered,"+n+"that he has attended more to the art which"+n+"is called rhetoric than to dialectic.";
+		messages[1] = "The unexamined life is not worth living.";
+		messages[2] = "Please continue. I am curious about"+n+"the next thing you do not know.";
+		return new Attack("Socratic Method", 1, 0, 0, 0.5f, 1, messages);
+	}
+	
+	public static Attack PlatonicLove(){
+		String[] messages = new String[3];
+		messages[0] = "I would love to see you"+n+"handcuffed in a dark cave!";
+		messages[1] = "I like the idealised version of you.";
+		messages[2] = "How does it feel to be ruled"+n+"by the philosopher king?";
+		return new Attack("Platonic Love", 1, 0, 0, 0.5f, 1, messages);
+	}	
+	
+	public static Attack AristotelianLogic(){
+		String[] messages = new String[3];
+		messages[0] = "All living things are beautiful."+n+"I am a living thing."+n+"Therfore I am beautiful. Oh, yeah!";
+		messages[1] = "Every non-Socrates against a"+n+"non-non-Socrates will be non-winning.";
+		messages[2] = "One man's modus ponens is another man's modus tollens.";
+		return new Attack("Aristotelian Logic", 1, 0, 0, 0.5f, 1, messages);
+	}
 	
 	public Attack(String name, int coolDown, float hpDamage, float sanityDamage, float bonus, float malus, String[] messages) {
 		this.name = name;
