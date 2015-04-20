@@ -17,6 +17,7 @@ public class Philosopher {
 	String name;
 	String[] phrases;
 	int currentSanity;
+	boolean thinking;
 
 	static String n = System.getProperty("line.separator");
 
@@ -158,6 +159,8 @@ public class Philosopher {
 		int damage = (int) Math.ceil(attack.hpDamage*(1 + attack.malus*(currentSanity-sanity)/sanity + attack.bonus*(opp.sanity - opp.currentSanity)/opp.sanity));  
 		opp.currenthp -= damage;
 		opp.currentSanity -= attack.sanityDamage;
+		currenthp += attack.hpHealing;
+		currentSanity += attack.sanityHealing;
 		String returnString = "";
 		if (damage != 0){
 			returnString += "It does "+ damage + " damage to " + opp.name + "'s conviction!";
@@ -166,8 +169,25 @@ public class Philosopher {
 			if (returnString != "") returnString += n;
 			returnString += "It does "+ attack.sanityDamage + " damage to " + opp.name + "'s sanity!";
 		}
+		if(attack.hpHealing > 0){
+			if (returnString != "") returnString += n;
+			returnString += name + " heals " + attack.hpHealing + " of his conviction!";
+		}
+		if(attack.sanityHealing > 0){
+			if (returnString != "") returnString += n;
+			returnString += name + " heals " + attack.sanityHealing + " of his sanity!";
+		}
+		if(attack.hpHealing < 0){
+			if (returnString != "") returnString += n;
+			returnString += name + " damages his own conviction by " + (-1)*attack.hpHealing;
+		}
+		if(attack.sanityHealing < 0){
+			if (returnString != "") returnString += n;
+			returnString += name + " damages his own sanity by " + (-1)*attack.sanityHealing;
+		}
 		if (returnString == "") returnString += "It does nothing!";
 		return returnString;
+		
 	}
 
 	public Attack choseRandomMove(PhilosopherGame game) {
