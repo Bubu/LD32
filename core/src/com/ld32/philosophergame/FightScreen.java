@@ -89,10 +89,24 @@ public class FightScreen extends ScreenAdapter {
 	public void handleAttack(Attack attack, Philosopher opponent){
 		String feedback = game.player.doAttack(attack, opponent);
 		updateUI();
+		if(opponent.currenthp <= 0){
+			feedback += n + "You conviced " + opponent.name + " of your philosophy!";
+			showWinMessage();
+			showLoseMessage(opponent);
+			game.needNextOpponent = true;
+		}
 		showAttackInfo(attack, feedback);
 		showAttackMessage(attack);
 	}
 	
+	private void showLoseMessage(Philosopher opponent) {
+		Gdx.app.log("TODO", "Show lose message!");
+	}
+
+	private void showWinMessage() {
+		Gdx.app.log("TODO", "Show win message!");
+	}
+
 	private void updateUI() {
 		oppStatus.setHp(game.opponent.currenthp);
 		oppStatus.setSanity(game.opponent.currentSanity);
@@ -152,6 +166,11 @@ public class FightScreen extends ScreenAdapter {
 	}
 
 	private void continueAction(final int action, InputListener listener){
+		if (game.needNextOpponent){
+			game.fought.add(game.opponent.name);
+			game.startFight();
+			return;
+		}
 		if (action == Ressources.AdvanceText) {
 			advancePlayer();
 		}
