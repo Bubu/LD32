@@ -4,15 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
@@ -29,7 +25,7 @@ public class FightScreen extends ScreenAdapter {
 	
 	public FightScreen(final PhilosopherGame game) {
 		this.game = game;
-		Skin skin = new Skin(Gdx.files.internal("uiskin.json"));
+		
 		stage = new Stage(new ScreenViewport());
 		stage.addListener(new InputListener() {
 			@Override
@@ -44,32 +40,21 @@ public class FightScreen extends ScreenAdapter {
 		 	}
 		});
 		
-		infoText = new Label("", skin);
+		infoText = new Label("", Ressources.Skin());
 		infoText.setVisible(false);
-		oppHealth = new ProgressBar(0, game.opponent.maxhp, 1, false, skin);
+		oppHealth = new ProgressBar(0, game.opponent.maxhp, 1, false, Ressources.Skin());
 		oppHealth.setValue(game.opponent.currenthp);
-		playerHealth = new ProgressBar(0, game.player.maxhp, 1, false, skin);
+		playerHealth = new ProgressBar(0, game.player.maxhp, 1, false, Ressources.Skin());
 		playerHealth.setValue(game.player.currenthp);
 
-		menu = new Menu(skin);
+		menu = new Menu(Ressources.Skin());
 		menu.updateMenu(game);
 		
 		// Creation of speech bubble
-		NinePatch bubblePatchLeft = new NinePatch(new Texture(Gdx.files.internal("BubbleLeft.png")), 49, 49, 24, 56);
-		skin.add("bubbleBackgroundLeft",bubblePatchLeft);
-		LabelStyle bubbleStyleLeft = new LabelStyle(skin.getFont("default-font"), skin.getColor("white"));
-		Label bubbleLeft = new Label("\n\rSassssssss\n\rdassssssssssssssssssssssssss                              \n\r\n\r", bubbleStyleLeft);
+		LeftBubble bubbleLeft = new LeftBubble("Hallo");
 		bubbleLeft.debug();
-		bubbleStyleLeft.background = skin.getDrawable("bubbleBackgroundLeft");
-		
-		NinePatch bubblePatchRight = new NinePatch(new Texture(Gdx.files.internal("BubbleLeft.png")), 14, 37, 14, 50);
-		skin.add("bubbleBackgroundRight",bubblePatchRight);
-		LabelStyle bubbleStyleRight = new LabelStyle(skin.getFont("default-font"), skin.getColor("white"));
-		Label bubbleRight = new Label("", bubbleStyleRight);
-		bubbleStyleRight.background = skin.getDrawable("bubbleBackgroundRight");
-		
-		bubbleLeft.setPosition(30, 150);
-		bubbleRight.setPosition(20, 30);
+		RightBubble bubbleRight = new RightBubble("Sassssssss\n\rdassssssssssssssssssssssssss");
+		bubbleRight.setVisible(true);
 		
 		game.player.sprite.setPosition(20, 25);
 		
@@ -99,7 +84,7 @@ public class FightScreen extends ScreenAdapter {
 		stage.addActor(infoTextTable);
 		stage.addActor(game.player.sprite);
 		stage.addActor(bubbleLeft);
-		//stage.addActor(bubbleRight);
+		stage.addActor(bubbleRight);
 		
 		menutable.add(menu);
 	}
@@ -162,7 +147,7 @@ public class FightScreen extends ScreenAdapter {
 		game.fightscreen.menu.setVisible(true);
 		game.fightscreen.infoText.setVisible(false);
 		game.fightscreen.stage.removeListener(listener);
-		if(!(game.currentplayer != game.player)){
+		if(game.currentplayer == game.player){
 			game.currentplayer = game.opponent;
 			game.opponent.chooseMove(game);
 		}
