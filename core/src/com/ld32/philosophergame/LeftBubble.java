@@ -6,7 +6,7 @@ public class LeftBubble extends Label {
 
 	public LeftBubble(CharSequence text) {
 		super(text, Ressources.BubbleStyleLeft());
-		this.setPosition(30, 150);
+		this.setPosition(40, 160);
 	}
 	
 
