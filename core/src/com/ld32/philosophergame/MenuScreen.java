@@ -9,7 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -19,7 +18,9 @@ public class MenuScreen extends ScreenAdapter {
 	Stage stage;
 	KeyTextButton startbutton;
 	KeyTextButton quitbutton;
+	KeyTextButton restartbutton;
 	KeyTextButton activeButton;
+	private VerticalGroup group;
 	public MenuScreen(final PhilosopherGame game) {
 		this.game = game;
 				
@@ -57,26 +58,32 @@ public class MenuScreen extends ScreenAdapter {
 				}
 		 	}
 		});
-		Skin skin = new Skin(Gdx.files.internal("uiskin.json"));
 
-		VerticalGroup group = new VerticalGroup();
+		group = new VerticalGroup();
 		stage.addActor(group);
 		
 		group.center();
 
 		
-		Label titel = new Label("Philosophers Fight", skin);
+		Label titel = new Label("Philosophers Fight", Ressources.Skin());
 		
 		group.addActor(titel);
 
-		startbutton = new KeyTextButton("Start the game!", skin);
+		startbutton = new KeyTextButton("Start the game!", Ressources.Skin());
 		startbutton.addListener(new ChangeListener() {
 			public void changed (ChangeEvent event, Actor actor) {
-				game.start();
+				game.resumeGame();
 			}
 		});
 		
-		quitbutton = new KeyTextButton("Quit", skin);
+		restartbutton = new KeyTextButton("Restart!", Ressources.Skin());
+		restartbutton.addListener(new ChangeListener() {
+			public void changed (ChangeEvent event, Actor actor) {
+				game.restart();
+			}
+		});
+		
+		quitbutton = new KeyTextButton("Quit", Ressources.Skin());
 		quitbutton.addListener(new ChangeListener() {
 			public void changed (ChangeEvent event, Actor actor) {
 				game.quit();
@@ -99,6 +106,7 @@ public class MenuScreen extends ScreenAdapter {
 		if(game.isRunning){
 			
 			startbutton.setText("Resume");
+			group.addActorAt(2,restartbutton);
 			activeButton = startbutton;
 			activeButton.setSelected(true);
 		}
