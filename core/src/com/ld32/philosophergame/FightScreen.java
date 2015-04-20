@@ -4,15 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
@@ -24,94 +19,121 @@ public class FightScreen extends ScreenAdapter {
 	Stage stage;
 	Menu menu;
 	Label infoText;
+	LeftBubble leftBubble;
+	RightBubble rightBubble;
+	StatusDisplay oppStatus;
+	StatusDisplay playerStatus;
 	
 	public FightScreen(final PhilosopherGame game) {
 		this.game = game;
-		Skin skin = new Skin(Gdx.files.internal("uiskin.json"));
+		
 		stage = new Stage(new ScreenViewport());
-		stage.addListener(new InputListener() {
-			@Override
-			public boolean keyDown(InputEvent event, int keycode) {
-				if(keycode == Input.Keys.ESCAPE ){
-					game.setScreen(game.menuScreen);
-					return true;
-				}
-				else{
-					return false;
-				}
-		 	}
-		});
-		
-		infoText = new Label("", skin);
-		infoText.setVisible(false);
-		ProgressBar oppHealth = new ProgressBar(0, game.opponent.maxhp, 1, false, skin);
-		oppHealth.setValue(game.opponent.currenthp);
+		stage.addListener(Ressources.EscListener(game));
 
-		menu = new Menu(skin);
-		menu.updateMenu(game);
-		
-		// Creation of speech bubble
-		NinePatch bubblePatchLeft = new NinePatch(new Texture(Gdx.files.internal("BubbleLeft.png")), 48, 96, 24, 48);
-		skin.add("bubbleBackgroundLeft",bubblePatchLeft);
-		LabelStyle bubbleStyleLeft = new LabelStyle();
-		Label bubbleLeft = new Label("", bubbleStyleLeft);
-		bubbleStyleLeft.background = skin.getDrawable("bubbleBackgroundLeft");
-		
-		NinePatch bubblePatchRight = new NinePatch(new Texture(Gdx.files.internal("BubbleLeft.png")), 14, 42, 14, 28);
-		skin.add("bubbleBackgroundRight",bubblePatchRight);
-		LabelStyle bubbleStyleRight = new LabelStyle();
-		Label bubbleRight = new Label("", bubbleStyleRight);
-		bubbleStyleRight.background = skin.getDrawable("bubbleBackgroundRight");
-		
-		bubbleLeft.setPosition(20, 30);
-		bubbleRight.setPosition(20, 30);
+		// Creation of speech bubble:
+		leftBubble = new LeftBubble(game.player.phrases[0]);
+		leftBubble.setVisible(false);
+		rightBubble = new RightBubble(game.opponent.phrases[0]);
+		rightBubble.setVisible(true);
 		
 		game.player.sprite.setPosition(20, 25);
 		
+		stage.addActor(generateTopTable());
+		stage.addActor(generateMenuTable());
+		stage.addActor(generateInfoTextTable());
+		stage.addActor(game.player.sprite);
+		stage.addActor(leftBubble);
+		stage.addActor(rightBubble);
+	}
+	
+	// %%%%% Table Generators %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	public Table generateMenuTable(){
+		menu = new Menu(Ressources.Skin());
+		menu.updateMenu(game);
 		Table menutable = new Table();
-
 		menutable.setFillParent(true);
 		menutable.right().bottom();
-		
+		menutable.add(menu);
+		return menutable;
+	}
+	
+	public Table generateInfoTextTable(){
+		infoText = new Label("", Ressources.Skin());
+		infoText.setVisible(false);
 		Table infoTextTable = new Table();
 		infoTextTable.setFillParent(true);
 		infoTextTable.left().top();
-		
 		infoTextTable.add(infoText).padLeft(210).padTop(350);
-		
-		Table opponentTable = new Table();
-		opponentTable.debugAll();
-		opponentTable.setFillParent(true);
-		opponentTable.right().top();
-		opponentTable.add(oppHealth);
-		opponentTable.add(game.opponent.sprite).height(150)
-			.width(game.opponent.sprite.getWidth()* 100/game.opponent.sprite.getWidth())
-			.pad(15);
-		
-		stage.addActor(opponentTable);
-		stage.addActor(menutable);
-		stage.addActor(infoTextTable);
-		stage.addActor(game.player.sprite);
-		stage.addActor(bubbleLeft);
-		stage.addActor(bubbleRight);
-		
-		menutable.add(menu);
-
-
+		return infoTextTable;
 	}
 	
-	public void handleAttack(Attack attack){
-		String feedback = game.player.doAttack(attack, game.opponent);
-		game.fightscreen.menu.setVisible(false);
-		game.fightscreen.infoText.setText(game.player.name + " uses \"" + attack.name + "\"" + n + feedback);
+	public Table generateTopTable(){
+		oppStatus = new StatusDisplay(game.opponent);
+		playerStatus = new StatusDisplay(game.player);
+		
+		Table topTable = new Table();
+		topTable.setFillParent(true);
+		topTable.top();
+		
+		topTable.add(playerStatus).top().pad(10).padRight(20);
+		topTable.add(oppStatus).top().pad(10);
+		topTable.add(game.opponent.sprite).height(150)
+			.width(game.opponent.sprite.getWidth()* 100/game.opponent.sprite.getWidth())
+			.pad(15);
+		return topTable;
+	}
+
+	// %%%%% Attack Handlers %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	public void handleAttack(Attack attack, Philosopher opponent){
+		String feedback = game.player.doAttack(attack, opponent);
+		updateUI();
+		showAttackInfo(attack, feedback);
+		showAttackMessage(attack);
+	}
+	
+	private void updateUI() {
+		oppStatus.setHp(game.opponent.currenthp);
+		oppStatus.setSanity(game.opponent.currentSanity);
+		playerStatus.setHp(game.player.currenthp);
+		playerStatus.setSanity(game.player.currentSanity);
+	}
+
+	public void showAttackMessage(Attack attack){
+		String message = attack.messages[Ressources.Rand().nextInt(attack.messages.length)];
+		if(game.currentplayer == game.player){
+			leftBubble.setVisible(true);
+			leftBubble.setText(message);
+			leftBubble.pack();
+			rightBubble.setVisible(false);
+		}else{
+			rightBubble.setVisible(true);
+			rightBubble.setText(message);
+			rightBubble.pack();
+			leftBubble.setVisible(false);
+		}
+	}
+
+	public void showAttackInfo(Attack attack, String feedback) {
+		game.fightscreen.infoText.setText(game.currentplayer.name + " uses \"" + attack.name + "\"" + n + feedback);
 		game.fightscreen.infoText.setVisible(true);
-		game.fightscreen.stage.addListener(new InputListener(){
+		waitForClick(Ressources.AdvanceText);
+	}
+
+	protected boolean checkStatus() {
+		//game.player.status
+		return false;
+	}	
+	
+	// %%%%% Turn Handlers %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	public void waitForClick (final int action) {
+		InputListener listener = new InputListener(){
 			@Override
 			public boolean keyDown(InputEvent event, int keycode) {
 				if(keycode == Input.Keys.ENTER){
-					game.fightscreen.menu.setVisible(true);
-					game.fightscreen.infoText.setVisible(false);
-					game.fightscreen.stage.removeListener(this);
+					continueAction(action,this);
 					return true;
 				}
 				else{
@@ -123,38 +145,45 @@ public class FightScreen extends ScreenAdapter {
 				return true;
 			}
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				game.fightscreen.menu.setVisible(true);
-				game.fightscreen.infoText.setVisible(false);
-				game.fightscreen.stage.removeListener(this);
+					continueAction(action,this);
 			}
-		});
+		};
+		game.fightscreen.stage.addListener(listener);
 	}
 
-	protected boolean checkStatus() {
-		//game.player.status
-		return false;
-	}
-
-	protected void describeAttack(Attack attack) {
-		Gdx.app.log("TODO!", "Describe Attack");
+	private void continueAction(final int action, InputListener listener){
+		if (action == Ressources.AdvanceText) {
+			advancePlayer();
+		}
+		stage.removeListener(listener);
 	}
 	
-	protected void describeStatus(Status status) {
-		Gdx.app.log("TODO!", "Describe Attack");
+	private void advancePlayer() {
+		if(game.currentplayer == game.player){
+			game.currentplayer = game.opponent;
+			handleAttack(game.opponent.choseRandomMove(game), game.player);
+		}
+		else{
+			game.currentplayer = game.player;
+			menu.setVisible(true);
+			infoText.setVisible(false);
+		}
 	}
 
+	protected void describeStatus(Status status) {
+		Gdx.app.log("TODO!", "Describe Status");
+	}
 	public void render(float delta) {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		stage.act(Gdx.graphics.getDeltaTime());
 		stage.draw();
 	}
-	
 	public void show() {
-		Gdx.gl.glClearColor(0.2f, 0.3f, 0.9f, 1);
+		Gdx.gl.glClearColor(0.4f, 0.5f, 0.9f, 1);
 		Gdx.input.setInputProcessor(stage);
 	}
 	public void resize (int width, int height) {
 		stage.getViewport().update(width, height, true);
 	}
-
+	
 }

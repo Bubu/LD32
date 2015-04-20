@@ -53,7 +53,9 @@ public class Menu extends Table {
 				entries[i].addListener(new ChangeListener() {
 					@Override
 					public void changed(ChangeEvent event, final Actor actor) {
-						game.fightscreen.handleAttack( game.player.attacks[finali]);
+						game.fightscreen.menu.setVisible(false);
+						game.fightscreen.infoText.setVisible(true);
+						game.fightscreen.handleAttack(game.player.attacks[finali], game.opponent);
 					}
 				});
 			}
