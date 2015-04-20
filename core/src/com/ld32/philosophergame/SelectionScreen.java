@@ -19,7 +19,6 @@ public class SelectionScreen extends ScreenAdapter {
 	Stage stage;
 	public SelectionScreen(final PhilosopherGame game) {
 		this.game = game;
-		Gdx.app.log("Test", "Creating selection screen");
 		stage = new Stage(new ScreenViewport());
 		stage.addListener(Ressources.EscListener(game));
 

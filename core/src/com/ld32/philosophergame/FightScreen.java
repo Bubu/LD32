@@ -8,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
@@ -22,8 +21,8 @@ public class FightScreen extends ScreenAdapter {
 	Label infoText;
 	LeftBubble leftBubble;
 	RightBubble rightBubble;
-	ProgressBar oppHealth;
-	ProgressBar playerHealth;
+	StatusDisplay oppStatus;
+	StatusDisplay playerStatus;
 	
 	public FightScreen(final PhilosopherGame game) {
 		this.game = game;
@@ -39,7 +38,7 @@ public class FightScreen extends ScreenAdapter {
 		
 		game.player.sprite.setPosition(20, 25);
 		
-		stage.addActor(generateOpponentTable());
+		stage.addActor(generateTopTable());
 		stage.addActor(generateMenuTable());
 		stage.addActor(generateInfoTextTable());
 		stage.addActor(game.player.sprite);
@@ -69,33 +68,38 @@ public class FightScreen extends ScreenAdapter {
 		return infoTextTable;
 	}
 	
-	public Table generateOpponentTable(){
-		oppHealth = new ProgressBar(0, game.opponent.maxhp, 1, false, Ressources.Skin());
-		oppHealth.setValue(game.opponent.currenthp);
-		playerHealth = new ProgressBar(0, game.player.maxhp, 1, false, Ressources.Skin());
-		playerHealth.setValue(game.player.currenthp);
-
-		Table opponentTable = new Table();
-		opponentTable.debugAll();
-		opponentTable.setFillParent(true);
-		opponentTable.right().top();
-		opponentTable.add(playerHealth);
-		opponentTable.add(oppHealth);
-		opponentTable.add(game.opponent.sprite).height(150)
+	public Table generateTopTable(){
+		oppStatus = new StatusDisplay(game.opponent);
+		playerStatus = new StatusDisplay(game.player);
+		
+		Table topTable = new Table();
+		topTable.setFillParent(true);
+		topTable.top();
+		
+		topTable.add(playerStatus).top().pad(10).padRight(20);
+		topTable.add(oppStatus).top().pad(10);
+		topTable.add(game.opponent.sprite).height(150)
 			.width(game.opponent.sprite.getWidth()* 100/game.opponent.sprite.getWidth())
 			.pad(15);
-		return opponentTable;
+		return topTable;
 	}
-	
+
 	// %%%%% Attack Handlers %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	
-	public void handleAttack(Attack attack){
-		String feedback = game.player.doAttack(attack, game.opponent);
-		oppHealth.setValue(game.opponent.currenthp);
+	public void handleAttack(Attack attack, Philosopher opponent){
+		String feedback = game.player.doAttack(attack, opponent);
+		updateUI();
 		showAttackInfo(attack, feedback);
 		showAttackMessage(attack);
 	}
 	
+	private void updateUI() {
+		oppStatus.setHp(game.opponent.currenthp);
+		oppStatus.setSanity(game.opponent.currentSanity);
+		playerStatus.setHp(game.player.currenthp);
+		playerStatus.setSanity(game.player.currentSanity);
+	}
+
 	public void showAttackMessage(Attack attack){
 		String message = attack.messages[Ressources.Rand().nextInt(attack.messages.length)];
 		if(game.currentplayer == game.player){
@@ -157,7 +161,7 @@ public class FightScreen extends ScreenAdapter {
 	private void advancePlayer() {
 		if(game.currentplayer == game.player){
 			game.currentplayer = game.opponent;
-			handleAttack(game.opponent.choseRandomMove(game));
+			handleAttack(game.opponent.choseRandomMove(game), game.player);
 		}
 		else{
 			game.currentplayer = game.player;
@@ -175,7 +179,7 @@ public class FightScreen extends ScreenAdapter {
 		stage.draw();
 	}
 	public void show() {
-		Gdx.gl.glClearColor(0.2f, 0.3f, 0.9f, 1);
+		Gdx.gl.glClearColor(0.4f, 0.5f, 0.9f, 1);
 		Gdx.input.setInputProcessor(stage);
 	}
 	public void resize (int width, int height) {
