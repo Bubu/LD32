@@ -170,13 +170,11 @@ public class FightScreen extends ScreenAdapter {
 	protected void describeStatus(Status status) {
 		Gdx.app.log("TODO!", "Describe Status");
 	}
-
 	public void render(float delta) {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		stage.act(Gdx.graphics.getDeltaTime());
 		stage.draw();
 	}
-	
 	public void show() {
 		Gdx.gl.glClearColor(0.2f, 0.3f, 0.9f, 1);
 		Gdx.input.setInputProcessor(stage);
