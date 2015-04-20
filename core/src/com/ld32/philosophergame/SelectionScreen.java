@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -26,7 +27,7 @@ public class SelectionScreen extends ScreenAdapter {
 		stage.addActor(table);		
 		table.center();		
 		table.setFillParent(true);
-		Label titel = new Label("Select your character!", Ressources.Skin());
+		Label titel = new Label("Select your character!", Ressources.Skin().get("title",LabelStyle.class));
 		Table charTable = new Table();
 		
 		int i = 0;

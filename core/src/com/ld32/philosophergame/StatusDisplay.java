@@ -1,6 +1,7 @@
 package com.ld32.philosophergame;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
+import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar.ProgressBarStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
 
@@ -15,6 +16,7 @@ public class StatusDisplay extends Table {
 	public StatusDisplay(Philosopher phil) {
 		healthbar = generateBar(phil.maxhp);
 		sanitybar = generateBar(phil.sanity);
+		sanitybar.setStyle(Ressources.Skin().get("default-sanity", ProgressBarStyle.class));
 		healthLabel =new Label(Integer.toString(phil.currenthp)+"/"+Integer.toString(phil.maxhp), Ressources.Skin());
 		healthLabel.setAlignment(Align.right);
 		sanityLabel = new Label(Integer.toString(phil.currentSanity)+"/"+Integer.toString(phil.sanity), Ressources.Skin());
