@@ -27,18 +27,7 @@ public class FightScreen extends ScreenAdapter {
 		this.game = game;
 		
 		stage = new Stage(new ScreenViewport());
-		stage.addListener(new InputListener() {
-			@Override
-			public boolean keyDown(InputEvent event, int keycode) {
-				if(keycode == Input.Keys.ESCAPE ){
-					game.setScreen(game.menuScreen);
-					return true;
-				}
-				else{
-					return false;
-				}
-		 	}
-		});
+		stage.addListener(Ressources.EscListener(game));
 		
 
 		menu = new Menu(Ressources.Skin());

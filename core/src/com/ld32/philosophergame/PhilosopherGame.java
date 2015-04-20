@@ -42,10 +42,11 @@ public class PhilosopherGame extends Game {
 		
 	}
 
-	private void start() {
+	void start() {
 		isRunning = true;
 		currentScreen = selectionScreen;
 		selectionScreen = new SelectionScreen(this);
+		setScreen(selectionScreen);
 		
 	}
 
