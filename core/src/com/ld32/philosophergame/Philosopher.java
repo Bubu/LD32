@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.Scaling;
 
 public class Philosopher {
 	public static enum Philosophers {Socrates, Descartes, Nietzsche, Schopenhauer, Kierkegaard, Hobbes, Freud, Kant, Wittgenstein};
+	public static String[] PhilosopherNames = {"Socrates", "Descartes", "Nietzsche", "Schopenhauer", "Kierkegaard", "Hobbes", "Freud", "Kant", "Wittgenstein"};
 	int maxhp;
 	int currenthp;
 	int sanity;
@@ -19,7 +20,8 @@ public class Philosopher {
 
 	static String n = System.getProperty("line.separator");
 
-	public static Philosopher createPhilosopher(Philosophers phil, boolean isOpponent){
+	public static Philosopher createPhilosopher(String name, boolean isOpponent){
+		Philosophers phil = getType(name);
 		switch(phil){
 		case Descartes:
 			return Descartes(isOpponent);
@@ -156,7 +158,16 @@ public class Philosopher {
 		int damage = (int) Math.ceil(attack.hpDamage*(1 + attack.malus*(currentSanity-sanity)/sanity + attack.bonus*(opp.sanity - opp.currentSanity)/opp.sanity));  
 		opp.currenthp -= damage;
 		opp.currentSanity -= attack.sanityDamage;
-		return "It does "+ damage + " damage to " + opp.name + "'s conviction!";
+		String returnString = "";
+		if (damage != 0){
+			returnString += "It does "+ damage + " damage to " + opp.name + "'s conviction!";
+		}
+		if(attack.sanityDamage != 0){
+			if (returnString != "") returnString += n;
+			returnString += "It does "+ attack.sanityDamage + " damage to " + opp.name + "'s sanity!";
+		}
+		if (returnString == "") returnString += "It does nothing!";
+		return returnString;
 	}
 
 	public Attack choseRandomMove(PhilosopherGame game) {
@@ -167,6 +178,20 @@ public class Philosopher {
 	public static Philosopher getRandom() {
 
 		return null;
+	}
+
+	public static Philosophers getType(String name) {
+		if(name == "Socrates") return Philosophers.Socrates;
+		if(name == "Descartes") return Philosophers.Descartes;
+		if(name == "Nietzsche") return Philosophers.Nietzsche;
+		if(name == "Schopenhauer") return Philosophers.Schopenhauer;
+		if(name == "Kierkegaard") return Philosophers.Kierkegaard;
+		if(name == "Hobbes") return Philosophers.Hobbes;
+		if(name == "Freud") return Philosophers.Freud;
+		if(name == "Kant") return Philosophers.Kant;
+		if(name == "Wittgenstein") return Philosophers.Wittgenstein;
+		return null;
+		
 	}
 
 }

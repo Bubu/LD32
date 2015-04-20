@@ -28,12 +28,12 @@ public final class Ressources {
 		 //load bubble skin
 		 NinePatch bubblePatchLeft = new NinePatch(new Texture(Gdx.files.internal("BubbleLeft.png")), 49, 49, 24, 56);
 		 skin.add("bubbleBackgroundLeft",bubblePatchLeft);
-		 bubbleStyleLeft = new LabelStyle(skin.getFont("default-font"), skin.getColor("white"));
+		 bubbleStyleLeft = new LabelStyle(skin.getFont("mono-font"), skin.getColor("black"));
 		 bubbleStyleLeft.background = skin.getDrawable("bubbleBackgroundLeft");
 		 
 		 NinePatch bubblePatchRight = new NinePatch(new Texture(Gdx.files.internal("BubbleRight.png")), 20, 43, 14, 50);
 		 skin.add("bubbleBackgroundRight",bubblePatchRight);
-		 bubbleStyleRight = new LabelStyle(skin.getFont("default-font"), skin.getColor("white"));
+		 bubbleStyleRight = new LabelStyle(skin.getFont("mono-font"), skin.getColor("black"));
 		 bubbleStyleRight.background = skin.getDrawable("bubbleBackgroundRight");
 
 	}
