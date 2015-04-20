@@ -8,7 +8,9 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class FightScreen extends ScreenAdapter {
@@ -59,12 +61,13 @@ public class FightScreen extends ScreenAdapter {
 	}
 	
 	public Table generateInfoTextTable(){
-		infoText = new Label("", Ressources.Skin());
+		infoText = new Label("", Ressources.Skin().get("info",LabelStyle.class));
 		infoText.setVisible(false);
+		infoText.setAlignment(Align.topLeft);
 		Table infoTextTable = new Table();
 		infoTextTable.setFillParent(true);
-		infoTextTable.left().top();
-		infoTextTable.add(infoText).padLeft(210).padTop(350);
+		infoTextTable.right().bottom();
+		infoTextTable.add(infoText).height(143).width(442);
 		return infoTextTable;
 	}
 	
@@ -195,6 +198,9 @@ public class FightScreen extends ScreenAdapter {
 	public void render(float delta) {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		stage.act(Gdx.graphics.getDeltaTime());
+		stage.getBatch().begin();
+		stage.getBatch().draw(Ressources.Background(0), 0,0);
+		stage.getBatch().end();
 		stage.draw();
 	}
 	public void show() {

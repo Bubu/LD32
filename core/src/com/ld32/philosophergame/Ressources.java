@@ -20,6 +20,7 @@ public final class Ressources {
 	public TextureRegion[][] philosophers;
 	private LabelStyle bubbleStyleLeft;
 	private LabelStyle bubbleStyleRight;
+	private Texture[] backgrounds; 
 	private Random rand;
 	private Ressources() {
 		 rand = new Random();
@@ -35,7 +36,9 @@ public final class Ressources {
 		 skin.add("bubbleBackgroundRight",bubblePatchRight);
 		 bubbleStyleRight = new LabelStyle(skin.getFont("mono-font"), skin.getColor("black"));
 		 bubbleStyleRight.background = skin.getDrawable("bubbleBackgroundRight");
-
+		 
+		 backgrounds = new Texture[1];
+		 backgrounds[0] = new Texture(Gdx.files.internal("back1.png"));
 	}
 	public static Ressources getInstance() {
 		if(instance == null) {
@@ -103,6 +106,9 @@ public final class Ressources {
 	}
 	public static LabelStyle BubbleStyleRight(){
 		return getInstance().bubbleStyleRight;
+	}
+	public static Texture Background(int number){
+		return getInstance().backgrounds[number];
 	}
 	public static EventListener EscListener(final PhilosopherGame game) {
 		InputListener esclistner = new InputListener() {
