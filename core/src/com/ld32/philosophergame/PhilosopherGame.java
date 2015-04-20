@@ -21,7 +21,6 @@ public class PhilosopherGame extends Game {
 	public boolean needNextOpponent;
 
 	public void create () {
-		fought = new LinkedList<String>();
 		isRunning = false;
 		menuScreen = new MenuScreen(this);
 		setScreen(menuScreen);
@@ -44,11 +43,11 @@ public class PhilosopherGame extends Game {
 
 	private Philosopher getNextOpponent() {
 		List<String> toFight = new LinkedList<String>(Arrays.asList(Philosopher.PhilosopherNames));
-		Gdx.app.log("Debug", player.name);
 		toFight.remove(player.name);
 		toFight.removeAll(fought);
+		if (toFight.size() == 0) return null;
 		int pick = Ressources.Rand().nextInt(toFight.size());
-		return Philosopher.createPhilosopher(Philosopher.Philosophers.values()[pick], true);
+		return Philosopher.createPhilosopher(toFight.get(pick), true);
 	}
 
 	public void resumeGame() {
@@ -66,6 +65,7 @@ public class PhilosopherGame extends Game {
 	}
 
 	void start() {
+		fought = new LinkedList<String>();
 		isRunning = true;
 		selectionScreen = new SelectionScreen(this);
 		currentScreen = selectionScreen;

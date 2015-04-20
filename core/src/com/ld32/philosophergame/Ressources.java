@@ -54,8 +54,8 @@ public final class Ressources {
 			return Nietzsche();
 		case Schopenhauer:
 			return Schopenhauer();
-		case Kirkegaard:
-			return Kirkegaard();
+		case Kierkegaard:
+			return Kierkegaard();
 		case Hobbes:
 			return Hobbes();
 		case Freud:
@@ -77,7 +77,7 @@ public final class Ressources {
 	public static TextureRegion Schopenhauer(){
 		return getInstance().philosophers[0][1];
 	}
-	public static TextureRegion Kirkegaard(){
+	public static TextureRegion Kierkegaard(){
 		return getInstance().philosophers[0][2];
 	}
 	public static TextureRegion Hobbes(){

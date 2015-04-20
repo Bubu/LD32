@@ -37,7 +37,7 @@ public class SelectionScreen extends ScreenAdapter {
 			philImage.addListener(new InputListener() {
 				@Override
 				public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-					game.player = Philosopher.createPhilosopher(phil, false);
+					game.player = Philosopher.createPhilosopher(phil.toString(), false);
 					game.startFight();
 					return true;
 				}
