@@ -20,16 +20,16 @@ public class PhilosopherGame extends Game {
 	}
 
 	public void startFight() {
-		currentScreen = fightscreen;
-		player =  Philosopher.Nietzsche(false);
 		opponent = Philosopher.Descartes(true);
 		currentplayer = player; 
 		fightscreen = new FightScreen(this);
-		resumeGame();
+		currentScreen = fightscreen;
+		setScreen(currentScreen);
 		
 	}
 
 	public void resumeGame() {
+		if(!isRunning) start();
 		setScreen(currentScreen);
 	}
 
@@ -39,15 +39,13 @@ public class PhilosopherGame extends Game {
 
 	public void restart() {
 		start();
-		
+		resumeGame();		
 	}
 
 	void start() {
 		isRunning = true;
-		currentScreen = selectionScreen;
 		selectionScreen = new SelectionScreen(this);
-		setScreen(selectionScreen);
-		
+		currentScreen = selectionScreen;
 	}
 
 }

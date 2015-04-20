@@ -72,7 +72,7 @@ public class MenuScreen extends ScreenAdapter {
 		startbutton = new KeyTextButton("Start the game!", Ressources.Skin());
 		startbutton.addListener(new ChangeListener() {
 			public void changed (ChangeEvent event, Actor actor) {
-				game.start();
+				game.resumeGame();
 			}
 		});
 		

@@ -3,10 +3,16 @@ package com.ld32.philosophergame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.ld32.philosophergame.Philosopher.Philosophers;
 
 public class SelectionScreen extends ScreenAdapter {
 	PhilosopherGame game;
@@ -14,27 +20,45 @@ public class SelectionScreen extends ScreenAdapter {
 	public SelectionScreen(final PhilosopherGame game) {
 		this.game = game;
 		Gdx.app.log("Test", "Creating selection screen");
-				
 		stage = new Stage(new ScreenViewport());
 		stage.addListener(Ressources.EscListener(game));
 
-		VerticalGroup group = new VerticalGroup();
-		stage.addActor(group);		
-		group.center();		
+		Table table = new Table();
+		stage.addActor(table);		
+		table.center();		
+		table.setFillParent(true);
+		table.debugAll();
 		Label titel = new Label("Select your character!", Ressources.Skin());
+		Table charTable = new Table();
 		
-		group.addActor(titel);
+		int i = 0;
+		for(final Philosophers phil: Philosopher.Philosophers.values()){
+			Image philImage = new Image(new TextureRegionDrawable(Ressources.getPhilosopherSprite(phil)));
+			philImage.setScaling(Scaling.fillY);
+			philImage.addListener(new InputListener() {
+				@Override
+				public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+					game.player = Philosopher.createPhilosopher(phil, false);
+					game.startFight();
+					return true;
+				}
+			});
+			Table philTable = new Table();
+			philTable.add(philImage).size(120).row();
+			philTable.add(new Label(phil.toString(), Ressources.Skin()));
+			if(i%4 == 0) charTable.row();
+			charTable.add(philTable);
+			i++;
+		}
 		
-		group.space(20);
-		group.padBottom(300);
-		group.setSize(group.getPrefWidth(), group.getPrefHeight());
-		group.setPosition((stage.getWidth() - group.getWidth())/2, (stage.getHeight() - group.getHeight())/2);
-
+		table.add(titel);
+		table.row();
+		table.add(charTable);
 	}
 	
 	@Override
 	public void show() {
-		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClearColor(0.7f, 0.3f, 0.9f, 1);
 		Gdx.input.setInputProcessor(stage);
 	}
 

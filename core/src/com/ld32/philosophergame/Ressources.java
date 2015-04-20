@@ -39,6 +39,30 @@ public final class Ressources {
 		return instance;
 	}
 	
+	public static TextureRegion getPhilosopherSprite(Philosopher.Philosophers phil){
+		switch(phil){
+		case Descartes:
+			return Descartes();
+		case Socrates:
+			return Socrates();
+		case Nietzsche:
+			return Nietzsche();
+		case Schopenhauer:
+			return Schopenhauer();
+		case Kirkegaard:
+			return Kirkegaard();
+		case Hobbes:
+			return Hobbes();
+		case Freud:
+			return Freud();
+		case Kant:
+			return Kant();
+		case Wittgenstein:
+			return Wittgenstein();
+		default:
+			return null;
+		}
+	}
 	public static TextureRegion Nietzsche(){
 		return getInstance().philosophers[0][4];
 	}
@@ -54,11 +78,17 @@ public final class Ressources {
 	public static TextureRegion Hobbes(){
 		return getInstance().philosophers[0][3];
 	}
-	public static TextureRegion Sokrates(){
+	public static TextureRegion Socrates(){
 		return getInstance().philosophers[0][5];
 	}
 	public static TextureRegion Freud(){
 		return getInstance().philosophers[0][6];
+	}
+	public static TextureRegion Kant(){
+		return getInstance().philosophers[0][7];
+	}
+	public static TextureRegion Wittgenstein(){
+		return getInstance().philosophers[1][0];
 	}
 	public static Skin Skin(){
 		return getInstance().skin;

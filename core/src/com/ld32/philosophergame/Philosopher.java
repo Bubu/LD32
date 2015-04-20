@@ -1,6 +1,5 @@
 package com.ld32.philosophergame;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -10,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Scaling;
 
 public class Philosopher {
+	public static enum Philosophers {Socrates, Descartes, Nietzsche, Schopenhauer, Kirkegaard, Hobbes, Freud, Kant, Wittgenstein};
 	int maxhp;
 	int currenthp;
 	int sanity;
@@ -17,13 +17,30 @@ public class Philosopher {
 	Attack[] attacks;
 	String name;
 	int currentSanity;
-	private static ArrayList<Philosopher> philosphers;
 	
-	public static ArrayList<Philosopher> getList(){
-		if (philosphers == null){
-			
+	public static Philosopher createPhilosopher(Philosophers phil, boolean isOpponent){
+		switch(phil){
+		case Descartes:
+			return Descartes(isOpponent);
+		case Socrates:
+			return Socrates(isOpponent);
+		case Nietzsche:
+			return Nietzsche(isOpponent);
+		case Schopenhauer:
+			return Nietzsche(isOpponent);
+		case Kirkegaard:
+			return Nietzsche(isOpponent);
+		case Hobbes:
+			return Nietzsche(isOpponent);
+		case Freud:
+			return Nietzsche(isOpponent);
+		case Kant:
+			return Nietzsche(isOpponent);
+		case Wittgenstein:
+			return Nietzsche(isOpponent);
+		default:
+			return null;
 		}
-		return philosphers;
 	}
 	
 	public static Philosopher Nietzsche(boolean isOpponent){	
@@ -36,6 +53,15 @@ public class Philosopher {
 	public static Philosopher Descartes(boolean isOpponent){
 		
 		Philosopher p = new Philosopher("Descartes", 100,20,Ressources.Descartes(),isOpponent);
+		p.attacks[3] = Attack.EternalReturn();
+		p.attacks[4] = Attack.WilltoPower();
+		p.attacks[5] = Attack.SummonUbermensch();
+		return p;
+	}
+	
+public static Philosopher Socrates(boolean isOpponent){
+		
+		Philosopher p = new Philosopher("Socrates", 100,20,Ressources.Socrates(),isOpponent);
 		p.attacks[3] = Attack.EternalReturn();
 		p.attacks[4] = Attack.WilltoPower();
 		p.attacks[5] = Attack.SummonUbermensch();
