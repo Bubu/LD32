@@ -2,13 +2,16 @@ package com.ld32.philosophergame;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 public class PhilosopherGame extends Game {
 	MenuScreen menuScreen;
 	FightScreen fightscreen;
+	SelectionScreen selectionScreen;
 	boolean isRunning;
 	Philosopher player;
 	Philosopher opponent;
 	Philosopher currentplayer;
+	private Screen currentScreen;
 
 	public void create () {
 		isRunning = false;
@@ -16,9 +19,8 @@ public class PhilosopherGame extends Game {
 		setScreen(menuScreen);
 	}
 
-	public void start() {
-		isRunning = true;
-		
+	public void startFight() {
+		currentScreen = fightscreen;
 		player =  Philosopher.Nietzsche(false);
 		opponent = Philosopher.Descartes(true);
 		currentplayer = player; 
@@ -28,11 +30,23 @@ public class PhilosopherGame extends Game {
 	}
 
 	public void resumeGame() {
-		setScreen(fightscreen);
+		setScreen(currentScreen);
 	}
 
 	public void quit() {
 		Gdx.app.exit();		
+	}
+
+	public void restart() {
+		start();
+		
+	}
+
+	private void start() {
+		isRunning = true;
+		currentScreen = selectionScreen;
+		selectionScreen = new SelectionScreen(this);
+		
 	}
 
 }

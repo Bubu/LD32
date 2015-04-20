@@ -14,15 +14,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-public class MenuScreen extends ScreenAdapter {
+public class SelectionScreen extends ScreenAdapter {
 	PhilosopherGame game;
 	Stage stage;
 	KeyTextButton startbutton;
 	KeyTextButton quitbutton;
-	KeyTextButton restartbutton;
 	KeyTextButton activeButton;
-	private VerticalGroup group;
-	public MenuScreen(final PhilosopherGame game) {
+	public SelectionScreen(final PhilosopherGame game) {
 		this.game = game;
 				
 		stage = new Stage(new ScreenViewport());
@@ -59,32 +57,26 @@ public class MenuScreen extends ScreenAdapter {
 				}
 		 	}
 		});
+		Skin skin = new Skin(Gdx.files.internal("uiskin.json"));
 
-		group = new VerticalGroup();
+		VerticalGroup group = new VerticalGroup();
 		stage.addActor(group);
 		
 		group.center();
 
 		
-		Label titel = new Label("Philosophers Fight", Ressources.Skin());
+		Label titel = new Label("Philosophers Fight", skin);
 		
 		group.addActor(titel);
 
-		startbutton = new KeyTextButton("Start the game!", Ressources.Skin());
+		startbutton = new KeyTextButton("Start the game!", skin);
 		startbutton.addListener(new ChangeListener() {
 			public void changed (ChangeEvent event, Actor actor) {
 				game.startFight();
 			}
 		});
 		
-		restartbutton = new KeyTextButton("Restart!", Ressources.Skin());
-		restartbutton.addListener(new ChangeListener() {
-			public void changed (ChangeEvent event, Actor actor) {
-				game.restart();
-			}
-		});
-		
-		quitbutton = new KeyTextButton("Quit", Ressources.Skin());
+		quitbutton = new KeyTextButton("Quit", skin);
 		quitbutton.addListener(new ChangeListener() {
 			public void changed (ChangeEvent event, Actor actor) {
 				game.quit();
@@ -107,7 +99,6 @@ public class MenuScreen extends ScreenAdapter {
 		if(game.isRunning){
 			
 			startbutton.setText("Resume");
-			group.addActorAt(2,restartbutton);
 			activeButton = startbutton;
 			activeButton.setSelected(true);
 		}
