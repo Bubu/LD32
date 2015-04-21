@@ -37,9 +37,10 @@ public class PhilosopherGame extends Game {
 		}
 		needNextOpponent = false;
 		tryAgain = false;
-		currentplayer = player; 
+		currentplayer = player;
 		player.heal();
 		opponent.heal(); 
+		player.resetCooldowns();
 		fightscreen = new FightScreen(this);
 		currentScreen = fightscreen;
 		setScreen(currentScreen);
