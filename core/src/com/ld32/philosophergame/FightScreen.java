@@ -105,11 +105,17 @@ public class FightScreen extends ScreenAdapter {
 	public void handleAttack(Attack attack, Philosopher opponent){
 		String feedback = game.player.doAttack(attack, opponent);
 		updateUI();
-		if(opponent.currenthp <= 0){
+		if(game.player != opponent && opponent.currenthp <= 0){
 			feedback += n + "You conviced " + opponent.name + " of your philosophy!";
 			showWinMessage();
 			showLoseMessage(opponent);
 			game.needNextOpponent = true;
+		}
+		if(game.player.currenthp <= 0){
+			feedback += n + "You failed to convince " + game.opponent.name + "! Try Again";
+			//showWinMessage();
+			//showLoseMessage(opponent);
+			game.tryAgain = true;
 		}
 		showAttackInfo(attack, feedback);
 		showAttackMessage(attack);
@@ -189,6 +195,10 @@ public class FightScreen extends ScreenAdapter {
 			game.startFight();
 			return;
 		}
+		if (game.tryAgain){
+			game.startFight();
+			return;
+		}
 		if (action == Ressources.AdvanceText) {
 			advancePlayer();
 		}else if(action == Ressources.GoToMenu){
@@ -238,6 +248,7 @@ public class FightScreen extends ScreenAdapter {
 		stage.draw();
 	}
 	public void show() {
+		updateUI();
 		Gdx.gl.glClearColor(0.4f, 0.5f, 0.9f, 1);
 		Gdx.input.setInputProcessor(stage);
 	}
