@@ -103,7 +103,7 @@ public class FightScreen extends ScreenAdapter {
 	// %%%%% Attack Handlers %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	
 	public void handleAttack(Attack attack, Philosopher opponent){
-		String feedback = game.player.doAttack(attack, opponent);
+		String feedback = game.currentplayer.doAttack(attack, opponent);
 		updateUI();
 		if(game.player != opponent && opponent.currenthp <= 0){
 			feedback += n + "You conviced " + opponent.name + " of your philosophy!";
