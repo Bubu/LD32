@@ -1,5 +1,6 @@
 package com.ld32.philosophergame;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -17,7 +18,7 @@ public class Philosopher {
 	String name;
 	String[] phrases;
 	int currentSanity;
-	boolean thinking;
+	int thinking;
 
 	static String n = System.getProperty("line.separator");
 
@@ -153,6 +154,7 @@ public class Philosopher {
 		this.attacks[1] = Attack.Paradox();
 		this.attacks[2] = Attack.SelPerption();
 		this.phrases = new String[3];
+		this.thinking = 0;
 	}
 
 	public String doAttack(Attack attack, Philosopher opp) {
@@ -161,6 +163,8 @@ public class Philosopher {
 		opp.currentSanity -= attack.sanityDamage;
 		currenthp += attack.hpHealing;
 		currentSanity += attack.sanityHealing;
+
+		
 		String returnString = "";
 		if (damage != 0){
 			returnString += "It does "+ damage + " damage to " + opp.name + "'s conviction!";
@@ -186,6 +190,14 @@ public class Philosopher {
 			returnString += name + " damages his own sanity by " + (-1)*attack.sanityHealing;
 		}
 		if (returnString == "") returnString += "It does nothing!";
+		
+		returnString += n+n;
+		Gdx.app.log(""+attack.name, ""+attack.coolDown);
+		if(Ressources.Rand().nextFloat()<attack.thinkingChance){
+			returnString+=opp.name + " has to think about this issue.";
+			opp.thinking=2;
+		}
+		
 		return returnString;
 		
 	}
