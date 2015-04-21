@@ -293,7 +293,7 @@ public class Attack {
 
 	public static Attack SummonLeviathan(){
 		String[] messages = new String[3];
-		messages[0] = "There is no power on earth to be compared to the Leviathan.";
+		messages[0] = "There is no power on earth" + n + "to be compared to the Leviathan.";
 		messages[1] = "I broke my back lifting the Leviathan to heaven.";
 		messages[2] = "Now I am about to take my last voyage," + n + " a great leap in the dark.";
 		int coolDown = 5; float thinkingChance=0.2f;
