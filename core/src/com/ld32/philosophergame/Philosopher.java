@@ -136,9 +136,9 @@ public class Philosopher {
 		p.attacks[4] = Attack.SexualRepression();
 		p.attacks[5] = Attack.SummonSuperEgo();
 		
-		p.phrases[0] = "Dreams are often most profound when they seem the most crazy.";
+		p.phrases[0] = "Dreams are often most profound"+n+"when they seem the most crazy.";
 		p.phrases[1] = "Personally, I blame my mother.";
-		p.phrases[2] = "The first human who hurled an insult"+n+"instead of a stone was the founder of civilization."+n+"You ass!";
+		p.phrases[2] = "The first human who hurled an insult"+n+"instead of a stone was the founder"+n+"of civilization. You ass!";
 		
 		return p;
 	}

@@ -394,7 +394,7 @@ public class Attack {
 
 	public static Attack Angst(){
 		String[] messages = new String[3];
-		messages[0] = "We can easily forgive a child who is afraid of the dark;"+n+"the real tragedy of life is when men are afraid of the light.";
+		messages[0] = "We can easily forgive a child who is afraid"+n+"of the dark; the real tragedy of life"+n+"is when men are afraid of the light.";
 		messages[1] = "Oh, my sweet summer child, what do you know of angst?";
 		messages[2] = "Anxiety is an alien power which lays hold"+n+"of the individual; and yet one cannot tear"+n+"oneself away, not has a will to do so;"+n+"for one fears, but what one fears one desires";
 		int coolDown = 4; float thinkingChance=0.1f;;
