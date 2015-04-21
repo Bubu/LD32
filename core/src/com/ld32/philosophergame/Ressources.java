@@ -15,6 +15,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 
 public final class Ressources {
 	public static int AdvanceText = 0;
+	public static int GoToMenu = 1;
+	public static int OpponentAttack = 2;
 	private static Ressources instance = null;
 	private Skin skin;
 	public TextureRegion[][] philosophers;

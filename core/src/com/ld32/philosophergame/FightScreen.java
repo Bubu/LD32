@@ -182,6 +182,7 @@ public class FightScreen extends ScreenAdapter {
 	}
 
 	private void continueAction(final int action, InputListener listener){
+		stage.removeListener(listener);
 		if (game.needNextOpponent){
 			game.fought.add(game.opponent.name);
 			game.startFight();
@@ -189,21 +190,38 @@ public class FightScreen extends ScreenAdapter {
 		}
 		if (action == Ressources.AdvanceText) {
 			advancePlayer();
+		}else if(action == Ressources.GoToMenu){
+			menu.setVisible(true);
+			infoText.setVisible(false);
+		}else if(action == Ressources.OpponentAttack){
+			handleAttack(game.opponent.choseRandomMove(game), game.player);
 		}
-		stage.removeListener(listener);
 	}
 	
 	private void advancePlayer() {
 		if(game.currentplayer == game.player){
+			if(game.opponent.thinking==0){
 			game.currentplayer = game.opponent;
 			handleAttack(game.opponent.choseRandomMove(game), game.player);
+			}else{
+				game.opponent.thinking-=1;
+				infoText.setText(game.opponent.name + "is still thinking.");
+				waitForClick(Ressources.GoToMenu);
+			}
 		}
 		else{
+			if(game.player.thinking==0){
 			game.currentplayer = game.player;
 			menu.setVisible(true);
 			infoText.setVisible(false);
+			}else{
+				game.player.thinking-=1;
+				infoText.setText(game.player.name + "is still thinking.");
+				waitForClick(Ressources.OpponentAttack);
+			}
 		}
 	}
+	
 
 	protected void describeStatus(Status status) {
 		Gdx.app.log("TODO!", "Describe Status");
