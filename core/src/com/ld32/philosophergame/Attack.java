@@ -322,7 +322,7 @@ public class Attack {
 		String[] messages = new String[3];
 		messages[0] = "Your aggression seems to come from an erotic infatuation to your grandmother.";
 		messages[1] = "Sometimes a cigar is just a cigar.";
-		messages[2] = "I sense a slight castration anxiety. Don't worry this is natural.";
+		messages[2] = "I sense a slight castration anxiety. "+n+"Don't worry this is natural.";
 
 		int coolDown = 4; float thinkingChance=0.1f;
 		int hpDamage = 10;	 int sanityDamage = 20;
@@ -335,7 +335,7 @@ public class Attack {
 	public static Attack SummonSuperEgo(){
 		String[] messages = new String[3];
 		messages[0] = "The ego is not master in its own house.";
-		messages[1] = "The super-ego is never so inexorable, so impersonal, so independent"+n+"of its emotional origins as we require it to be in men";
+		messages[1] = "The super-ego is never so inexorable, so impersonal,"+n+"so independent of its emotional origins "+n+"as we require it to be in men";
 		messages[2] = "My ego, my superego and I, that's all I got in the end."+n+"That's what I found out and there ain't no need to cry.";
 
 		int coolDown = 5; float thinkingChance=0.2f;
