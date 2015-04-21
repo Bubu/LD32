@@ -326,7 +326,7 @@ public class Attack {
 
 		int coolDown = 4; float thinkingChance=0.1f;
 		int hpDamage = 10;	 int sanityDamage = 20;
-		int hpHealing = 0;  int sanityHealing = -10;
+		int hpHealing = 0;  int sanityHealing = -5;
 		float malus = 0;        float bonus = 0;
 
 		return new Attack("Sexual Repression", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, malus, bonus, thinkingChance, messages);
