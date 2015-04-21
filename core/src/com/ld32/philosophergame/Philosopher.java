@@ -138,7 +138,7 @@ public class Philosopher {
 		
 		p.phrases[0] = "Dreams are often most profound when they seem the most crazy.";
 		p.phrases[1] = "Personally, I blame my mother.";
-		p.phrases[2] = "The first human who hurled an insult"+n+"instead of a stone was the founder of civilization."+n+"You fool!";
+		p.phrases[2] = "The first human who hurled an insult"+n+"instead of a stone was the founder of civilization."+n+"You ass!";
 		
 		return p;
 	}
@@ -151,8 +151,8 @@ public class Philosopher {
 		p.attacks[5] = Attack.Enlightenment();
 		
 		p.phrases[0] = "Kant touch this!";
-		p.phrases[1] = "You won with words."+n+"Words are the money of fools.";
-		p.phrases[2] = "Get out of my social contract!";
+		p.phrases[1] = "Looks like you can touch this.";
+		p.phrases[2] = "Ingratitude is the essence of vileness!";
 		
 		return p;
 	}
@@ -165,8 +165,8 @@ public class Philosopher {
 		p.attacks[5] = Attack.SummonKnightOfFaith();
 		
 		p.phrases[0] = "Once you label me, you negate me.";
-		p.phrases[1] = "You won with words."+n+"Words are the money of fools.";
-		p.phrases[2] = "Get out of my social contract!";
+		p.phrases[1] = "The tyrant dies and his rule is over, the martyr dies and his rule begins.";
+		p.phrases[2] = "Ingratitude is the essence of vileness!";
 		
 		return p;
 	}
