@@ -16,7 +16,7 @@ public class WinScreen extends ScreenAdapter implements Screen {
 	PhilosopherGame game;
 	Stage stage;
 
-	static String n = System.getProperty("line.separator");
+	public static String n = "\n"; //Ressources.getLineSeparator();
 
 	public WinScreen(final PhilosopherGame game) {
 		this.game = game;
