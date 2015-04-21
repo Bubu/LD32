@@ -26,7 +26,7 @@ public class Attack {
 		int hpDamage = 0;	 int sanityDamage = 10;
 		int hpHealing = 0;  int sanityHealing = 0;
 		float malus = 0;        float bonus = 0;
-		return new Attack("Paradox", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, malus, bonus, thinkingChance, messages);
+		return new Attack("Paradox", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, bonus, malus, thinkingChance, messages);
 	}
 
 	public static Attack AdHominem() {
@@ -42,7 +42,7 @@ public class Attack {
 		int hpDamage = 10;	 int sanityDamage = 0;
 		int hpHealing = 0;  int sanityHealing = 0;
 		float malus = 0;        float bonus = 1f;
-		return new Attack("Ad Hominem", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, malus, bonus, thinkingChance, messages);
+		return new Attack("Ad Hominem", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, bonus, malus, thinkingChance, messages);
 	}
 
 	public static Attack SelPerption(){
@@ -54,7 +54,7 @@ public class Attack {
 		int hpDamage = 0;	 int sanityDamage = 0;
 		int hpHealing = 5;  int sanityHealing = 5;
 		float malus = 0;        float bonus = 0;
-		return new Attack("Selective Perception", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, malus, bonus, thinkingChance, messages);
+		return new Attack("Selective Perception", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, bonus, malus, thinkingChance, messages);
 	}
 
 	// Nietzsche Attacks
@@ -68,7 +68,7 @@ public class Attack {
 		int hpDamage = 15;	 int sanityDamage = 15;
 		int hpHealing = 0;  int sanityHealing = 0;
 		float malus = 0;        float bonus = 0.5f;
-		return new Attack("Eternal Return", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, malus, bonus, thinkingChance, messages);
+		return new Attack("Eternal Return", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, bonus, malus, thinkingChance, messages);
 	}
 	public static Attack WilltoPower(){
 		String[] messages = new String[3];
@@ -79,7 +79,7 @@ public class Attack {
 		int hpDamage = 10;	 int sanityDamage = 0;
 		int hpHealing = 20;  int sanityHealing = -10;
 		float malus = 0;        float bonus = 0;
-		return new Attack("Will to Power", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, malus, bonus, thinkingChance, messages);
+		return new Attack("Will to Power", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, bonus, malus, thinkingChance, messages);
 	}
 	public static Attack SummonUbermensch(){
 		String[] messages = new String[3];
@@ -91,7 +91,7 @@ public class Attack {
 		int hpDamage = 20;	 int sanityDamage = 10;
 		int hpHealing = 10;  int sanityHealing = 10;
 		float malus = 0;        float bonus = 0;
-		return new Attack("Summon Ubermensch", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, malus, bonus, thinkingChance, messages);
+		return new Attack("Summon Ubermensch", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, bonus, malus, thinkingChance, messages);
 	}
 
 	// Descartes Attacks
@@ -105,7 +105,7 @@ public class Attack {
 		int hpDamage = 10;	 int sanityDamage = 10;
 		int hpHealing = 0;  int sanityHealing = 0;
 		float malus = 0;        float bonus = 0;
-		return new Attack("Cartesian Dualism", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, malus, bonus, thinkingChance, messages);
+		return new Attack("Cartesian Dualism", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, bonus, malus, thinkingChance, messages);
 	}
 
 	public static Attack DeusDeceptor(){
@@ -117,7 +117,7 @@ public class Attack {
 		int hpDamage = 0;	 int sanityDamage = 20;
 		int hpHealing = 0;  int sanityHealing = 0;
 		float malus = 0;        float bonus = 0;
-		return new Attack("Deus Deceptor", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, malus, bonus, thinkingChance, messages);
+		return new Attack("Deus Deceptor", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, bonus, malus, thinkingChance, messages);
 	}	
 
 	public static Attack CogitoErgoSum(){
@@ -129,7 +129,7 @@ public class Attack {
 		int hpDamage = 10;	 int sanityDamage = 0;
 		int hpHealing = 10;  int sanityHealing = 10;
 		float malus = 0;        float bonus = 0;
-		return new Attack("Cogito Ergo Sum", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, malus, bonus, thinkingChance, messages);
+		return new Attack("Cogito Ergo Sum", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, bonus, malus, thinkingChance, messages);
 	}	
 
 	// Socrates Attacks
@@ -144,7 +144,7 @@ public class Attack {
 		int hpDamage = 10;	 int sanityDamage = 0;
 		int hpHealing = 0;  int sanityHealing = 0;
 		float malus = 0.3f;        float bonus = 0;
-		return new Attack("Socratic Method", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, malus, bonus, thinkingChance, messages);
+		return new Attack("Socratic Method", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, bonus, malus, thinkingChance, messages);
 	}
 
 	public static Attack PlatonicLove(){
@@ -158,7 +158,7 @@ public class Attack {
 		int hpHealing = 20;  int sanityHealing = 0;
 		float malus = 0;        float bonus = 0.5f;
 
-		return new Attack("Platonic Love", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, malus, bonus, thinkingChance, messages);
+		return new Attack("Platonic Love", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, bonus, malus, thinkingChance, messages);
 	}	
 
 	public static Attack AristotelianLogic(){
@@ -172,7 +172,7 @@ public class Attack {
 		int hpHealing = 0;  int sanityHealing = 0;
 		float malus = 0.3f;        float bonus = 0;
 
-		return new Attack("Aristotelian Logic", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, malus, bonus, thinkingChance, messages);
+		return new Attack("Aristotelian Logic", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, bonus, malus, thinkingChance, messages);
 	}
 
 	// Attack Schopenhauer
@@ -180,7 +180,7 @@ public class Attack {
 	public static Attack Pessimism(){
 		String[] messages = new String[3];
 		messages[0] = "The brain may be regarded as a"+n+"kind of parasite of the organism,"+n+"a pensioner, as it were, who"+n+"dwells with the body.";
-		messages[1] = "Wicked thoughts and worthless"+n+"efforts gradually set their mark"+n+"on the face, especially the eyes.";
+		messages[1] = "Wicked thoughts and worthless"+n+"efforts gradually set their mark"+n+"on the face, especially your face.";
 		messages[2] = "Pessimism: A valuable protection against quackery.";
 
 		int coolDown = 3; float thinkingChance=0.1f;
@@ -188,7 +188,7 @@ public class Attack {
 		int hpHealing = 0;  int sanityHealing = 0;
 		float malus = 0;        float bonus = 0.6f;
 
-		return new Attack("Pessimism", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, malus, bonus, thinkingChance, messages);
+		return new Attack("Pessimism", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, bonus, malus, thinkingChance, messages);
 	}
 
 	public static Attack LifeIsSuffering(){
@@ -202,7 +202,7 @@ public class Attack {
 		int hpHealing = 0;  int sanityHealing = 0;
 		float malus = 0;        float bonus = 0.6f;
 
-		return new Attack("Life is Suffering", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, malus, bonus, thinkingChance, messages);
+		return new Attack("Life is Suffering", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, bonus, malus, thinkingChance, messages);
 	}
 
 	public static Attack HedgehogDilemma(){
@@ -216,7 +216,7 @@ public class Attack {
 		int hpHealing = -20;  int sanityHealing = 0;
 		float malus = 0;        float bonus = 0.2f;
 
-		return new Attack("Hedgehog Dilemma", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, malus, bonus, thinkingChance, messages);
+		return new Attack("Hedgehog Dilemma", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, bonus, malus, thinkingChance, messages);
 	}
 
 	// Wittgenstein Attacks
@@ -232,7 +232,7 @@ public class Attack {
 		int hpHealing = 0;  int sanityHealing = 0;
 		float malus = 0.3f;        float bonus = 0;
 
-		return new Attack("Logical Atomism", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, malus, bonus, thinkingChance, messages);
+		return new Attack("Logical Atomism", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, bonus, malus, thinkingChance, messages);
 	}
 
 	public static Attack LanguageGames(){
@@ -246,7 +246,7 @@ public class Attack {
 		int hpHealing = 0;  int sanityHealing = 0;
 		float malus = 0.6f;        float bonus = 0;
 
-		return new Attack("Language Games", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, malus, bonus, thinkingChance, messages);
+		return new Attack("Language Games", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, bonus, malus, thinkingChance, messages);
 	}
 
 	public static Attack BeatleInABox(){
@@ -260,7 +260,7 @@ public class Attack {
 		int hpHealing = 10;  int sanityHealing = 10;
 		float malus = 0;        float bonus = 0;
 
-		return new Attack("Beatle in a Box", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, malus, bonus, thinkingChance, messages);
+		return new Attack("Beatle in a Box", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, bonus, malus, thinkingChance, messages);
 	}
 
 	// Hobbes Attacks
@@ -276,7 +276,7 @@ public class Attack {
 		int hpHealing = -30;  int sanityHealing = 0;
 		float malus = 0;        float bonus = 0.5f;
 
-		return new Attack("Social Contract", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, malus, bonus, thinkingChance, messages);
+		return new Attack("Social Contract", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, bonus, malus, thinkingChance, messages);
 	}
 
 	public static Attack AllAgainstAll(){
@@ -288,7 +288,7 @@ public class Attack {
 		int hpDamage = 15;	 int sanityDamage = 15;
 		int hpHealing = 15;  int sanityHealing = 15;
 		float malus = 0;        float bonus = 1f;
-		return new Attack("All against All", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, malus, bonus, thinkingChance, messages);
+		return new Attack("All against All", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, bonus, malus, thinkingChance, messages);
 	}
 
 	public static Attack SummonLeviathan(){
@@ -300,7 +300,7 @@ public class Attack {
 		int hpDamage = 20;	 int sanityDamage = 10;
 		int hpHealing = 10;  int sanityHealing = 10;
 		float malus = 0;        float bonus = 0;
-		return new Attack("Summon Leviathan", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, malus, bonus, thinkingChance, messages);
+		return new Attack("Summon Leviathan", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, bonus, malus, thinkingChance, messages);
 	}
 
 	// Freud Attacks
@@ -315,7 +315,7 @@ public class Attack {
 		int hpHealing = 20;  int sanityHealing = 0;
 		float malus = 0;        float bonus = 0.5f;
 
-		return new Attack("Tabu", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, malus, bonus, thinkingChance, messages);
+		return new Attack("Tabu", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, bonus, malus, thinkingChance, messages);
 	}
 
 	public static Attack SexualRepression(){
@@ -329,7 +329,7 @@ public class Attack {
 		int hpHealing = 0;  int sanityHealing = -5;
 		float malus = 0;        float bonus = 0;
 
-		return new Attack("Sexual Repression", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, malus, bonus, thinkingChance, messages);
+		return new Attack("Sexual Repression", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, bonus, malus, thinkingChance, messages);
 	}
 
 	public static Attack SummonSuperEgo(){
@@ -343,7 +343,7 @@ public class Attack {
 		int hpHealing = 20;  int sanityHealing = 10;
 		float malus = 0;        float bonus = 1;
 
-		return new Attack("Summon Superego", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, malus, bonus, thinkingChance, messages);
+		return new Attack("Summon Superego", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, bonus, malus, thinkingChance, messages);
 	}
 
 	// Kant Attacks
@@ -359,7 +359,7 @@ public class Attack {
 		int hpHealing = 0;  int sanityHealing = 0;
 		float malus = 1;        float bonus = 0;
 
-		return new Attack("Pure Reson", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, malus, bonus, thinkingChance, messages);
+		return new Attack("Pure Reson", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, bonus, malus, thinkingChance, messages);
 	}
 
 	public static Attack CategoricalImperative(){
@@ -373,7 +373,7 @@ public class Attack {
 		int hpHealing = 10;  int sanityHealing = 5;
 		float malus = 1;        float bonus = 1;
 
-		return new Attack("Categorical Imperative", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, malus, bonus, thinkingChance, messages);
+		return new Attack("Categorical Imperative", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, bonus, malus, thinkingChance, messages);
 	}
 
 	public static Attack Enlightenment(){
@@ -387,7 +387,7 @@ public class Attack {
 		int hpHealing = 30;  int sanityHealing = 20;
 		float malus = 0;        float bonus = 0;
 
-		return new Attack("Enlightenment", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, malus, bonus, thinkingChance, messages);
+		return new Attack("Enlightenment", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, bonus, malus, thinkingChance, messages);
 	}
 
 	// Kierkegard Attacks
@@ -402,7 +402,7 @@ public class Attack {
 		int hpHealing = 0;  int sanityHealing = 0;
 		float malus = 0;        float bonus = 1;
 
-		return new Attack("Angst", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, malus, bonus, thinkingChance, messages);
+		return new Attack("Angst", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, bonus, malus, thinkingChance, messages);
 	}
 
 	public static Attack ExistentialDespair(){
@@ -416,7 +416,7 @@ public class Attack {
 		int hpHealing = 0;  int sanityHealing = 0;
 		float malus = 0.5f;        float bonus = 0;
 
-		return new Attack("Existential Despair", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, malus, bonus, thinkingChance, messages);
+		return new Attack("Existential Despair", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, bonus, malus, thinkingChance, messages);
 	}
 
 	public static Attack SummonKnightOfFaith(){
@@ -430,7 +430,7 @@ public class Attack {
 		int hpHealing = 10;  int sanityHealing = 10;
 		float malus = 0;        float bonus = 0;
 
-		return new Attack("Summon Knight of Faith", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, malus, bonus, thinkingChance, messages);
+		return new Attack("Summon Knight of Faith", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, bonus, malus, thinkingChance, messages);
 	}
 
 
