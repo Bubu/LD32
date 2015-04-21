@@ -179,8 +179,8 @@ public class Attack {
 
 	public static Attack Pessimism(){
 		String[] messages = new String[3];
-		messages[0] = "The brain may be regarded as a kind of parasite of the organism,"+n+"a pensioner, as it were, who dwells with the body.";
-		messages[1] = "Wicked thoughts and worthless efforts gradually"+n+"set their mark on the face, especially the eyes.";
+		messages[0] = "The brain may be regarded as a"+n+"kind of parasite of the organism,"+n+"a pensioner, as it were, who"+n+"dwells with the body.";
+		messages[1] = "Wicked thoughts and worthless"+n+"efforts gradually set their mark"+n+"on the face, especially the eyes.";
 		messages[2] = "Pessimism: A valuable protection against quackery.";
 
 		int coolDown = 3; float thinkingChance=0.1f;
@@ -194,7 +194,7 @@ public class Attack {
 	public static Attack LifeIsSuffering(){
 		String[] messages = new String[3];
 		messages[0] = "To live alone is the fate of all great souls.";
-		messages[1] = "There is no doubt that life is given us, not to be enjoyed, but to be overcome; to be got over.";
+		messages[1] = "There is no doubt that"+n+"life is given us, not to be enjoyed,"+n+"but to be overcome; to be got over.";
 		messages[2] = "I think I need a time out and go cry.";
 
 		int coolDown = 4; float thinkingChance=0.1f;
@@ -224,7 +224,7 @@ public class Attack {
 	public static Attack LogicalAtomism(){
 		String[] messages = new String[3];
 		messages[0] = "Time to diconstruct you!";
-		messages[1] = "Some of your statements are senseless, some are nonsensical."+n+"The rest is simply wrong.";
+		messages[1] = "Some of your statements are"+n+"senseless, some are nonsensical."+n+"The rest is simply wrong.";
 		messages[2] = "Whereof one cannot speak, thereof one must be silent.";
 
 		int coolDown = 4; float thinkingChance=0.1f;;
@@ -238,7 +238,7 @@ public class Attack {
 	public static Attack LanguageGames(){
 		String[] messages = new String[3];
 		messages[0] = "What is the difference between a duck?";
-		messages[1] = "How are a chicken and a grape alike?"+n+"They are both purple... except for the chicken.";
+		messages[1] = "How are a chicken and a grape alike?"+n+"They are both purple..."+n+"except for the chicken.";
 		messages[2] = "We can not say that you am the worst of all times,"+n+"because we have no concept of 'of all times'.";
 
 		int coolDown = 5; float thinkingChance=0.1f;;
@@ -273,7 +273,7 @@ public class Attack {
 
 		int coolDown = 3; float thinkingChance=0.1f;;
 		int hpDamage = 50;	 int sanityDamage = 0;
-		int hpHealing = -50;  int sanityHealing = 0;
+		int hpHealing = -30;  int sanityHealing = 0;
 		float malus = 0;        float bonus = 0.5f;
 
 		return new Attack("Social Contract", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, malus, bonus, thinkingChance, messages);
@@ -282,7 +282,7 @@ public class Attack {
 	public static Attack AllAgainstAll(){
 		String[] messages = new String[3];
 		messages[0] = "The condition of man... is a condition of"+n+"war of everyone against everyone.";
-		messages[1] = "Life is nasty, brutish, and short";
+		messages[1] = "Life is nasty, brutish, and short.";
 		messages[2] = "Men look not at the greatnesse of the evill past," + n + "but the greatnesse of the good to follow!";
 		int coolDown = 4; float thinkingChance=0.15f;;
 		int hpDamage = 15;	 int sanityDamage = 15;
@@ -380,7 +380,7 @@ public class Attack {
 		String[] messages = new String[3];
 		messages[0] = "Have the courage to use your own reason --"+n+"That is the motto of enlightenment.";
 		messages[1] = "Knowing others is wisdom, knowing yourself is Enlightenment.";
-		messages[2] = "It must be difficult to work yourself out of the immaturity which has become almost natural for you.";
+		messages[2] = "It must be difficult to work"+n+"yourself out of the immaturity"+n+"which has become almost natural for you.";
 
 		int coolDown = 5; float thinkingChance=0f;;
 		int hpDamage = 10;	 int sanityDamage = 0;
@@ -396,7 +396,7 @@ public class Attack {
 		String[] messages = new String[3];
 		messages[0] = "We can easily forgive a child who is afraid of the dark;"+n+"the real tragedy of life is when men are afraid of the light.";
 		messages[1] = "Oh, my sweet summer child, what do you know of angst?";
-		messages[2] = "Anxiety is an alien power which lays hold of the individual;"+n+"and yet one cannot tear oneself away, not has a will to do so;"+n+"for one fears, but what one fears one desires";
+		messages[2] = "Anxiety is an alien power which lays hold"+n+"of the individual; and yet one cannot tear"+n+"oneself away, not has a will to do so;"+n+"for one fears, but what one fears one desires";
 		int coolDown = 4; float thinkingChance=0.1f;;
 		int hpDamage = 20;	 int sanityDamage = 0;
 		int hpHealing = 0;  int sanityHealing = 0;
@@ -409,7 +409,7 @@ public class Attack {
 		String[] messages = new String[3];
 		messages[0] = "Life can only be understood backwards;"+n+"but it must be lived forwards.";
 		messages[1] = "In a few hundred years no one will know"+n+"who you are or that you ever existed.";
-		messages[2] = "The most painful state of being is remembering the future,"+n+"particularly the one you'll never have.";
+		messages[2] = "The most painful state of being"+n+"is remembering the future, particularly"+n+"the one you'll never have.";
 
 		int coolDown = 4; float thinkingChance=0.5f;;
 		int hpDamage = 10;	 int sanityDamage = 10;
