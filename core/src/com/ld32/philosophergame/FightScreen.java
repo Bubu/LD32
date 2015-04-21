@@ -103,7 +103,7 @@ public class FightScreen extends ScreenAdapter {
 	// %%%%% Attack Handlers %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	
 	public void handleAttack(Attack attack, Philosopher opponent){
-		String feedback = game.player.doAttack(attack, opponent);
+		String feedback = game.currentplayer.doAttack(attack, opponent);
 		updateUI();
 		if(game.player != opponent && opponent.currenthp <= 0){
 			feedback += n + "You conviced " + opponent.name + " of your philosophy!";
@@ -122,7 +122,10 @@ public class FightScreen extends ScreenAdapter {
 	}
 	
 	private void showLoseMessage(Philosopher opponent) {
-		Gdx.app.log("TODO", "Show lose message!");
+		leftBubble.setVisible(false);
+		rightBubble.setVisible(true);
+		rightBubble.setText(opponent.phrases[1]);
+		rightBubble.pack();
 	}
 
 	private void showWinMessage() {
@@ -217,7 +220,7 @@ public class FightScreen extends ScreenAdapter {
 			handleAttack(game.opponent.choseRandomMove(game), game.player);
 			}else{
 				game.opponent.thinking-=1;
-				infoText.setText(game.opponent.name + "is still thinking.");
+				infoText.setText(game.opponent.name + " is still thinking.");
 				waitForClick(Ressources.GoToMenu);
 			}
 		}
@@ -229,7 +232,7 @@ public class FightScreen extends ScreenAdapter {
 			infoText.setVisible(false);
 			}else{
 				game.player.thinking-=1;
-				infoText.setText(game.player.name + "is still thinking.");
+				infoText.setText(game.player.name + " is still thinking.");
 				waitForClick(Ressources.OpponentAttack);
 			}
 		}

@@ -248,6 +248,10 @@ public class Philosopher {
 		if(currenthp<0){currenthp=0;};
 		if(opp.currentSanity<0){opp.currentSanity=0;};
 		if(opp.currenthp<0){opp.currenthp=0;};
+		if(currentSanity>sanity){currentSanity=sanity;};
+		if(currenthp>maxhp){currenthp=maxhp;};
+		if(opp.currentSanity>opp.sanity){opp.currentSanity=opp.sanity;};
+		if(opp.currenthp>opp.maxhp){opp.currenthp= opp.maxhp;};
 	}
 
 	public Attack choseRandomMove(PhilosopherGame game) {
