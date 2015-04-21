@@ -122,6 +122,7 @@ public class FightScreen extends ScreenAdapter {
 	}
 	
 	private void showLoseMessage(Philosopher opponent) {
+		leftBubble.setVisible(false);
 		rightBubble.setVisible(true);
 		rightBubble.setText(opponent.phrases[1]);
 		rightBubble.pack();
@@ -219,7 +220,7 @@ public class FightScreen extends ScreenAdapter {
 			handleAttack(game.opponent.choseRandomMove(game), game.player);
 			}else{
 				game.opponent.thinking-=1;
-				infoText.setText(game.opponent.name + "is still thinking.");
+				infoText.setText(game.opponent.name + " is still thinking.");
 				waitForClick(Ressources.GoToMenu);
 			}
 		}
@@ -231,7 +232,7 @@ public class FightScreen extends ScreenAdapter {
 			infoText.setVisible(false);
 			}else{
 				game.player.thinking-=1;
-				infoText.setText(game.player.name + "is still thinking.");
+				infoText.setText(game.player.name + " is still thinking.");
 				waitForClick(Ressources.OpponentAttack);
 			}
 		}
