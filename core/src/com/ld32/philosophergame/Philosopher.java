@@ -49,7 +49,7 @@ public class Philosopher {
 	}
 
 	public static Philosopher Nietzsche(boolean isOpponent){	
-		Philosopher p = new Philosopher("Nietzsche", 100,20,Ressources.Nietzsche(),isOpponent);
+		Philosopher p = new Philosopher("Nietzsche", 100,40,Ressources.Nietzsche(),isOpponent);
 		p.attacks[3] = Attack.EternalReturn();
 		p.attacks[4] = Attack.WilltoPower();
 		p.attacks[5] = Attack.SummonUbermensch();
@@ -61,7 +61,7 @@ public class Philosopher {
 	}
 	public static Philosopher Descartes(boolean isOpponent){
 
-		Philosopher p = new Philosopher("Descartes", 100,20,Ressources.Descartes(),isOpponent);
+		Philosopher p = new Philosopher("Descartes", 100,40,Ressources.Descartes(),isOpponent);
 		p.attacks[3] = Attack.CartesianDualism();
 		p.attacks[4] = Attack.DeusDeceptor();
 		p.attacks[5] = Attack.CogitoErgoSum();
@@ -75,7 +75,7 @@ public class Philosopher {
 
 	public static Philosopher Socrates(boolean isOpponent){
 
-		Philosopher p = new Philosopher("Socrates", 100,20,Ressources.Socrates(),isOpponent);
+		Philosopher p = new Philosopher("Socrates", 100,40,Ressources.Socrates(),isOpponent);
 		p.attacks[3] = Attack.SocraticMethod();
 		p.attacks[4] = Attack.PlatonicLove();
 		p.attacks[5] = Attack.AristotelianLogic();
@@ -84,7 +84,7 @@ public class Philosopher {
 
 	public static Philosopher Schopenhauer(boolean isOpponent){
 
-		Philosopher p = new Philosopher("Schopenhauer", 100,20,Ressources.Schopenhauer(),isOpponent);
+		Philosopher p = new Philosopher("Schopenhauer", 100,40,Ressources.Schopenhauer(),isOpponent);
 		p.attacks[3] = Attack.Pessimism();
 		p.attacks[4] = Attack.HedgehogDilemma();
 		p.attacks[5] = Attack.LifeIsSuffering();
@@ -93,7 +93,7 @@ public class Philosopher {
 
 	public static Philosopher Wittgenstein(boolean isOpponent){
 
-		Philosopher p = new Philosopher("Wittgenstein", 100,20,Ressources.Wittgenstein(),isOpponent);
+		Philosopher p = new Philosopher("Wittgenstein", 100,40,Ressources.Wittgenstein(),isOpponent);
 		p.attacks[3] = Attack.LogicalAtomism();
 		p.attacks[4] = Attack.LanguageGames();
 		p.attacks[5] = Attack.BeatleInABox();
@@ -102,7 +102,7 @@ public class Philosopher {
 
 	public static Philosopher Hobbes(boolean isOpponent){
 
-		Philosopher p = new Philosopher("Hobbes", 100,20,Ressources.Hobbes(),isOpponent);
+		Philosopher p = new Philosopher("Hobbes", 100,40,Ressources.Hobbes(),isOpponent);
 		p.attacks[3] = Attack.AllAgainstAll();
 		p.attacks[4] = Attack.SocialContract();
 		p.attacks[5] = Attack.SummonLeviathan();
@@ -111,7 +111,7 @@ public class Philosopher {
 
 	public static Philosopher Freud(boolean isOpponent){
 
-		Philosopher p = new Philosopher("Freud", 100,20,Ressources.Freud(),isOpponent);
+		Philosopher p = new Philosopher("Freud", 100,40,Ressources.Freud(),isOpponent);
 		p.attacks[3] = Attack.Tabu();
 		p.attacks[4] = Attack.SexualRepression();
 		p.attacks[5] = Attack.SummonSuperEgo();
@@ -120,7 +120,7 @@ public class Philosopher {
 
 	public static Philosopher Kant(boolean isOpponent){
 
-		Philosopher p = new Philosopher("Kant", 100,20,Ressources.Kant(),isOpponent);
+		Philosopher p = new Philosopher("Kant", 100,40,Ressources.Kant(),isOpponent);
 		p.attacks[3] = Attack.PureReason();
 		p.attacks[4] = Attack.CategoricalImperative();
 		p.attacks[5] = Attack.Enlightenment();
@@ -129,7 +129,7 @@ public class Philosopher {
 
 	public static Philosopher Kierkegaard(boolean isOpponent){
 
-		Philosopher p = new Philosopher("Kierkegaard", 100,20,Ressources.Kierkegaard(),isOpponent);
+		Philosopher p = new Philosopher("Kierkegaard", 100,40,Ressources.Kierkegaard(),isOpponent);
 		p.attacks[3] = Attack.Angst();
 		p.attacks[4] = Attack.ExistentialDespair();
 		p.attacks[5] = Attack.SummonKnightOfFaith();
@@ -192,15 +192,24 @@ public class Philosopher {
 		}
 		if (returnString == "") returnString += "It does nothing!";
 		
+		
 		returnString += n+n;
 		Gdx.app.log(""+attack.name, ""+attack.coolDown);
 		if(Ressources.Rand().nextFloat()<attack.thinkingChance){
 			returnString+=opp.name + " has to think about this issue.";
 			opp.thinking=2;
 		}
+		repairStats(opp);
 		
 		return returnString;
 		
+	}
+	
+	void repairStats(Philosopher opp){
+		if(currentSanity<0){currentSanity=0;};
+		if(currenthp<0){currenthp=0;};
+		if(opp.currentSanity<0){opp.currentSanity=0;};
+		if(opp.currenthp<0){opp.currenthp=0;};
 	}
 
 	public Attack choseRandomMove(PhilosopherGame game) {
