@@ -112,7 +112,7 @@ public class FightScreen extends ScreenAdapter {
 			game.needNextOpponent = true;
 		}
 		if(game.player.currenthp <= 0){
-			feedback += n + "You failed to convince " + game.opponent.name + "! Try Again";
+			feedback += n + "You failed to convince " + game.opponent.name + "! Try Again.";
 			//showWinMessage();
 			//showLoseMessage(opponent);
 			game.tryAgain = true;

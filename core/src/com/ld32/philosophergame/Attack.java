@@ -52,7 +52,7 @@ public class Attack {
 		messages[2] = "I believe your own argument defeats itself.";
 		int coolDown = 0; float thinkingChance=0f;
 		int hpDamage = 0;	 int sanityDamage = 0;
-		int hpHealing = 5;  int sanityHealing = 5;
+		int hpHealing = 5;  int sanityHealing = 10;
 		float malus = 0;        float bonus = 0;
 		return new Attack("Selective Perception", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, bonus, malus, thinkingChance, messages);
 	}
@@ -208,7 +208,7 @@ public class Attack {
 	public static Attack HedgehogDilemma(){
 		String[] messages = new String[3];
 		messages[0] = "Real Closeness is impossible."+n+"For hedgehogs I mean.";
-		messages[1] = "The more you try, the more you hurt the people closest to you.";
+		messages[1] = "The more you try, the more you"+n+"hurt the people closest to you.";
 		messages[2] = "Almost all of our sorrows spring"+n+"out of our relations with other people.";
 
 		int coolDown = 5; float thinkingChance=0.1f;
