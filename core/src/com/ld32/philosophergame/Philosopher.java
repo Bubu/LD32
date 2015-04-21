@@ -232,7 +232,8 @@ public class Philosopher {
 
 		returnString += n+n;
 		Gdx.app.log(""+attack.name, ""+attack.coolDown);
-		if(Ressources.Rand().nextFloat()<attack.thinkingChance){
+		
+		if(opp.thinking==0 && Ressources.Rand().nextFloat()<attack.thinkingChance){
 			returnString+=opp.name + " has to think about this issue.";
 			opp.thinking=2;
 		}
