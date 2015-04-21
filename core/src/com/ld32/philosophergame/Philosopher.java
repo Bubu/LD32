@@ -108,9 +108,9 @@ public class Philosopher {
 		p.attacks[4] = Attack.LanguageGames();
 		p.attacks[5] = Attack.BeatleInABox();
 
-		p.phrases[0] = "The two enemies of human happiness are pain"+n+"and boredom. Prepare for pain.";
-		p.phrases[1] = "You made me sad. Again.";
-		p.phrases[2] = "Now in the height of my victory"+n+"it feels empty and shallow.";
+		p.phrases[0] = "Logic is not a body of doctrine,"+n+"but a mirror-image of the world.";
+		p.phrases[1] = "The limits of my language means the limits of my world.";
+		p.phrases[2] = "I try to put it into language: You lost hard.";
 
 		return p;
 	}
@@ -121,6 +121,11 @@ public class Philosopher {
 		p.attacks[3] = Attack.AllAgainstAll();
 		p.attacks[4] = Attack.SocialContract();
 		p.attacks[5] = Attack.SummonLeviathan();
+		
+		p.phrases[0] = "It is not wisdom but Authority that makes a law.";
+		p.phrases[1] = "You won with words."+n+"Words are the money of fools.";
+		p.phrases[2] = "Get out of my social contract!";
+		
 		return p;
 	}
 
@@ -130,6 +135,11 @@ public class Philosopher {
 		p.attacks[3] = Attack.Tabu();
 		p.attacks[4] = Attack.SexualRepression();
 		p.attacks[5] = Attack.SummonSuperEgo();
+		
+		p.phrases[0] = "Dreams are often most profound when they seem the most crazy.";
+		p.phrases[1] = "Time spent with cats is never wasted.";
+		p.phrases[2] = "Get out of my social contract!";
+		
 		return p;
 	}
 
@@ -139,6 +149,11 @@ public class Philosopher {
 		p.attacks[3] = Attack.PureReason();
 		p.attacks[4] = Attack.CategoricalImperative();
 		p.attacks[5] = Attack.Enlightenment();
+		
+		p.phrases[0] = "Kant touch this!";
+		p.phrases[1] = "You won with words."+n+"Words are the money of fools.";
+		p.phrases[2] = "Get out of my social contract!";
+		
 		return p;
 	}
 
@@ -148,6 +163,11 @@ public class Philosopher {
 		p.attacks[3] = Attack.Angst();
 		p.attacks[4] = Attack.ExistentialDespair();
 		p.attacks[5] = Attack.SummonKnightOfFaith();
+		
+		p.phrases[0] = "Once you label me, you negate me.";
+		p.phrases[1] = "You won with words."+n+"Words are the money of fools.";
+		p.phrases[2] = "Get out of my social contract!";
+		
 		return p;
 	}
 
