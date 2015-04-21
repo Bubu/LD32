@@ -122,7 +122,9 @@ public class FightScreen extends ScreenAdapter {
 	}
 	
 	private void showLoseMessage(Philosopher opponent) {
-		Gdx.app.log("TODO", "Show lose message!");
+		rightBubble.setVisible(true);
+		rightBubble.setText(opponent.phrases[1]);
+		rightBubble.pack();
 	}
 
 	private void showWinMessage() {
