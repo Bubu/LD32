@@ -124,6 +124,7 @@ public class FightScreen extends ScreenAdapter {
 	}
 
 	private void updateUI() {
+		menu.updateMenu(game);
 		oppStatus.setHp(game.opponent.currenthp);
 		oppStatus.setSanity(game.opponent.currentSanity);
 		playerStatus.setHp(game.player.currenthp);
@@ -200,6 +201,7 @@ public class FightScreen extends ScreenAdapter {
 	
 	private void advancePlayer() {
 		if(game.currentplayer == game.player){
+			game.opponent.cooldownAttacks();
 			if(game.opponent.thinking==0){
 			game.currentplayer = game.opponent;
 			handleAttack(game.opponent.choseRandomMove(game), game.player);
@@ -210,6 +212,7 @@ public class FightScreen extends ScreenAdapter {
 			}
 		}
 		else{
+			game.player.cooldownAttacks();
 			if(game.player.thinking==0){
 			game.currentplayer = game.player;
 			menu.setVisible(true);

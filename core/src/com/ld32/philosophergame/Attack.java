@@ -3,6 +3,7 @@ package com.ld32.philosophergame;
 public class Attack {
 	String name;
 	int coolDown;
+	int currentCoolDown;
 	int hpDamage;
 	int sanityDamage;
 	float bonus;
@@ -349,7 +350,7 @@ public class Attack {
 		String[] messages = new String[3];
 		messages[0] = "Have the courage to use your own reason --"+n+"That is the motto of enlightenment.";
 		messages[1] = "Knowing others is wisdom, knowing yourself is Enlightenment.";
-		messages[2] = "It must be difficult to work yourself out of the immaturity which has become almost natural for you.";
+		messages[2] = "It must be difficult to work yourself out of"+n+"the immaturity which has become almost natural for you.";
 		int coolDown = 1; float thinkingChance=0.1f;;
 		int hpDamage = 10;	 int sanityDamage = 0;
 		int hpHealing = 0;  int sanityHealing = 0;
@@ -373,7 +374,7 @@ public class Attack {
 
 	public static Attack ExistentialDespair(){
 		String[] messages = new String[3];
-		messages[0] = "Life can only be understood backwards; but it must be lived forwards.";
+		messages[0] = "Life can only be understood backwards;"+n+"but it must be lived forwards.";
 		messages[1] = "In a few hundred years no one will know"+n+"who you are or that you ever existed.";
 		messages[2] = "The most painful state of being is remembering the future,"+n+"particularly the one you'll never have.";
 		int coolDown = 1; float thinkingChance=0.1f;;
@@ -385,8 +386,8 @@ public class Attack {
 
 	public static Attack SummonKnightOfFaith(){
 		String[] messages = new String[3];
-		messages[0] = "The true knight of faith is a witness, never a teacher, and therein lies his deep humanity.";
-		messages[1] = "Faith consists in believing when it is beyond the power of reason to believe.";
+		messages[0] = "The true knight of faith is a witness,"+n+"never a teacher, and therein lies his deep humanity.";
+		messages[1] = "Faith consists in believing when it is beyond"+n+"the power of reason to believe.";
 		messages[2] = "Just a mental flesh wound!";
 		int coolDown = 1; float thinkingChance=0.1f;;
 		int hpDamage = 10;	 int sanityDamage = 0;
@@ -399,6 +400,7 @@ public class Attack {
 	public Attack(String name, int coolDown, int hpDamage, int sanityDamage, int hpHealing, int sanityHealing, float bonus, float malus, float thinkingChance, String[] messages) {
 		this.name = name;
 		this.coolDown = coolDown;
+		this.currentCoolDown = 0;
 		this.hpDamage = hpDamage;
 		this.sanityDamage = sanityDamage;
 		this.hpHealing = hpHealing;

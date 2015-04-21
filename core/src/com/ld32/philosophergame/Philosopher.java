@@ -158,6 +158,7 @@ public class Philosopher {
 	}
 
 	public String doAttack(Attack attack, Philosopher opp) {
+		attack.currentCoolDown += attack.coolDown;
 		int damage = (int) Math.ceil(attack.hpDamage*(1 + attack.malus*(currentSanity-sanity)/sanity + attack.bonus*(opp.sanity - opp.currentSanity)/opp.sanity));  
 		opp.currenthp -= damage;
 		opp.currentSanity -= attack.sanityDamage;
@@ -223,6 +224,20 @@ public class Philosopher {
 		if(name == "Kant") return Philosophers.Kant;
 		if(name == "Wittgenstein") return Philosophers.Wittgenstein;
 		return null;
+		
+	}
+	
+	public void cooldownAttacks(){
+		for(int i = 0; i < attacks.length; i++){
+			attacks[i].currentCoolDown -= 1;
+			if(attacks[i].currentCoolDown < 0) attacks[i].currentCoolDown = 0;
+		}
+	}
+
+	public void resetCooldowns() {
+		for(int i = 0; i < attacks.length; i++){
+			attacks[i].currentCoolDown = 0;
+		}
 		
 	}
 

@@ -36,6 +36,7 @@ public class PhilosopherGame extends Game {
 		currentplayer = player; 
 		player.currenthp = player.maxhp;
 		player.currentSanity = player.sanity;
+		player.resetCooldowns();
 		fightscreen = new FightScreen(this);
 		currentScreen = fightscreen;
 		setScreen(currentScreen);

@@ -46,11 +46,19 @@ public class Menu extends Table {
 	
 	public void updateMenu(final PhilosopherGame game){
 		entries = new KeyTextButton[6];
+		length = 0;
 		reset();
 		for(int i = 0; i < game.player.attacks.length; i++){
 			final int finali = i;
 			if(game.player.attacks[i] != null){
 				add(new KeyTextButton(game.player.attacks[i].name,skin));
+				if(game.player.attacks[i].currentCoolDown > 0){
+					entries[i].setDisabled(true);
+					entries[i].setText(entries[i].getText() + " (" + game.player.attacks[i].currentCoolDown + ")");
+				}
+				else if(game.player.attacks[i].coolDown != 0){
+					entries[i].setText(entries[i].getText() + " (" + game.player.attacks[i].coolDown + ")");
+				}
 				entries[i].addListener(new ChangeListener() {
 					@Override
 					public void changed(ChangeEvent event, final Actor actor) {
