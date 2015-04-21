@@ -13,7 +13,7 @@ public class Attack {
 	float thinkingChance;
 	String[] messages;
 
-	static String n = System.getProperty("line.separator");
+	public static String n = "\n"; //Ressources.getLineSeparator();
 	// Generale Attacks
 
 

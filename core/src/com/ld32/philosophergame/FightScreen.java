@@ -15,7 +15,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class FightScreen extends ScreenAdapter {
 
-	public static String n = System.getProperty("line.separator");
+	public static String n = "\n"; //Ressources.getLineSeparator();
 
 	PhilosopherGame game;
 	Stage stage;

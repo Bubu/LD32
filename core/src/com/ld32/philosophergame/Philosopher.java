@@ -20,7 +20,7 @@ public class Philosopher {
 	int currentSanity;
 	int thinking;
 
-	static String n = System.getProperty("line.separator");
+	public static String n = "\n"; //Ressources.getLineSeparator();
 
 	public static Philosopher createPhilosopher(String name, boolean isOpponent){
 		Philosophers phil = getType(name);

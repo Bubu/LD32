@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
 public class Menu extends Table {
-	public static String n = System.getProperty("line.separator");
+	public static String n = "\n"; //Ressources.getLineSeparator();
 	KeyTextButton[] entries;
 	int length;
 	private Skin skin; 
