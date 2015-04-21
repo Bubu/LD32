@@ -137,8 +137,8 @@ public class Philosopher {
 		p.attacks[5] = Attack.SummonSuperEgo();
 		
 		p.phrases[0] = "Dreams are often most profound when they seem the most crazy.";
-		p.phrases[1] = "Time spent with cats is never wasted.";
-		p.phrases[2] = "Get out of my social contract!";
+		p.phrases[1] = "Personally, I blame my mother.";
+		p.phrases[2] = "The first human who hurled an insult"+n+"instead of a stone was the founder of civilization."+n+"You fool!";
 		
 		return p;
 	}
@@ -195,6 +195,8 @@ public class Philosopher {
 	public String doAttack(Attack attack, Philosopher opp) {
 		attack.currentCoolDown += attack.coolDown;
 		int damage = (int) Math.ceil(attack.hpDamage*(1 + attack.malus*(currentSanity-sanity)/sanity + attack.bonus*(opp.sanity - opp.currentSanity)/opp.sanity));  
+		//Gdx.app.log("", damage + " - " + attack.bonus + " - " + attack.malus);
+		
 		opp.currenthp -= damage;
 		opp.currentSanity -= attack.sanityDamage;
 		currenthp += attack.hpHealing;
