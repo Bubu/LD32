@@ -379,7 +379,7 @@ public class Attack {
 	public static Attack Enlightenment(){
 		String[] messages = new String[3];
 		messages[0] = "Have the courage to use your own reason --"+n+"That is the motto of enlightenment.";
-		messages[1] = "Knowing others is wisdom, knowing yourself is Enlightenment.";
+		messages[1] = "Knowing others is wisdom,"+n+"knowing yourself is Enlightenment.";
 		messages[2] = "It must be difficult to work"+n+"yourself out of the immaturity"+n+"which has become almost natural for you.";
 
 		int coolDown = 5; float thinkingChance=0f;;

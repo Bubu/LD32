@@ -80,7 +80,7 @@ public class Philosopher {
 		p.attacks[4] = Attack.PlatonicLove();
 		p.attacks[5] = Attack.AristotelianLogic();
 
-		p.phrases[0] = "I think -- therefore I kick ass!";
+		p.phrases[0] = "I can not teach anybody anything,"+n+"I can only make them think.";
 		p.phrases[1] = "Bring me the hemlock!";
 		p.phrases[2] = "Now you know that you know nothing.";
 
