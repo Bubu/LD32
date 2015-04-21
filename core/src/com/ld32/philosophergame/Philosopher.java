@@ -79,6 +79,11 @@ public class Philosopher {
 		p.attacks[3] = Attack.SocraticMethod();
 		p.attacks[4] = Attack.PlatonicLove();
 		p.attacks[5] = Attack.AristotelianLogic();
+
+		p.phrases[0] = "I think -- therefore I kick ass!";
+		p.phrases[1] = "Bring me the hemlock!";
+		p.phrases[2] = "Now you know that you know nothing.";
+
 		return p;
 	}
 
@@ -88,6 +93,11 @@ public class Philosopher {
 		p.attacks[3] = Attack.Pessimism();
 		p.attacks[4] = Attack.HedgehogDilemma();
 		p.attacks[5] = Attack.LifeIsSuffering();
+
+		p.phrases[0] = "The two enemies of human happiness are pain"+n+"and boredom. Prepare for pain.";
+		p.phrases[1] = "You made me sad. Again.";
+		p.phrases[2] = "Now in the height of my victory"+n+"it feels empty and shallow.";
+
 		return p;
 	}
 
@@ -97,6 +107,11 @@ public class Philosopher {
 		p.attacks[3] = Attack.LogicalAtomism();
 		p.attacks[4] = Attack.LanguageGames();
 		p.attacks[5] = Attack.BeatleInABox();
+
+		p.phrases[0] = "The two enemies of human happiness are pain"+n+"and boredom. Prepare for pain.";
+		p.phrases[1] = "You made me sad. Again.";
+		p.phrases[2] = "Now in the height of my victory"+n+"it feels empty and shallow.";
+
 		return p;
 	}
 
@@ -164,7 +179,7 @@ public class Philosopher {
 		currenthp += attack.hpHealing;
 		currentSanity += attack.sanityHealing;
 
-		
+
 		String returnString = "";
 		if (damage != 0){
 			returnString += "It does "+ damage + " damage to " + opp.name + "'s conviction!";
@@ -190,8 +205,8 @@ public class Philosopher {
 			returnString += name + " damages his own sanity by " + (-1)*attack.sanityHealing;
 		}
 		if (returnString == "") returnString += "It does nothing!";
-		
-		
+
+
 		returnString += n+n;
 		Gdx.app.log(""+attack.name, ""+attack.coolDown);
 		if(Ressources.Rand().nextFloat()<attack.thinkingChance){
@@ -199,11 +214,11 @@ public class Philosopher {
 			opp.thinking=2;
 		}
 		repairStats(opp);
-		
+
 		return returnString;
-		
+
 	}
-	
+
 	void repairStats(Philosopher opp){
 		if(currentSanity<0){currentSanity=0;};
 		if(currenthp<0){currenthp=0;};
@@ -232,7 +247,12 @@ public class Philosopher {
 		if(name == "Kant") return Philosophers.Kant;
 		if(name == "Wittgenstein") return Philosophers.Wittgenstein;
 		return null;
-		
+
+	}
+
+	public void heal() {
+		currenthp = maxhp;
+		currentSanity = sanity;		
 	}
 
 }

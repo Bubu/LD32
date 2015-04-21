@@ -18,7 +18,8 @@ public class PhilosopherGame extends Game {
 	Philosopher currentplayer;
 	private Screen currentScreen;
 	public LinkedList<String> fought;
-	public boolean needNextOpponent;
+	public boolean needNextOpponent = false;
+	public boolean tryAgain = false;
 
 	public void create () {
 		isRunning = false;
@@ -27,15 +28,18 @@ public class PhilosopherGame extends Game {
 	}
 
 	public void startFight() {
-		opponent = getNextOpponent();
+		if(!tryAgain){
+			opponent = getNextOpponent();
+		}
 		if(opponent == null){
 			setScreen(new WinScreen(this));
 			return;
 		}
 		needNextOpponent = false;
+		tryAgain = false;
 		currentplayer = player; 
-		player.currenthp = player.maxhp;
-		player.currentSanity = player.sanity;
+		player.heal();
+		opponent.heal(); 
 		fightscreen = new FightScreen(this);
 		currentScreen = fightscreen;
 		setScreen(currentScreen);
