@@ -15,6 +15,7 @@ public class Menu extends Table {
 
 	public Menu(Skin skin) {
 		this.skin = skin;
+		setBackground(skin.getDrawable("default-rect"));
 		entries = new KeyTextButton[6];
 		length = 0;
 	}

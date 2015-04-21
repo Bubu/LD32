@@ -58,6 +58,9 @@ com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 	title: { font: title-font, fontColor: white }
 },
+com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
+	info: { font: default-font, fontColor: white, background: default-rect }
+},
 com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
 	default: { selection: selection, background: textfield, font: default-font, fontColor: white, cursor: cursor }
 },
