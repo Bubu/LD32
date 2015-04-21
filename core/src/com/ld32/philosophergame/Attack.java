@@ -21,7 +21,7 @@ public class Attack {
 		String[] messages = new String[3];
 		messages[0] = "This statement is a lie.";
 		messages[1] = "Can an omnipotent being create a rock"+n+"too heavy for itself to lift?";
-		messages[2] = "White horses are not horses because white"+n+"and horse refer to different things.";		
+		messages[2] = "White horses are not horses because"+n+"white and horse refer to different things.";		
 		int coolDown = 0; float thinkingChance=0.1f;
 		int hpDamage = 0;	 int sanityDamage = 10;
 		int hpHealing = 0;  int sanityHealing = 0;
@@ -209,7 +209,7 @@ public class Attack {
 		String[] messages = new String[3];
 		messages[0] = "Real Closeness is impossible."+n+"For hedgehogs I mean.";
 		messages[1] = "The more you try, the more you hurt the people closest to you.";
-		messages[2] = "Almost all of our sorrows spring out of our relations with other people.";
+		messages[2] = "Almost all of our sorrows spring"+n+"out of our relations with other people.";
 
 		int coolDown = 5; float thinkingChance=0.1f;
 		int hpDamage = 40;	 int sanityDamage = 0;
@@ -308,7 +308,7 @@ public class Attack {
 	public static Attack Tabu(){
 		String[] messages = new String[3];
 		messages[0] = "Silence, you fool!";
-		messages[1] = "It is generally assumed that the taboo is older"+n+"than the gods and goes back to the pre-religious age.";
+		messages[1] = "It is generally assumed that the taboo"+n+"is olderthan the gods and"+n+"goes back to the pre-religious age.";
 		messages[2] = "The mind should develop a blind spot whenever"+n+" a dangerous thought presented itself."+n+" The process should be automatic, instinctive. ";
 		int coolDown = 3; float thinkingChance=0.1f;
 		int hpDamage = 10;	 int sanityDamage = 0;
@@ -320,7 +320,7 @@ public class Attack {
 
 	public static Attack SexualRepression(){
 		String[] messages = new String[3];
-		messages[0] = "Your aggression seems to come from an erotic infatuation to your grandmother.";
+		messages[0] = "Your aggression seems to come from"+n+"an erotic infatuation to your grandmother.";
 		messages[1] = "Sometimes a cigar is just a cigar.";
 		messages[2] = "I sense a slight castration anxiety. "+n+"Don't worry this is natural.";
 
