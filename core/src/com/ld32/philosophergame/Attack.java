@@ -260,7 +260,7 @@ public class Attack {
 		String[] messages = new String[3];
 		messages[0] = "The condition of man... is a condition of"+n+"war of everyone against everyone.";
 		messages[1] = "Life is nasty, brutish, and short";
-		messages[2] = "Men look not at the greatnesse of the evill past, but the greatnesse of the good to follow!";
+		messages[2] = "Men look not at the greatnesse of the evill past," + n + "but the greatnesse of the good to follow!";
 		 int coolDown = 1;
 		 int hpDamage = 10;	 int sanityDamage = 0;
 		int hpHealing = 0;  int sanityHealing = 0;
@@ -272,7 +272,7 @@ public class Attack {
 		String[] messages = new String[3];
 		messages[0] = "There is no power on earth to be compared to the Leviathan.";
 		messages[1] = "I broke my back lifting the Leviathan to heaven.";
-		messages[2] = "Now I am about to take my last voyage, a great leap in the dark";
+		messages[2] = "Now I am about to take my last voyage," + n + " a great leap in the dark.";
 		 int coolDown = 1;
 		 int hpDamage = 10;	 int sanityDamage = 0;
 		int hpHealing = 0;  int sanityHealing = 0;
@@ -286,7 +286,7 @@ public class Attack {
 		String[] messages = new String[3];
 		messages[0] = "Silence, you fool!";
 		messages[1] = "It is generally assumed that the taboo is older"+n+"than the gods and goes back to the pre-religious age.";
-		messages[2] = "The mind should develop a blind spot whenever a dangerous"+n+"thought presented itself. The process should be automatic, instinctive. ";
+		messages[2] = "The mind should develop a blind spot whenever"+n+" a dangerous thought presented itself."+n+" The process should be automatic, instinctive. ";
 		int coolDown = 1;
 		 int hpDamage = 10;	 int sanityDamage = 0;
 		int hpHealing = 0;  int sanityHealing = 0;
@@ -334,7 +334,7 @@ public class Attack {
 	
 	public static Attack CategoricalImperative(){
 		String[] messages = new String[3];
-		messages[0] = "Act only on that maxim through which you can at the"+n+"same time will that it should become a universal law";
+		messages[0] = "Act only on that maxim through which you can at the"+n+"same time will that it should become a universal law.";
 		messages[1] = "Call me the categorical imperator!";
 		messages[2] = "By a lie, a man... annihilates his dignity as a man.";
 		int coolDown = 1;
@@ -346,7 +346,7 @@ public class Attack {
 	
 	public static Attack Enlightenment(){
 		String[] messages = new String[3];
-		messages[0] = "Have the courage to use your own reason --"+n+"That is the motto of enlightenment";
+		messages[0] = "Have the courage to use your own reason --"+n+"That is the motto of enlightenment.";
 		messages[1] = "Knowing others is wisdom, knowing yourself is Enlightenment.";
 		messages[2] = "It must be difficult to work yourself out of the immaturity which has become almost natural for you.";
 		 int coolDown = 1;

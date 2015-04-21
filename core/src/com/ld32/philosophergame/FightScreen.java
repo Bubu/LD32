@@ -35,8 +35,15 @@ public class FightScreen extends ScreenAdapter {
 		// Creation of speech bubble:
 		leftBubble = new LeftBubble(game.player.phrases[0]);
 		leftBubble.setVisible(false);
+		Table bubbleTable = new Table(Ressources.Skin());
+		bubbleTable.setFillParent(true);
 		rightBubble = new RightBubble(game.opponent.phrases[0]);
-		rightBubble.setVisible(true);
+		if(game.opponent.phrases[0] != null){
+			rightBubble.setVisible(true);
+		}
+		else rightBubble.setVisible(false);
+		
+		bubbleTable.add(rightBubble);
 		
 		game.player.sprite.setPosition(20, 25);
 		
@@ -45,7 +52,7 @@ public class FightScreen extends ScreenAdapter {
 		stage.addActor(generateInfoTextTable());
 		stage.addActor(game.player.sprite);
 		stage.addActor(leftBubble);
-		stage.addActor(rightBubble);
+		stage.addActor(bubbleTable);
 	}
 	
 	// %%%%% Table Generators %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -79,6 +86,12 @@ public class FightScreen extends ScreenAdapter {
 		topTable.setFillParent(true);
 		topTable.top();
 		
+		Table description = new Table(Ressources.Skin());
+		description.add().row();
+		description.add("Conviction: ").row();
+		description.add("Sanity: ").row();
+		
+		topTable.add(description).top().pad(10).padTop(36);
 		topTable.add(playerStatus).top().pad(10).padRight(20);
 		topTable.add(oppStatus).top().pad(10);
 		topTable.add(game.opponent.sprite).height(150)
