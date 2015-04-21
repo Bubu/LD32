@@ -165,8 +165,8 @@ public class Philosopher {
 		p.attacks[5] = Attack.SummonKnightOfFaith();
 		
 		p.phrases[0] = "Once you label me, you negate me.";
-		p.phrases[1] = "The tyrant dies and his rule is over, the martyr dies and his rule begins.";
-		p.phrases[2] = "Ingratitude is the essence of vileness!";
+		p.phrases[1] = "The tyrant dies and his rule is over,"+"the martyr dies and his rule begins.";
+		p.phrases[2] = "Prayer does not change God,"+n+"but it changes him who prays.";
 		
 		return p;
 	}
