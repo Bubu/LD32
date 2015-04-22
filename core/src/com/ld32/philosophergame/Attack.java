@@ -308,7 +308,7 @@ public class Attack {
 	public static Attack Tabu(){
 		String[] messages = new String[3];
 		messages[0] = "Silence, you fool!";
-		messages[1] = "It is generally assumed that the taboo"+n+"is olderthan the gods and"+n+"goes back to the pre-religious age.";
+		messages[1] = "It is generally assumed that the taboo"+n+"is older than the gods and"+n+"goes back to the pre-religious age.";
 		messages[2] = "The mind should develop a blind spot whenever"+n+" a dangerous thought presented itself."+n+" The process should be automatic, instinctive. ";
 		int coolDown = 3; float thinkingChance=0.1f;
 		int hpDamage = 10;	 int sanityDamage = 0;

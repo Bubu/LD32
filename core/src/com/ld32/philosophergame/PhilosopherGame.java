@@ -71,6 +71,7 @@ public class PhilosopherGame extends Game {
 
 	void start() {
 		fought = new LinkedList<String>();
+		tryAgain = false;
 		isRunning = true;
 		selectionScreen = new SelectionScreen(this);
 		currentScreen = selectionScreen;
