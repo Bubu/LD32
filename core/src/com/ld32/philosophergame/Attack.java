@@ -113,7 +113,7 @@ public class Attack {
 		messages[0] = "Everything was arranged to deceive you!";
 		messages[1] = "A malicious deamon controls your senses.";
 		messages[2] = "I show you how deep the rabbit hole goes.";
-		int coolDown = 5; float thinkingChance = 0.5f;
+		int coolDown = 5; float thinkingChance = 0.6f;
 		int hpDamage = 0;	 int sanityDamage = 20;
 		int hpHealing = 0;  int sanityHealing = 0;
 		float malus = 0;        float bonus = 0;
@@ -272,9 +272,9 @@ public class Attack {
 		messages[2] = "Just accept the terms and conditions and sign here!";
 
 		int coolDown = 3; float thinkingChance=0.1f;;
-		int hpDamage = 50;	 int sanityDamage = 0;
-		int hpHealing = -30;  int sanityHealing = 0;
-		float malus = 0;        float bonus = 0.5f;
+		int hpDamage = 40;	 int sanityDamage = 0;
+		int hpHealing = -25;  int sanityHealing = 0;
+		float malus = 0.1f;        float bonus = 0f;
 
 		return new Attack("Social Contract", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, bonus, malus, thinkingChance, messages);
 	}
@@ -284,9 +284,9 @@ public class Attack {
 		messages[0] = "The condition of man... is a condition of"+n+"war of everyone against everyone.";
 		messages[1] = "Life is nasty, brutish, and short.";
 		messages[2] = "Men look not at the greatnesse of the evill past," + n + "but the greatnesse of the good to follow!";
-		int coolDown = 4; float thinkingChance=0.15f;;
-		int hpDamage = 15;	 int sanityDamage = 15;
-		int hpHealing = 15;  int sanityHealing = 15;
+		int coolDown = 4; float thinkingChance=0.10f;;
+		int hpDamage = 15;	 int sanityDamage = 10;
+		int hpHealing = 15;  int sanityHealing = 10;
 		float malus = 0;        float bonus = 1f;
 		return new Attack("All against All", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, bonus, malus, thinkingChance, messages);
 	}
@@ -296,9 +296,9 @@ public class Attack {
 		messages[0] = "There is no power on earth" + n + "to be compared to the Leviathan.";
 		messages[1] = "I broke my back lifting the Leviathan to heaven.";
 		messages[2] = "Now I am about to take my last voyage," + n + " a great leap in the dark.";
-		int coolDown = 5; float thinkingChance=0.2f;
-		int hpDamage = 20;	 int sanityDamage = 10;
-		int hpHealing = 10;  int sanityHealing = 10;
+		int coolDown = 5; float thinkingChance=0.25f;
+		int hpDamage = 20;	 int sanityDamage = 15;
+		int hpHealing = 0;  int sanityHealing = 0;
 		float malus = 0;        float bonus = 0;
 		return new Attack("Summon Leviathan", coolDown, hpDamage, sanityDamage, hpHealing, sanityHealing, bonus, malus, thinkingChance, messages);
 	}

@@ -1,6 +1,6 @@
 package com.ld32.philosophergame;
 
-import com.badlogic.gdx.Gdx;
+import java.util.HashSet;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -18,7 +18,9 @@ public class Philosopher {
 	String name;
 	String[] phrases;
 	int currentSanity;
-	int thinking;
+	boolean attacking;
+	HashSet<Condition> preConditions;
+	HashSet<Condition> postConditions;
 
 	public static String n = "\n"; //Ressources.getLineSeparator();
 
@@ -180,7 +182,6 @@ public class Philosopher {
 		Sprite s =new Sprite(texture);
 		if (!isOpponent) s.flip(true, false);
 		sprite = new Image(new TextureRegionDrawable(s));
-		//if(isOpponent) sprite.setColor(Color.RED);
 		sprite.setScaling(Scaling.fill);
 		sprite.setHeight(150);
 		sprite.setWidth(sprite.getWidth() * 150/texture.getRegionHeight());
@@ -189,27 +190,32 @@ public class Philosopher {
 		this.attacks[1] = Attack.Paradox();
 		this.attacks[2] = Attack.SelPerption();
 		this.phrases = new String[3];
-		this.thinking = 0;
+		this.attacking = true;
+		this.preConditions= new HashSet<Condition>();
+		this.postConditions= new HashSet<Condition>();
+			
 	}
 
-	public String doAttack(Attack attack, Philosopher opp) {
+	public String doAttack(Attack attack, Philosopher opponent) {
 		attack.currentCoolDown += attack.coolDown;
-		int damage = (int) Math.ceil(attack.hpDamage*(1 + attack.malus*(currentSanity-sanity)/sanity + attack.bonus*(opp.sanity - opp.currentSanity)/opp.sanity));  
-		//Gdx.app.log("", damage + " - " + attack.bonus + " - " + attack.malus);
+		int damage = (int) Math.ceil(attack.hpDamage*(1 + attack.malus*(currentSanity-sanity)/sanity + attack.bonus*(opponent.sanity - opponent.currentSanity)/opponent.sanity));  
 		
-		opp.currenthp -= damage;
-		opp.currentSanity -= attack.sanityDamage;
+		opponent.currenthp -= damage;
+		opponent.currentSanity -= attack.sanityDamage;
 		currenthp += attack.hpHealing;
 		currentSanity += attack.sanityHealing;
 
 
 		String returnString = "";
+		
+		returnString += name + " uses \"" + attack.name + "\"." + n;
+		
 		if (damage != 0){
-			returnString += "It does "+ damage + " damage to " + opp.name + "'s conviction!";
+			returnString += "It does "+ damage + " damage to " + opponent.name + "'s conviction!";
 		}
 		if(attack.sanityDamage != 0){
 			if (returnString != "") returnString += n;
-			returnString += "It does "+ attack.sanityDamage + " damage to " + opp.name + "'s sanity!";
+			returnString += "It does "+ attack.sanityDamage + " damage to " + opponent.name + "'s sanity!";
 		}
 		if(attack.hpHealing > 0){
 			if (returnString != "") returnString += n;
@@ -229,15 +235,14 @@ public class Philosopher {
 		}
 		if (returnString == "") returnString += "It does nothing!";
 
-
 		returnString += n+n;
-		Gdx.app.log(""+attack.name, ""+attack.coolDown);
 		
-		if(opp.thinking==0 && Ressources.Rand().nextFloat()<attack.thinkingChance){
-			returnString+=opp.name + " has to think about this issue.";
-			opp.thinking=2;
+		if(opponent.attacking && Ressources.Rand().nextFloat()<attack.thinkingChance){
+			
+			opponent.preConditions.add(Condition.Thinking());
+			returnString+=opponent.name + " has to think about this issue.";
 		}
-		repairStats(opp);
+		repairStats(opponent);
 
 		return returnString;
 

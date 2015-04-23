@@ -1,11 +1,8 @@
 package com.ld32.philosophergame;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
@@ -25,10 +22,12 @@ public class FightScreen extends ScreenAdapter {
 	RightBubble rightBubble;
 	StatusDisplay oppStatus;
 	StatusDisplay playerStatus;
-	
+	//Fight fight;
+
 	public FightScreen(final PhilosopherGame game) {
 		this.game = game;
-		
+		//this.fight = game.fight;
+
 		stage = new Stage(new ScreenViewport());
 		stage.addListener(Ressources.EscListener(game));
 
@@ -42,11 +41,11 @@ public class FightScreen extends ScreenAdapter {
 			rightBubble.setVisible(true);
 		}
 		else rightBubble.setVisible(false);
-		
+
 		bubbleTable.add(rightBubble);
-		
+
 		game.player.sprite.setPosition(20, 25);
-		
+
 		stage.addActor(generateTopTable());
 		stage.addActor(generateMenuTable());
 		stage.addActor(generateInfoTextTable());
@@ -54,9 +53,9 @@ public class FightScreen extends ScreenAdapter {
 		stage.addActor(leftBubble);
 		stage.addActor(bubbleTable);
 	}
-	
+
 	// %%%%% Table Generators %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	
+
 	public Table generateMenuTable(){
 		menu = new Menu(Ressources.Skin());
 		menu.updateMenu(game);
@@ -66,7 +65,7 @@ public class FightScreen extends ScreenAdapter {
 		menutable.add(menu);
 		return menutable;
 	}
-	
+
 	public Table generateInfoTextTable(){
 		infoText = new Label("", Ressources.Skin().get("info",LabelStyle.class));
 		infoText.setVisible(false);
@@ -77,62 +76,43 @@ public class FightScreen extends ScreenAdapter {
 		infoTextTable.add(infoText).height(143).width(442);
 		return infoTextTable;
 	}
-	
+
 	public Table generateTopTable(){
 		oppStatus = new StatusDisplay(game.opponent);
 		playerStatus = new StatusDisplay(game.player);
-		
+
 		Table topTable = new Table();
 		topTable.setFillParent(true);
 		topTable.top();
-		
+
 		Table description = new Table(Ressources.Skin());
 		description.add().row();
 		description.add("Conviction: ").row();
 		description.add("Sanity: ").row();
-		
+
 		topTable.add(description).top().pad(10).padTop(36);
 		topTable.add(playerStatus).top().pad(10).padRight(20);
 		topTable.add(oppStatus).top().pad(10);
 		topTable.add(game.opponent.sprite).height(150)
-			.width(game.opponent.sprite.getWidth()* 100/game.opponent.sprite.getWidth())
-			.pad(15);
+		.width(game.opponent.sprite.getWidth()* 100/game.opponent.sprite.getWidth())
+		.pad(15);
 		return topTable;
 	}
 
-	// %%%%% Attack Handlers %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	
-	public void handleAttack(Attack attack, Philosopher opponent){
-		String feedback = game.currentplayer.doAttack(attack, opponent);
-		updateUI();
-		if(game.player != opponent && opponent.currenthp <= 0){
-			feedback += n + "You conviced " + opponent.name + " of your philosophy!";
-			showWinMessage();
-			showLoseMessage(opponent);
-			game.needNextOpponent = true;
-		}
-		if(game.player.currenthp <= 0){
-			feedback += n + "You failed to convince " + game.opponent.name + "! Try Again.";
-			//showWinMessage();
-			//showLoseMessage(opponent);
-			game.tryAgain = true;
-		}
-		showAttackInfo(attack, feedback);
-		showAttackMessage(attack);
-	}
-	
-	private void showLoseMessage(Philosopher opponent) {
+	// %%%%%  Show messages and stuff %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	public void showLoseMessage(Philosopher opponent) {
 		leftBubble.setVisible(false);
 		rightBubble.setVisible(true);
 		rightBubble.setText(opponent.phrases[1]);
 		rightBubble.pack();
 	}
 
-	private void showWinMessage() {
+	public void showWinMessage() {
 		Gdx.app.log("TODO", "Show win message!");
 	}
 
-	private void updateUI() {
+	public void updateUI() {
 		menu.updateMenu(game);
 		oppStatus.setHp(game.opponent.currenthp);
 		oppStatus.setSanity(game.opponent.currentSanity);
@@ -141,8 +121,9 @@ public class FightScreen extends ScreenAdapter {
 	}
 
 	public void showAttackMessage(Attack attack){
+		//Gdx.app.log("tag", fight.currentPlayer.name);
 		String message = attack.messages[Ressources.Rand().nextInt(attack.messages.length)];
-		if(game.currentplayer == game.player){
+		if(game.fight.currentPlayer == game.player){
 			leftBubble.setVisible(true);
 			leftBubble.setText(message);
 			leftBubble.pack();
@@ -155,89 +136,19 @@ public class FightScreen extends ScreenAdapter {
 		}
 	}
 
-	public void showAttackInfo(Attack attack, String feedback) {
-		game.fightscreen.infoText.setText(game.currentplayer.name + " uses \"" + attack.name + "\"" + n + feedback);
-		game.fightscreen.infoText.setVisible(true);
-		waitForClick(Ressources.AdvanceText);
+	public void showInfoText(String feedback) {
+		infoText.setText(feedback);
+		infoText.setVisible(true);
+		game.fight.waitForClick(Ressources.AdvanceText);
 	}
 
-	protected boolean checkStatus() {
-		//game.player.status
-		return false;
-	}	
-	
+	public void showMenu(){
+		menu.setVisible(true);
+		infoText.setVisible(false);
+	}
+
 	// %%%%% Turn Handlers %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	
-	public void waitForClick (final int action) {
-		InputListener listener = new InputListener(){
-			@Override
-			public boolean keyDown(InputEvent event, int keycode) {
-				if(keycode == Input.Keys.ENTER){
-					continueAction(action,this);
-					return true;
-				}
-				else{
-					return false;
-				}
-			}
-			@Override
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-					continueAction(action,this);
-			}
-		};
-		game.fightscreen.stage.addListener(listener);
-	}
 
-	private void continueAction(final int action, InputListener listener){
-		stage.removeListener(listener);
-		if (game.needNextOpponent){
-			game.fought.add(game.opponent.name);
-			game.startFight();
-			return;
-		}
-		if (game.tryAgain){
-			game.startFight();
-			return;
-		}
-		if (action == Ressources.AdvanceText) {
-			advancePlayer();
-		}else if(action == Ressources.GoToMenu){
-			menu.setVisible(true);
-			infoText.setVisible(false);
-		}else if(action == Ressources.OpponentAttack){
-			handleAttack(game.opponent.choseRandomMove(game), game.player);
-		}
-	}
-	
-	private void advancePlayer() {
-		if(game.currentplayer == game.player){
-			game.opponent.cooldownAttacks();
-			if(game.opponent.thinking==0){
-			game.currentplayer = game.opponent;
-			handleAttack(game.opponent.choseRandomMove(game), game.player);
-			}else{
-				game.opponent.thinking-=1;
-				infoText.setText(game.opponent.name + " is still thinking.");
-				waitForClick(Ressources.GoToMenu);
-			}
-		}
-		else{
-			game.player.cooldownAttacks();
-			if(game.player.thinking==0){
-			game.currentplayer = game.player;
-			menu.setVisible(true);
-			infoText.setVisible(false);
-			}else{
-				game.player.thinking-=1;
-				infoText.setText(game.player.name + " is still thinking.");
-				waitForClick(Ressources.OpponentAttack);
-			}
-		}
-	}
-	
 
 	protected void describeStatus(Status status) {
 		Gdx.app.log("TODO!", "Describe Status");
@@ -258,5 +169,5 @@ public class FightScreen extends ScreenAdapter {
 	public void resize (int width, int height) {
 		stage.getViewport().update(width, height, true);
 	}
-	
+
 }

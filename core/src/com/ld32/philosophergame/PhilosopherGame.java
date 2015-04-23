@@ -11,11 +11,11 @@ import com.badlogic.gdx.Screen;
 public class PhilosopherGame extends Game {
 	MenuScreen menuScreen;
 	FightScreen fightscreen;
+	Fight fight;
 	SelectionScreen selectionScreen;
 	boolean isRunning;
 	Philosopher player;
 	Philosopher opponent;
-	Philosopher currentplayer;
 	private Screen currentScreen;
 	public LinkedList<String> fought;
 	public boolean needNextOpponent = false;
@@ -37,11 +37,12 @@ public class PhilosopherGame extends Game {
 		}
 		needNextOpponent = false;
 		tryAgain = false;
-		currentplayer = player;
 		player.heal();
 		opponent.heal(); 
 		player.resetCooldowns();
 		fightscreen = new FightScreen(this);
+		fight = new Fight(this, player, opponent, fightscreen);
+		
 		currentScreen = fightscreen;
 		setScreen(currentScreen);
 	}
