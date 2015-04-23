@@ -1,8 +1,12 @@
 package com.ld32.philosophergame;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
@@ -52,9 +56,33 @@ public class FightScreen extends ScreenAdapter {
 		stage.addActor(game.player.sprite);
 		stage.addActor(leftBubble);
 		stage.addActor(bubbleTable);
+		stage.addListener(getClickListener());
 	}
 
 	// %%%%% Table Generators %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	private EventListener getClickListener() {
+		InputListener listener = new InputListener(){
+			@Override
+			public boolean keyDown(InputEvent event, int keycode) {
+				if(keycode == Input.Keys.ENTER){
+					game.fight.advanceState();
+					return true;
+				}
+				else{
+					return false;
+				}
+			}
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+				return true;
+			}
+			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+				game.fight.advanceState();
+			}
+		};
+		return listener;
+	}
 
 	public Table generateMenuTable(){
 		menu = new Menu(Ressources.Skin());
@@ -120,8 +148,7 @@ public class FightScreen extends ScreenAdapter {
 		playerStatus.setSanity(game.player.currentSanity);
 	}
 
-	public void showAttackMessage(Attack attack){
-		//Gdx.app.log("tag", fight.currentPlayer.name);
+	public void showAttackBubble(Attack attack){
 		String message = attack.messages[Ressources.Rand().nextInt(attack.messages.length)];
 		if(game.fight.currentPlayer == game.player){
 			leftBubble.setVisible(true);

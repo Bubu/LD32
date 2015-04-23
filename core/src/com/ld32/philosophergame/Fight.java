@@ -1,5 +1,6 @@
 package com.ld32.philosophergame;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import com.badlogic.gdx.Input;
@@ -12,6 +13,9 @@ public class Fight {
 	PhilosopherGame game;
 	Philosopher currentPlayer;
 	FightScreen fightscreen;
+	FightState currentState;
+	ArrayList<FightState> stateList;
+	Iterator<FightState> states;
 	public static String n = "\n";
 
 	Philosopher currentOpponent(){
@@ -21,6 +25,10 @@ public class Fight {
 	}
 
 	public Fight(PhilosopherGame game, Philosopher player, Philosopher opponent, FightScreen fightscreen) {
+		this.stateList = new ArrayList<FightState>();
+		generateStates();
+		states = stateList.iterator();
+		currentState = states.next();
 		this.currentPlayer = player;
 		Gdx.app.log("tag", currentPlayer.name);
 		this.fightscreen = fightscreen;
@@ -29,12 +37,27 @@ public class Fight {
 
 	// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+	private void generateStates() {
+		FightState wincheck = new CheckWin(fightscreen, true);
+		stateList.add(new PreConditions(fightscreen, false));
+		stateList.add(wincheck);
+		stateList.add(new PlayerAttack(fightscreen, true));
+		stateList.add(wincheck);
+		stateList.add(new PostConditions(fightscreen, false));
+		stateList.add(wincheck);
+		stateList.add(new AdvanceTurn(fightscreen, true));
+		stateList.add(new PreConditions(fightscreen, false));
+		stateList.add(wincheck);
+		stateList.add(new OppenentTurn(fightscreen, true));
+		stateList.add(wincheck);
+		stateList.add(new PostConditions(fightscreen, false));
+		stateList.add(wincheck);
+		stateList.add(new AdvanceTurn(fightscreen, true));
+	}
+
 	private void advancePlayer() {
-
 		currentPlayer = currentOpponent();
-
 		currentPlayer.attacking=true;
-
 		startTurn();
 	}
 
@@ -77,11 +100,11 @@ public class Fight {
 
 	public void handleAttack(Attack attack, Philosopher opponent){
 
-		fightscreen.showAttackMessage(attack);
+		fightscreen.showAttackBubble(attack);
 
 		String attackText = currentPlayer.doAttack(attack, opponent);
 		fightscreen.updateUI();
-		attackText += checkForWinner();
+		//attackText += checkForWinner();
 
 		fightscreen.showInfoText(attackText);
 	}
@@ -109,31 +132,27 @@ public class Fight {
 
 	// %%%%% Waiting for human player %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-	public void waitForClick(final int action){
-		InputListener listener = new InputListener(){
-			@Override
-			public boolean keyDown(InputEvent event, int keycode) {
-				if(keycode == Input.Keys.ENTER){
-					continueAction(action,this);
-					return true;
+	
+	void advanceState() throws Exception{
+		if(currentState.waitForClick){
+			FightState oldState = currentState;
+			while(true){
+				if(states.hasNext()) currentState = states.next();
+				else {
+					states = stateList.iterator();
+					currentState = states.next();
 				}
-				else{
-					return false;
+				if (currentState.active){
+					break;
 				}
-			}
-			@Override
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				continueAction(action,this);
-			}
-		};
-		fightscreen.stage.addListener(listener);
+				if (currentState == oldState){
+					throw new Exception("Enless loop. No state active!");				}
+			}			
+			currentState.performAction();
+		}
 	}
 
-	private void continueAction(final int action, InputListener listener){
-		fightscreen.stage.removeListener(listener);
+	private void continueAction(final int action){
 		if (game.needNextOpponent){
 			game.fought.add(game.opponent.name);
 			game.startFight();
