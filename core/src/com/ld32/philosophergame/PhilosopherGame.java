@@ -27,7 +27,7 @@ public class PhilosopherGame extends Game {
 		setScreen(menuScreen);
 	}
 
-	public void startFight() {
+	public void startFight() throws Exception {
 		if(!tryAgain){
 			opponent = getNextOpponent();
 		}

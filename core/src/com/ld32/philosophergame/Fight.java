@@ -16,6 +16,7 @@ public class Fight {
 	FightState currentState;
 	ArrayList<FightState> stateList;
 	Iterator<FightState> states;
+	protected PlayerAttack playerAttack;
 	public static String n = "\n";
 
 	Philosopher currentOpponent(){
@@ -24,35 +25,35 @@ public class Fight {
 		else return game.player;
 	}
 
-	public Fight(PhilosopherGame game, Philosopher player, Philosopher opponent, FightScreen fightscreen) {
+	public Fight(PhilosopherGame game, Philosopher player, Philosopher opponent, FightScreen fightscreen) throws Exception {
 		this.stateList = new ArrayList<FightState>();
 		generateStates();
+		playerAttack = (PlayerAttack) stateList.get(2); // gets PlayerAttack
 		states = stateList.iterator();
 		currentState = states.next();
 		this.currentPlayer = player;
-		Gdx.app.log("tag", currentPlayer.name);
 		this.fightscreen = fightscreen;
 		this.game = game;
+		advanceState(false);
 	}
 
 	// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 	private void generateStates() {
-		FightState wincheck = new CheckWin(fightscreen, true);
-		stateList.add(new PreConditions(fightscreen, false));
-		stateList.add(wincheck);
-		stateList.add(new PlayerAttack(fightscreen, true));
-		stateList.add(wincheck);
-		stateList.add(new PostConditions(fightscreen, false));
-		stateList.add(wincheck);
-		stateList.add(new AdvanceTurn(fightscreen, true));
-		stateList.add(new PreConditions(fightscreen, false));
-		stateList.add(wincheck);
-		stateList.add(new OppenentTurn(fightscreen, true));
-		stateList.add(wincheck);
-		stateList.add(new PostConditions(fightscreen, false));
-		stateList.add(wincheck);
-		stateList.add(new AdvanceTurn(fightscreen, true));
+		stateList.add(new PreConditions(this, false));
+		stateList.add(new CheckWin(this, true));
+		stateList.add(new PlayerAttack(this, true));
+		stateList.add(new CheckWin(this, true));
+		stateList.add(new PostConditions(this, false));
+		stateList.add(new CheckWin(this, true));
+		stateList.add(new AdvanceTurn(this, true));
+		stateList.add(new PreConditions(this, false));
+		stateList.add(new CheckWin(this, true));
+		stateList.add(new OppenentTurn(this, true));
+		stateList.add(new CheckWin(this, true));
+		stateList.add(new PostConditions(this, false));
+		stateList.add(new CheckWin(this, true));
+		stateList.add(new AdvanceTurn(this, true));
 	}
 
 	private void advancePlayer() {
@@ -82,7 +83,7 @@ public class Fight {
 		}
 
 		fightscreen.showInfoText(conditionMessage);
-		waitForClick(Ressources.selectAttack);
+		//waitForClick(Ressources.selectAttack);
 	}
 
 	private void selectAttack(){
@@ -133,8 +134,9 @@ public class Fight {
 	// %%%%% Waiting for human player %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 	
-	void advanceState() throws Exception{
-		if(currentState.waitForClick){
+	void advanceState(boolean clicked) throws Exception{
+		Gdx.app.log("Debug", currentState.toString());
+		if(currentState.waitForClick == clicked){
 			FightState oldState = currentState;
 			while(true){
 				if(states.hasNext()) currentState = states.next();
@@ -152,7 +154,8 @@ public class Fight {
 		}
 	}
 
-	private void continueAction(final int action){
+
+	private void continueAction(final int action) throws Exception{
 		if (game.needNextOpponent){
 			game.fought.add(game.opponent.name);
 			game.startFight();
@@ -171,6 +174,7 @@ public class Fight {
 			selectAttack();
 		}
 	}
+
 
 
 

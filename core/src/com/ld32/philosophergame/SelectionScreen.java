@@ -38,7 +38,12 @@ public class SelectionScreen extends ScreenAdapter {
 				@Override
 				public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 					game.player = Philosopher.createPhilosopher(phil.toString(), false);
-					game.startFight();
+					try {
+						game.startFight();
+					} catch (Exception e) {
+						Gdx.app.log("Exception", "Endless loop detected. No active States.");
+						e.printStackTrace();
+					}
 					return true;
 				}
 			});

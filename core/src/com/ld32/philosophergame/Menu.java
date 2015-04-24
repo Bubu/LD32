@@ -1,6 +1,9 @@
 package com.ld32.philosophergame;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -62,9 +65,15 @@ public class Menu extends Table {
 				entries[i].addListener(new ChangeListener() {
 					@Override
 					public void changed(ChangeEvent event, final Actor actor) {
-						game.fightscreen.menu.setVisible(false);
-						game.fightscreen.infoText.setVisible(true);
-						game.fight.handleAttack(game.player.attacks[finali], game.opponent);
+						Gdx.app.log("Debug","Button Listener changed");
+						game.fight.playerAttack.performPlayerAttack(game.player.attacks[finali]);
+					}
+				});
+				entries[i].addListener(new InputListener() {
+					@Override
+					public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+						event.stop(); //Stops event propagation. So the general stage clickhandler doesn't receive it.
+						return true;
 					}
 				});
 			}

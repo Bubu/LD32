@@ -1,17 +1,20 @@
 package com.ld32.philosophergame;
 
 public class AdvanceTurn extends FightState {
-	public final boolean waitForClick = false;
-
-	public AdvanceTurn(FightScreen screen, boolean active) {
-		super(screen, active);
-		// TODO Auto-generated constructor stub
+	
+	public AdvanceTurn(Fight fight, boolean active) {
+		super(fight, active);
+		this.waitForClick = false;
+		
 	}
 
 	@Override
-	public void performAction() {
-		// TODO Auto-generated method stub
-
+	public void performAction() throws Exception {
+		fight.currentPlayer = fight.currentOpponent();
+		fight.currentPlayer.attacking=true;
+		fight.currentPlayer.cooldownAttacks();
+		
+		fight.advanceState(false);
 	}
 
 	@Override

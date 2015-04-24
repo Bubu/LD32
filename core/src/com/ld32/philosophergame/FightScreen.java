@@ -66,7 +66,12 @@ public class FightScreen extends ScreenAdapter {
 			@Override
 			public boolean keyDown(InputEvent event, int keycode) {
 				if(keycode == Input.Keys.ENTER){
-					game.fight.advanceState();
+					try {
+						game.fight.advanceState(true);
+					} catch (Exception e) {
+						Gdx.app.log("Exception", "Endless loop detected. No active States.");
+						e.printStackTrace();
+					}
 					return true;
 				}
 				else{
@@ -78,7 +83,12 @@ public class FightScreen extends ScreenAdapter {
 				return true;
 			}
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				game.fight.advanceState();
+				try {
+					game.fight.advanceState(true);
+				} catch (Exception e) {
+					Gdx.app.log("Exception", "Endless loop detected. No active States.");
+					e.printStackTrace();
+				}
 			}
 		};
 		return listener;
@@ -166,7 +176,6 @@ public class FightScreen extends ScreenAdapter {
 	public void showInfoText(String feedback) {
 		infoText.setText(feedback);
 		infoText.setVisible(true);
-		game.fight.waitForClick(Ressources.AdvanceText);
 	}
 
 	public void showMenu(){
@@ -195,6 +204,21 @@ public class FightScreen extends ScreenAdapter {
 	}
 	public void resize (int width, int height) {
 		stage.getViewport().update(width, height, true);
+	}
+
+	public void showOpponentBubble(String message) {
+		rightBubble.setVisible(true);
+		rightBubble.setText(message);
+		rightBubble.pack();
+		leftBubble.setVisible(false);
+		
+	}
+
+	public void showPlayerBubble(String message) {
+		leftBubble.setVisible(true);
+		leftBubble.setText(message);
+		leftBubble.pack();
+		rightBubble.setVisible(false);
 	}
 
 }
