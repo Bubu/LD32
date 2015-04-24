@@ -15,19 +15,19 @@ public class CheckWin extends FightState {
 		boolean won = false;
 		String message = "";
 		if(fight.game.opponent.currenthp <= 0 && fight.game.player.currenthp <= 0){
-			winnerText = "Err... somehow you managed to convince each other of the opposing views. Try again!";
+			winnerText = "Err... somehow you managed to convince each other "+ n +"of the opposing views. Try again!";
 			message = fight.game.opponent.phrases[2];
 			won = true;
 			fight.game.tryAgain = true;
 		}
-		if(fight.game.opponent.currenthp <= 0){
+		else if(fight.game.opponent.currenthp <= 0){
 			winnerText = n + "You conviced " + fight.game.opponent.name + " of your philosophy!";
 			message = fight.game.opponent.phrases[1];
 			won = true;
 			fight.game.needNextOpponent = true;
 		}
-		if(fight.game.player.currenthp <= 0){
-			winnerText += n + "You failed to convince " + fight.game.opponent.name + "! Try Again.";
+		else if(fight.game.player.currenthp <= 0){
+			winnerText = n + "You failed to convince " + fight.game.opponent.name + "! Try Again.";
 			message = fight.game.opponent.phrases[2];
 			won = true;
 			fight.game.tryAgain = true;

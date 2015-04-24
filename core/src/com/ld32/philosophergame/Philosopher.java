@@ -271,6 +271,7 @@ public class Philosopher {
 		currentSanity = sanity;
 		preConditions = new HashSet<Condition>();
 		postConditions = new HashSet<Condition>();
+		attacking = true;
 	}
 	
 	public void cooldownAttacks(){

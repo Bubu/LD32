@@ -9,17 +9,18 @@ public class PlayerAttack extends AttackState {
 	}
 
 	@Override
-	public void performAction() {
+	public void performAction() throws Exception {
 		this.waitForClick = false;
-		fight.fightscreen.showMenu();
+		if(fight.currentPlayer.attacking){
+			fight.fightscreen.showMenu();
+		}
+		else fight.advanceState(false);
+
 	}
 	
 	public void performPlayerAttack(Attack attack) throws Exception{
-		if(fight.currentPlayer.attacking){
 			String message = handleAttack(attack);
 			fight.fightscreen.showPlayerBubble(message);
-		}
-		else fight.advanceState(false);
 	}
 
 }
