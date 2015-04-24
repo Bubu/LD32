@@ -113,7 +113,7 @@ public class Attack {
 		messages[0] = "Everything was arranged to deceive you!";
 		messages[1] = "A malicious deamon controls your senses.";
 		messages[2] = "I show you how deep the rabbit hole goes.";
-		int coolDown = 5; float thinkingChance = 0.6f;
+		int coolDown = 5; float thinkingChance = 1.6f;
 		int hpDamage = 0;	 int sanityDamage = 20;
 		int hpHealing = 0;  int sanityHealing = 0;
 		float malus = 0;        float bonus = 0;
@@ -223,7 +223,7 @@ public class Attack {
 
 	public static Attack LogicalAtomism(){
 		String[] messages = new String[3];
-		messages[0] = "Time to diconstruct you!";
+		messages[0] = "Time to deconstruct you!";
 		messages[1] = "Some of your statements are"+n+"senseless, some are nonsensical."+n+"The rest is simply wrong.";
 		messages[2] = "Whereof one cannot speak, thereof one must be silent.";
 

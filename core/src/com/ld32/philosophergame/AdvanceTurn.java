@@ -17,10 +17,4 @@ public class AdvanceTurn extends FightState {
 		fight.advanceState(false);
 	}
 
-	@Override
-	public FightState next() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

@@ -14,6 +14,4 @@ public abstract class FightState {
 	
 	abstract public void performAction() throws Exception;
 
-	abstract public FightState next();
-
 }

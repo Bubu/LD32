@@ -1,22 +1,23 @@
 package com.ld32.philosophergame;
 
-public class Condition {
+
+public class Condition{
 	String name;
 	int duration;
 	int currentDuration;
 	int ident;
+	String activateMessage;
 
-	public Condition(int ident, String name, int duration){
+	public Condition(int ident, String name, int duration, String description){
 		this.name = name;
 		this.duration = duration;
 		this.currentDuration = duration;
 		this.ident = ident;
-		//this.message = description;
+		this.activateMessage = description;
 	}
-	// TODO Auto-generated constructor stub
 
 	public static Condition Thinking(){
-		return new Condition(0, "Thinking", 2);
+		return new Condition(0, "Thinking", 2, "has to think about this.");
 	}
 
 	public String performCondition(Philosopher currentPlayer, Philosopher currentOpponent){
@@ -34,6 +35,10 @@ public class Condition {
 	
 	public String toString(){
 		return super.toString() + this.name;
+	}
+	
+	public boolean equals(Condition other){
+		return this.name == other.name;
 	}
 
 }

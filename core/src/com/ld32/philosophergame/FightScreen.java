@@ -69,7 +69,6 @@ public class FightScreen extends ScreenAdapter {
 					try {
 						game.fight.advanceState(true);
 					} catch (Exception e) {
-						Gdx.app.log("Exception", "Endless loop detected. No active States.");
 						e.printStackTrace();
 					}
 					return true;
@@ -86,7 +85,6 @@ public class FightScreen extends ScreenAdapter {
 				try {
 					game.fight.advanceState(true);
 				} catch (Exception e) {
-					Gdx.app.log("Exception", "Endless loop detected. No active States.");
 					e.printStackTrace();
 				}
 			}
@@ -139,38 +137,12 @@ public class FightScreen extends ScreenAdapter {
 
 	// %%%%%  Show messages and stuff %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-	public void showLoseMessage(Philosopher opponent) {
-		leftBubble.setVisible(false);
-		rightBubble.setVisible(true);
-		rightBubble.setText(opponent.phrases[1]);
-		rightBubble.pack();
-	}
-
-	public void showWinMessage() {
-		Gdx.app.log("TODO", "Show win message!");
-	}
-
 	public void updateUI() {
 		menu.updateMenu(game);
 		oppStatus.setHp(game.opponent.currenthp);
 		oppStatus.setSanity(game.opponent.currentSanity);
 		playerStatus.setHp(game.player.currenthp);
 		playerStatus.setSanity(game.player.currentSanity);
-	}
-
-	public void showAttackBubble(Attack attack){
-		String message = attack.messages[Ressources.Rand().nextInt(attack.messages.length)];
-		if(game.fight.currentPlayer == game.player){
-			leftBubble.setVisible(true);
-			leftBubble.setText(message);
-			leftBubble.pack();
-			rightBubble.setVisible(false);
-		}else{
-			rightBubble.setVisible(true);
-			rightBubble.setText(message);
-			rightBubble.pack();
-			leftBubble.setVisible(false);
-		}
 	}
 
 	public void showInfoText(String feedback) {

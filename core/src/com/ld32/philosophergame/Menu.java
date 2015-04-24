@@ -65,8 +65,11 @@ public class Menu extends Table {
 				entries[i].addListener(new ChangeListener() {
 					@Override
 					public void changed(ChangeEvent event, final Actor actor) {
-						Gdx.app.log("Debug","Button Listener changed");
-						game.fight.playerAttack.performPlayerAttack(game.player.attacks[finali]);
+						try {
+							game.fight.playerAttack.performPlayerAttack(game.player.attacks[finali]);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
 					}
 				});
 				entries[i].addListener(new InputListener() {

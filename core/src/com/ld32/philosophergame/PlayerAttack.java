@@ -1,7 +1,7 @@
 package com.ld32.philosophergame;
 
 
-public class PlayerAttack extends FightState {
+public class PlayerAttack extends AttackState {
 
 	public PlayerAttack(Fight fight, boolean active) {
 		super(fight, active);
@@ -14,19 +14,12 @@ public class PlayerAttack extends FightState {
 		fight.fightscreen.showMenu();
 	}
 	
-	public void performPlayerAttack(Attack attack){
-		String message = attack.messages[Ressources.Rand().nextInt(attack.messages.length)];
-		fight.fightscreen.showPlayerBubble(message);
-		String attackText = fight.game.player.doAttack(attack, fight.game.opponent);
-		fight.fightscreen.updateUI();
-		fight.fightscreen.showInfoText(attackText);
-		this.waitForClick = true;
-	}
-
-	@Override
-	public FightState next() {
-		// TODO Auto-generated method stub
-		return null;
+	public void performPlayerAttack(Attack attack) throws Exception{
+		if(fight.currentPlayer.attacking){
+			String message = handleAttack(attack);
+			fight.fightscreen.showPlayerBubble(message);
+		}
+		else fight.advanceState(false);
 	}
 
 }

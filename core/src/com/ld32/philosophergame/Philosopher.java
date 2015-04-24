@@ -167,7 +167,7 @@ public class Philosopher {
 		p.attacks[5] = Attack.SummonKnightOfFaith();
 		
 		p.phrases[0] = "Once you label me, you negate me.";
-		p.phrases[1] = "The tyrant dies and his rule is over,"+"the martyr dies and his rule begins.";
+		p.phrases[1] = "The tyrant dies and his rule is over,"+n+"the martyr dies and his rule begins.";
 		p.phrases[2] = "Prayer does not change God,"+n+"but it changes him who prays.";
 		
 		return p;
@@ -208,40 +208,28 @@ public class Philosopher {
 
 		String returnString = "";
 		
-		returnString += name + " uses \"" + attack.name + "\"." + n;
-		
 		if (damage != 0){
-			returnString += "It does "+ damage + " damage to " + opponent.name + "'s conviction!";
+			returnString += n + "It does "+ damage + " damage to " + opponent.name + "'s conviction!";
 		}
 		if(attack.sanityDamage != 0){
-			if (returnString != "") returnString += n;
-			returnString += "It does "+ attack.sanityDamage + " damage to " + opponent.name + "'s sanity!";
+			returnString += n + "It does "+ attack.sanityDamage + " damage to " + opponent.name + "'s sanity!";
 		}
 		if(attack.hpHealing > 0){
-			if (returnString != "") returnString += n;
-			returnString += name + " heals " + attack.hpHealing + " of his conviction!";
+			returnString += n + name + " heals " + attack.hpHealing + " of his conviction!";
 		}
 		if(attack.sanityHealing > 0){
-			if (returnString != "") returnString += n;
-			returnString += name + " heals " + attack.sanityHealing + " of his sanity!";
+			returnString += n + name + " heals " + attack.sanityHealing + " of his sanity!";
 		}
 		if(attack.hpHealing < 0){
-			if (returnString != "") returnString += n;
-			returnString += name + " damages his own conviction by " + (-1)*attack.hpHealing;
+			returnString += n + name + " damages his own conviction by " + (-1)*attack.hpHealing;
 		}
 		if(attack.sanityHealing < 0){
-			if (returnString != "") returnString += n;
-			returnString += name + " damages his own sanity by " + (-1)*attack.sanityHealing;
+			returnString += n + name + " damages his own sanity by " + (-1)*attack.sanityHealing;
 		}
 		if (returnString == "") returnString += "It does nothing!";
 
-		returnString += n+n;
+		returnString = name + " uses \"" + attack.name + "\"." + n + returnString + n;
 		
-		if(opponent.attacking && Ressources.Rand().nextFloat()<attack.thinkingChance){
-			
-			opponent.preConditions.add(Condition.Thinking());
-			returnString+=opponent.name + " has to think about this issue.";
-		}
 		repairStats(opponent);
 
 		return returnString;
@@ -262,11 +250,6 @@ public class Philosopher {
 	public Attack choseRandomMove(PhilosopherGame game) {
 		Attack attack = attacks[Ressources.Rand().nextInt(attacks.length)];
 		return attack;
-	}
-
-	public static Philosopher getRandom() {
-
-		return null;
 	}
 
 	public static Philosophers getType(String name) {
@@ -300,6 +283,14 @@ public class Philosopher {
 			attacks[i].currentCoolDown = 0;
 		}
 		
+	}
+
+	public void addPostCondition(Condition condition) {
+		postConditions.add(condition);		
+	}
+	
+	public void addPreCondition(Condition condition) {
+		preConditions.add(condition);		
 	}
 
 }
