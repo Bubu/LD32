@@ -113,7 +113,7 @@ public class Attack {
 		messages[0] = "Everything was arranged to deceive you!";
 		messages[1] = "A malicious deamon controls your senses.";
 		messages[2] = "I show you how deep the rabbit hole goes.";
-		int coolDown = 5; float thinkingChance = 1.6f;
+		int coolDown = 5; float thinkingChance = 0.8f;
 		int hpDamage = 0;	 int sanityDamage = 20;
 		int hpHealing = 0;  int sanityHealing = 0;
 		float malus = 0;        float bonus = 0;

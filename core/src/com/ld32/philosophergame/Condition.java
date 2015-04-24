@@ -1,5 +1,7 @@
 package com.ld32.philosophergame;
 
+import com.badlogic.gdx.Gdx;
+
 
 public class Condition{
 	String name;
@@ -37,8 +39,16 @@ public class Condition{
 		return super.toString() + this.name;
 	}
 	
-	public boolean equals(Condition other){
-		return this.name == other.name;
+	@Override
+	public boolean equals(Object other){
+		Gdx.app.log("Debug", "equals called of: " + name);
+		return (other instanceof Condition) && (this.name.equals(((Condition)other).name));
+	}
+	
+	@Override
+	public int hashCode() {
+		Gdx.app.log("Debug", "hashcode called of: " + name);
+		return name.hashCode();
 	}
 
 }

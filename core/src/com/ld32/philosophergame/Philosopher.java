@@ -268,7 +268,9 @@ public class Philosopher {
 
 	public void heal() {
 		currenthp = maxhp;
-		currentSanity = sanity;		
+		currentSanity = sanity;
+		preConditions = new HashSet<Condition>();
+		postConditions = new HashSet<Condition>();
 	}
 	
 	public void cooldownAttacks(){

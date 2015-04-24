@@ -3,8 +3,6 @@ package com.ld32.philosophergame;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import com.badlogic.gdx.Gdx;
-
 public class Fight {
 
 	PhilosopherGame game;
