@@ -21,14 +21,15 @@ public abstract class AttackState extends FightState {
 	protected String handleConditions(Attack attack) {
 		if(Ressources.Rand().nextFloat() < attack.thinkingChance){
 			Condition condition = Condition.Thinking();
-			fight.currentOpponent().addPreCondition(condition);
-			if(fight.game.opponent == fight.currentOpponent()){
-				fight.activateOpponentPre();
+			if(fight.currentOpponent().addPreCondition(condition)){
+				if(fight.game.opponent == fight.currentOpponent()){
+					fight.activateOpponentPre();
+				}
+				else{
+					fight.activatePlayerPre();
+				}
+				return n + fight.currentOpponent().name + " " + condition.activateMessage;
 			}
-			else{
-				fight.activatePlayerPre();
-			}
-			return n + fight.currentOpponent().name + " " + condition.activateMessage;
 		}
 		return "";
 	}

@@ -288,12 +288,12 @@ public class Philosopher {
 		
 	}
 
-	public void addPostCondition(Condition condition) {
-		postConditions.add(condition);		
+	public boolean addPostCondition(Condition condition) {
+		return postConditions.add(condition);		
 	}
 	
-	public void addPreCondition(Condition condition) {
-		preConditions.add(condition);		
+	public boolean addPreCondition(Condition condition) {
+		return preConditions.add(condition);		
 	}
 
 }
