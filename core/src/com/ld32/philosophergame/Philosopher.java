@@ -111,7 +111,7 @@ public class Philosopher {
 		p.attacks[5] = Attack.BeatleInABox();
 
 		p.phrases[0] = "Logic is not a body of doctrine,"+n+"but a mirror-image of the world.";
-		p.phrases[1] = "The limits of my language means the limits of my world.";
+		p.phrases[1] = "The limits of my language mean the limits of my world.";
 		p.phrases[2] = "I try to put it into language: You lost hard.";
 
 		return p;
