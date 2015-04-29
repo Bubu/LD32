@@ -1,17 +1,17 @@
 package com.ld32.philosophergame;
 
 public class Attack {
-	String name;
-	int coolDown;
-	int currentCoolDown;
+	public String name;
+	public int coolDown;
+	public int currentCoolDown;
 	int hpDamage;
 	int sanityDamage;
 	float bonus;
 	float malus;
 	int hpHealing;
 	int sanityHealing;
-	float thinkingChance;
-	String[] messages;
+	public float thinkingChance;
+	public String[] messages;
 
 	public static String n = "\n"; //Ressources.getLineSeparator();
 	// Generale Attacks

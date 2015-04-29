@@ -3,20 +3,29 @@ package com.ld32.philosophergame;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import com.ld32.philosophergame.states.CheckWin;
+import com.ld32.philosophergame.states.FightState;
+import com.ld32.philosophergame.states.OppenentTurn;
+import com.ld32.philosophergame.states.PlayerAttack;
+import com.ld32.philosophergame.states.CheckPostConditions;
+import com.ld32.philosophergame.states.CheckPreConditions;
+
+
+
 public class Fight {
 
-	PhilosopherGame game;
-	Philosopher currentPlayer;
-	FightScreen fightscreen;
+	public PhilosopherGame game;
+	public Philosopher currentPlayer;
+	public FightScreen fightscreen;
 	FightState currentState;
 	ArrayList<FightState> stateList;
 	Iterator<FightState> states;
-	protected PlayerAttack playerAttack;
-	protected PreConditions playerPre;
-	protected PreConditions opponentPre;
+	public PlayerAttack playerAttack;
+	protected CheckPreConditions playerPre;
+	protected CheckPreConditions opponentPre;
 	public static String n = "\n";
 
-	Philosopher currentOpponent(){
+	public Philosopher currentOpponent(){
 		if (currentPlayer == game.player)
 			return game.opponent;
 		else return game.player;
@@ -28,8 +37,8 @@ public class Fight {
 		playerAttack = (PlayerAttack) stateList.get(2); // gets PlayerAttack		
 		states = stateList.iterator();
 		currentState = states.next();
-		playerPre = (PreConditions) stateList.get(0);
-		opponentPre = (PreConditions) stateList.get(7);
+		playerPre = (CheckPreConditions) stateList.get(0);
+		opponentPre = (CheckPreConditions) stateList.get(7);
 		this.currentPlayer = player;
 		this.fightscreen = fightscreen;
 		this.game = game;
@@ -39,23 +48,23 @@ public class Fight {
 	// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 	private void generateStates() {
-		stateList.add(new PreConditions(this, false));
+		stateList.add(new CheckPreConditions(this, false));
 		stateList.add(new CheckWin(this, true));
 		stateList.add(new PlayerAttack(this, true));
 		stateList.add(new CheckWin(this, true));
-		stateList.add(new PostConditions(this, false));
+		stateList.add(new CheckPostConditions(this, false));
 		stateList.add(new CheckWin(this, true));
 		stateList.add(new AdvanceTurn(this, true));
-		stateList.add(new PreConditions(this, false));
+		stateList.add(new CheckPreConditions(this, false));
 		stateList.add(new CheckWin(this, true));
 		stateList.add(new OppenentTurn(this, true));
 		stateList.add(new CheckWin(this, true));
-		stateList.add(new PostConditions(this, false));
+		stateList.add(new CheckPostConditions(this, false));
 		stateList.add(new CheckWin(this, true));
 		stateList.add(new AdvanceTurn(this, true));
 	}	
 	
-	void advanceState(boolean clicked) throws Exception{
+	public void advanceState(boolean clicked) throws Exception{
 		if(currentState.waitForClick == clicked){
 			if (game.needNextOpponent){
 				game.fought.add(game.opponent.name);

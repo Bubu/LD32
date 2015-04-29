@@ -1,5 +1,7 @@
 package com.ld32.philosophergame;
 
+import com.ld32.philosophergame.states.FightState;
+
 public class AdvanceTurn extends FightState {
 	
 	public AdvanceTurn(Fight fight, boolean active) {

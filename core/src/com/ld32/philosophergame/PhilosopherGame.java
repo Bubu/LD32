@@ -4,18 +4,23 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.ld32.philosophergame.gui.MenuScreen;
+import com.ld32.philosophergame.gui.SelectionScreen;
+import com.ld32.philosophergame.gui.WinScreen;
 
 public class PhilosopherGame extends Game {
 	MenuScreen menuScreen;
 	FightScreen fightscreen;
-	Fight fight;
+	public Fight fight;
 	SelectionScreen selectionScreen;
-	boolean isRunning;
-	Philosopher player;
-	Philosopher opponent;
+	public boolean isRunning;
+	public Philosopher player;
+	public Philosopher opponent;
 	private Screen currentScreen;
 	public LinkedList<String> fought;
 	public boolean needNextOpponent = false;

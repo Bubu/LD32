@@ -1,4 +1,4 @@
-package com.ld32.philosophergame;
+package com.ld32.philosophergame.gui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
@@ -13,6 +13,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.ld32.philosophergame.Philosopher;
+import com.ld32.philosophergame.PhilosopherGame;
+import com.ld32.philosophergame.Ressources;
 import com.ld32.philosophergame.Philosopher.Philosophers;
 
 public class SelectionScreen extends ScreenAdapter {

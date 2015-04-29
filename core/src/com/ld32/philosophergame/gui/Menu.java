@@ -1,4 +1,5 @@
-package com.ld32.philosophergame;
+package com.ld32.philosophergame.gui;
+
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -7,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.ld32.philosophergame.PhilosopherGame;
 
 public class Menu extends Table {
 	public static String n = "\n"; //Ressources.getLineSeparator();

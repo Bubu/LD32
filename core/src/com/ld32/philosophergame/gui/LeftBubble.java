@@ -1,6 +1,7 @@
-package com.ld32.philosophergame;
+package com.ld32.philosophergame.gui;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.ld32.philosophergame.Ressources;
 
 public class LeftBubble extends Label {
 

@@ -1,10 +1,16 @@
-package com.ld32.philosophergame;
+package com.ld32.philosophergame.states;
 
 import java.util.Iterator;
 
-public class PreConditions extends FightState {
 
-	public PreConditions(Fight fight, boolean active) {
+import com.ld32.philosophergame.Fight;
+import com.ld32.philosophergame.Philosopher;
+import com.ld32.philosophergame.conditions.Condition;
+
+
+public class CheckPreConditions extends FightState {
+
+	public CheckPreConditions(Fight fight, boolean active) {
 		super(fight, active);
 		this.waitForClick = false;
 	}

@@ -1,9 +1,11 @@
-package com.ld32.philosophergame;
+package com.ld32.philosophergame.gui;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar.ProgressBarStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
+import com.ld32.philosophergame.Philosopher;
+import com.ld32.philosophergame.Ressources;
 
 
 public class StatusDisplay extends Table {

@@ -1,4 +1,6 @@
-package com.ld32.philosophergame;
+package com.ld32.philosophergame.states;
+
+import com.ld32.philosophergame.Fight;
 
 public class CheckWin extends FightState {
 	public static String n = "\n";

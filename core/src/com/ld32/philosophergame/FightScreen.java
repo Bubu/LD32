@@ -1,5 +1,6 @@
 package com.ld32.philosophergame;
 
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
@@ -13,6 +14,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.ld32.philosophergame.gui.LeftBubble;
+import com.ld32.philosophergame.gui.Menu;
+import com.ld32.philosophergame.gui.RightBubble;
+import com.ld32.philosophergame.gui.StatusDisplay;
 
 public class FightScreen extends ScreenAdapter {
 
@@ -158,9 +163,7 @@ public class FightScreen extends ScreenAdapter {
 	// %%%%% Turn Handlers %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-	protected void describeStatus(Status status) {
-		Gdx.app.log("TODO!", "Describe Status");
-	}
+
 	public void render(float delta) {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		stage.act(Gdx.graphics.getDeltaTime());

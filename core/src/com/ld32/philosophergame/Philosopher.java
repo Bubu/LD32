@@ -1,25 +1,28 @@
 package com.ld32.philosophergame;
 
 import java.util.HashSet;
+
+
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Scaling;
+import com.ld32.philosophergame.conditions.Condition;
 
 public class Philosopher {
 	public static enum Philosophers {Socrates, Descartes, Nietzsche, Schopenhauer, Kierkegaard, Hobbes, Freud, Kant, Wittgenstein};
 	public static String[] PhilosopherNames = {"Socrates", "Descartes", "Nietzsche", "Schopenhauer", "Kierkegaard", "Hobbes", "Freud", "Kant", "Wittgenstein"};
-	int maxhp;
-	int currenthp;
-	int sanity;
+	public int maxhp;
+	public int currenthp;
+	public int sanity;
 	Image sprite;
-	Attack[] attacks;
-	String name;
-	String[] phrases;
-	int currentSanity;
-	boolean attacking;
-	HashSet<Condition> preConditions;
+	public Attack[] attacks;
+	public String name;
+	public String[] phrases;
+	public int currentSanity;
+	public boolean attacking;
+	public HashSet<Condition> preConditions;
 	HashSet<Condition> postConditions;
 
 	public static String n = "\n"; //Ressources.getLineSeparator();

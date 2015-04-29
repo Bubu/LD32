@@ -1,4 +1,8 @@
-package com.ld32.philosophergame;
+package com.ld32.philosophergame.states;
+
+import com.ld32.philosophergame.Attack;
+import com.ld32.philosophergame.Fight;
+
 
 public class OppenentTurn extends AttackState {
 

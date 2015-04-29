@@ -1,4 +1,5 @@
-package com.ld32.philosophergame;
+package com.ld32.philosophergame.gui;
+
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -13,6 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.ld32.philosophergame.PhilosopherGame;
+import com.ld32.philosophergame.Ressources;
 
 public class MenuScreen extends ScreenAdapter {
 	PhilosopherGame game;

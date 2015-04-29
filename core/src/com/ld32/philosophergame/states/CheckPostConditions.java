@@ -1,8 +1,13 @@
-package com.ld32.philosophergame;
+package com.ld32.philosophergame.states;
 
-public class PostConditions extends FightState {
 
-	public PostConditions(Fight fight, boolean active) {
+import com.ld32.philosophergame.Fight;
+import com.ld32.philosophergame.Philosopher;
+import com.ld32.philosophergame.conditions.Condition;
+
+public class CheckPostConditions extends FightState {
+
+	public CheckPostConditions(Fight fight, boolean active) {
 		super(fight, active);
 		this.waitForClick = false;
 	}

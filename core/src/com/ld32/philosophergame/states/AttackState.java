@@ -1,4 +1,10 @@
-package com.ld32.philosophergame;
+package com.ld32.philosophergame.states;
+
+
+import com.ld32.philosophergame.Attack;
+import com.ld32.philosophergame.Fight;
+import com.ld32.philosophergame.Ressources;
+import com.ld32.philosophergame.conditions.Condition;
 
 public abstract class AttackState extends FightState {
 	private static String n = "\n";

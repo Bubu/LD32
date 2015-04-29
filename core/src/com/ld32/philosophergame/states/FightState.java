@@ -1,4 +1,7 @@
-package com.ld32.philosophergame;
+package com.ld32.philosophergame.states;
+
+import com.ld32.philosophergame.Fight;
+
 
 public abstract class FightState {
 
